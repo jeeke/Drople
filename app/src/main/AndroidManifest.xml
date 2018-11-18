@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".AddressActivity" />
         <activity android:name=".PlaceOrderActivity" />
+        <activity android:name=".TrackOrderActivity" />
+        <activity android:name=".DonateActivity"></activity>
     </application>
 
 </manifest>
