@@ -1,5 +1,4 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name">E-L</string>
     <string name="action_settings">Settings</string>
@@ -14,4 +13,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <!--parse credentials-->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">cVuLJj2JEkxn5SArbj3nM7AvHmeHdOR4XHGV7xSb</string>
+    <string name="back4app_client_key">0tPT9sAdGbsuZPVMUsthoe6wLEiLyxgDOQbXeD7E</string>
 </resources>

@@ -1,19 +1,19 @@
 package com.example.gyanesh.myapplication.Fragments;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gyanesh.myapplication.DonateActivity;
+import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.TrackOrderActivity;
+
+import androidx.fragment.app.Fragment;
 
 
 /**
@@ -62,13 +62,13 @@ public class HomeFrag extends Fragment {
             }
         });
 
-//        Order History
+//        OrderModel History
 
         View home_button4 = layout.findViewById(R.id.constraintLayout5);
         home_button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),PlaceOrderActivity.class);
+                Intent intent = new Intent(getContext(),HistoryActivity.class);
                 startActivity(intent);
             }
         });

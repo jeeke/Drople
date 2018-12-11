@@ -1,28 +1,24 @@
 package com.example.gyanesh.myapplication;
 
-import android.content.Intent;
-import android.graphics.Color;
+
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.gyanesh.myapplication.Fragments.AccountFrag;
-import com.example.gyanesh.myapplication.Fragments.Date_Picker;
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
-import com.example.gyanesh.myapplication.Fragments.Slot_Picker;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity{
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
 
@@ -84,20 +80,20 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         toolbar = getSupportActionBar();
 
 //        Setting navigation bar
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         toolbar.setTitle("DASHBOARD");
 
 //        Initialising with home fragment
         loadFragment(new HomeFrag());
+
     }
 
-//    Navigation bar handler
+    //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -123,8 +119,6 @@ public class MainActivity extends AppCompatActivity{
             }
             return false;
         }
-
-
 
 
     };

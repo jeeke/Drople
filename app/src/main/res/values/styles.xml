@@ -7,13 +7,8 @@
         <!--<item name="android:buttonStyle">@style/defaultButton</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@android:color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
-
-    <!--<style name="defaultTextView" parent="android:Widget.TextView">-->
-        <!--<item name="android:fontFamily">sans-serif-Niramit</item>-->
-    <!--</style>-->
-
 
     <style name="defaultButton" parent="android:Widget.Button">
         <item name="android:background">@drawable/button_corner_round</item>

@@ -1,7 +1,9 @@
 package com.example.gyanesh.myapplication;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddressActivity extends AppCompatActivity {
 

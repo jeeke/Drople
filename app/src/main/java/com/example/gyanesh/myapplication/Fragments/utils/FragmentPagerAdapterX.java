@@ -1,12 +1,14 @@
 package com.example.gyanesh.myapplication.Fragments.utils;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+
 import com.example.gyanesh.myapplication.Fragments.AccountFrag;
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
+import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 public class FragmentPagerAdapterX extends FragmentPagerAdapter {
 
