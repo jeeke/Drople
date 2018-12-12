@@ -33,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordAgainView = (EditText) findViewById(R.id.input_password_again);
 
     }
-
+//my comment is Here
     public void signUp(View v) {
 
         //Validating the log in data
