@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.gyanesh.myapplication.LoginActivity;
@@ -40,30 +40,20 @@ public class ProfileFrag extends Fragment {
         String name = ParseUser.getCurrentUser().getUsername();
         String email = ParseUser.getCurrentUser().getEmail();
         //TODO BIND data to views
-        TextView textView = view.findViewById(R.id.name).findViewById(R.id.text);
+        TextView textView = view.findViewById(R.id.include1).findViewById(R.id.name);
         textView.setText(name);
 
-        textView = view.findViewById(R.id.email).findViewById(R.id.text);
+        textView = view.findViewById(R.id.include2).findViewById(R.id.textView12);
         textView.setText(email);
 
 
-        final Button logout_button = view.findViewById(R.id.logout_btn);
+        final LinearLayout logout_button = view.findViewById(R.id.include1).findViewById(R.id.logout_button);
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                 logging out of Parse
-                ParseUser.logOut();
+                //TODO Cofirmation dialog on logout click
                 alertDisplayer("So, you're going...", "Ok...Bye-bye then");
-
-                final ProgressDialog dlg = new ProgressDialog(getContext());
-                dlg.setTitle("Please, wait a moment.");
-                dlg.setMessage("Redirecting you to register...");
-                dlg.show();
-                Intent intent = new Intent(getContext(), SignUpActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                dlg.dismiss();
-                startActivity(intent);
             }
         });
         return view;
@@ -78,9 +68,16 @@ public class ProfileFrag extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+//  l                   ogging out of Parse
+                        ProgressDialog dlg = new ProgressDialog(getContext());
+                        dlg.setTitle("Please, wait a moment.");
+                        dlg.setMessage("Redirecting you to register...");
+                        dlg.show();
                         // don't forget to change the line below with the names of your Activities
+                        ParseUser.logOut();
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        dlg.dismiss();
                         startActivity(intent);
                     }
                 });

@@ -19,6 +19,8 @@ import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,12 +33,14 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.CHANNEL_ID
 import static com.example.gyanesh.myapplication.utilClasses.Constants.INDUSTRY_TYPE_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.M_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.WEBSITE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
 
 public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
-    private Date time = Calendar.getInstance().getTime();
+    private Date c= Calendar.getInstance().getTime();
+    SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
     private double cost = 50;
     private int payMode = 1;
@@ -51,28 +55,74 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
         dlg= new ProgressDialog(this);
+        Date date=Calendar.getInstance().getTime();
+        DateFormat dateFormat=new SimpleDateFormat("hh:mm");
+        String frmtDate=dateFormat.format(date);
         TextView textView;
+        String default1="10:00";
+        String default2="2:00";
+        String default3="6:00";
         v1 = findViewById(R.id.date1);
         v2 = findViewById(R.id.date2);
         v3 = findViewById(R.id.date3);
         v4 = findViewById(R.id.day1);
         v5 = findViewById(R.id.day2);
         v6 = findViewById(R.id.day3);
+        if(default1.compareTo(frmtDate)>=0)
+        {
+            v4.setBackgroundColor(getResources().getColor(R.color.grey));
+        }
+        else
+        {
+            v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
+        if(default2.compareTo(frmtDate)>=0)
+        {
+            v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
+        else
+        {
+            v5.setBackgroundColor(getResources().getColor(R.color.grey));
+        }
+        if(default3.compareTo(frmtDate)>=0)
+        {
+            v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
+        else
+        {
+            v6.setBackgroundColor(getResources().getColor(R.color.grey));
+        }
         v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-//        TODO format date and set to textviews
-//       Date c = Calendar.getInstance().getTime();
-//        System.out.println("Current time => " + c);
-//
-//        SimpleDateFormat df = new SimpleDateFormat("dd - MMM");
-//        String formattedDate = df.format(c);
+        SimpleDateFormat df1 = new SimpleDateFormat("dd - MMM");
+        String formattedDate = df1.format(c);
+        TextView textView1=v1.findViewById(R.id.date);
+        textView1.setText(formattedDate);
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(c);
+        cal.add(Calendar.DAY_OF_YEAR,1);
+        String formattedDate2=df1.format(cal.getTime());
+        int d1=cal.get(Calendar.DAY_OF_MONTH);
+        TextView day11=v1.findViewById(R.id.day);
+        day11.setText(getDay(d1));
+        TextView textView2=v2.findViewById(R.id.date);
+        textView2.setText(formattedDate2);
+        int d2=(d1+1)%7;
+        TextView day22=v2.findViewById(R.id.day);
+        day22.setText(getDay(d2));
+        Calendar cal2=Calendar.getInstance();
+        cal2.setTime(c);
+        cal2.add(Calendar.DAY_OF_YEAR,2);
+        String formattedDate3=df1.format(cal2.getTime());
 
 
+        TextView textView3=v3.findViewById(R.id.date);
+        textView3.setText(formattedDate3);
+        int d3=(d1+2)%7;
+        TextView day33=v3.findViewById(R.id.day);
+        day33.setText(getDay(d3));
         textView= v4.findViewById(R.id.date);
         textView.setText("10 : 00");
         textView= v4.findViewById(R.id.day);
@@ -85,7 +135,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         textView.setText("6 : 00");
         textView = v6.findViewById(R.id.day);
         textView.setText("P M");
-
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,49 +289,49 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 v1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date2:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+               v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date3:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+              v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
             case R.id.day1:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.day2:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                break;
+//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                break;
             default:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
     }
 
@@ -296,7 +345,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         order.setUserId(ParseUser.getCurrentUser().getObjectId());
         order.setClothes(clothes);
         order.setPayMode(payMode);
-        order.setPickupTime(time);
+        order.setPickupTime(c);
 
         int orderId = 123;
         //TODO calculate order Id

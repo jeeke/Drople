@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.final_sign_up);
 
         usernameView = (EditText) findViewById(R.id.input_name);
         emailView = (EditText) findViewById(R.id.input_email);
@@ -96,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
             user.setUsername(usernameView.getText().toString());
             user.setPassword(passwordView.getText().toString());
             user.setEmail(emailView.getText().toString());
+            user.put("userType",0);
 
             user.signUpInBackground(new SignUpCallback() {
                 @Override
