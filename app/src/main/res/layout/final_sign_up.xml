@@ -54,13 +54,13 @@
                     android:ems="10"
                     android:hint="User Name"
                     android:inputType="textPersonName"
-                    app:layout_constraintBottom_toTopOf="@+id/editText5"
+                    app:layout_constraintBottom_toTopOf="@+id/no_account"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/no_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -132,7 +132,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/editText6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText5" />
+                    app:layout_constraintTop_toBottomOf="@+id/no_account" />
 
                 <ImageView
                     android:id="@+id/imageView11"
@@ -163,7 +163,7 @@
                     android:layout_marginBottom="40dp"
                     android:contentDescription="Mail"
                     app:layout_constraintBottom_toTopOf="@+id/imageView13"
-                    app:layout_constraintEnd_toStartOf="@+id/editText5"
+                    app:layout_constraintEnd_toStartOf="@+id/no_account"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView11"

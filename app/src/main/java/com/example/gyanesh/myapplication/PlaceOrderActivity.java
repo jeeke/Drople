@@ -289,49 +289,31 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 v1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date2:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date3:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-              v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
             case R.id.day1:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.day2:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                break;
+                break;
             default:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
     }
 
