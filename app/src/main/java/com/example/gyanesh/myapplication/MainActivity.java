@@ -13,14 +13,14 @@ import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActionBar toolbar;
+    private Toolbar toolbar;
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = getSupportActionBar();
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 //        Setting navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

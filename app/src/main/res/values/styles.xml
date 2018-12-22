@@ -1,7 +1,7 @@
 <resources>
 
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <!--<item name="android:textViewStyle">@style/defaultTextView</item>-->
         <!--<item name="android:buttonStyle">@style/defaultButton</item>-->

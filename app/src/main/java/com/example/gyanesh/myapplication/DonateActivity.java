@@ -1,6 +1,7 @@
 package com.example.gyanesh.myapplication;
 
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class DonateActivity extends AppCompatActivity {
 
@@ -30,6 +32,11 @@ public class DonateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolbard);
+        setSupportActionBar(toolbar);
+        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

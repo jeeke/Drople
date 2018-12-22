@@ -16,12 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AddressActivity" />
-        <activity android:name=".PlaceOrderActivity" />
-        <activity android:name=".TrackOrderActivity" />
-        <activity android:name=".DonateActivity" />
-        <activity android:name=".HistoryActivity" />
+        <activity android:name=".MainActivity"
+            android:label="Home"/>
+        <activity android:name=".AddressActivity"
+            android:parentActivityName=".PlaceOrderActivity"
+            android:label="Edit Address"/>
+        <activity android:name=".PlaceOrderActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Place Order"/>
+        <activity android:name=".TrackOrderActivity"
+            android:label="Track Your Orders"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DonateActivity"
+            android:label="Donate Clothes"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".HistoryActivity"
+            android:label="History"
+            android:parentActivityName=".MainActivity"/>
 
         <meta-data
             android:name="com.parse.SERVER_URL"

@@ -19,4 +19,10 @@
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_app_id">cVuLJj2JEkxn5SArbj3nM7AvHmeHdOR4XHGV7xSb</string>
     <string name="back4app_client_key">0tPT9sAdGbsuZPVMUsthoe6wLEiLyxgDOQbXeD7E</string>
+
+    <string-array name="CityNames">
+        <item>-- Select City --</item>
+        <item> NIT Jalandhar </item>
+        <item> Jalandhar</item>
+    </string-array>
 </resources>

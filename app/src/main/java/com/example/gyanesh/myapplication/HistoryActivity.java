@@ -1,6 +1,7 @@
 package com.example.gyanesh.myapplication;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +33,11 @@ public class HistoryActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContent(this,R.layout.activity_history);
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolbarh);
+        setSupportActionBar(toolbar);
+        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
