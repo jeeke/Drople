@@ -1,5 +1,6 @@
 package com.example.gyanesh.myapplication;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import java.util.UUID;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CALLBACK_URL;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CHANNEL_ID;
@@ -55,6 +58,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
+    public static  int callme = 0; //none of your business.. ignore it ... but dont delete !!
     private Date c= Calendar.getInstance().getTime();
     SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
@@ -68,8 +72,54 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        TextView textViewn = findViewById(R.id.al_name);
+
+        TextView textViewn2 = findViewById(R.id.al_number);
+        TextView textViewn3 = findViewById(R.id.al_default);
+        TextView textViewn4 = findViewById(R.id.al_address);
+        TextView textViewn6 = findViewById(R.id.address_2);
+        TextView textViewn5 = findViewById(R.id.al_city);
+        TextView textViewn7 = findViewById(R.id.al_code);
+        textViewn4.setText("Address Not Selected");
+        textViewn5.setText("Edit address");
+        Intent intent = getIntent();
+        if(callme==1) {
+            textViewn.setText(intent.getStringExtra("name"));
+            textViewn2.setText(intent.getStringExtra("number"));
+            textViewn4.setText(intent.getStringExtra("address1"));
+            textViewn6.setText(intent.getStringExtra("address2"));
+            textViewn5.setText(intent.getStringExtra("city"));
+            textViewn7.setText(intent.getStringExtra("code"));
+            String bho = intent.getStringExtra("checkbox");
+            if(bho.equals("hello"))
+            {
+                textViewn3.setText("Default");
+            }
+
+        }callme = 0;
+
+
+
+
+
+        ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceOrderActivity.this,AddressActivity.class);
+                startActivity(intent);
+            }
+        });
+
         dlg= new ProgressDialog(this);
         Date date=Calendar.getInstance().getTime();
         DateFormat dateFormat=new SimpleDateFormat("hh:mm");
@@ -196,6 +246,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         return uuid.replaceAll("-", "");
     }
 
+    public void testing(View view)
+    {
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+    }
     private void paytm(){
 
         // Use this map to send parameters to your Cloud Code function
@@ -254,6 +309,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         Service.startPaymentTransaction(this, true, true, this);
 
     }
+
+
 
     //all these overriden method is to detect the payment result accordingly
     @Override

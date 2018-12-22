@@ -32,4 +32,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string-array name="CityNames">
+        <item>-- Select City --</item>
+        <item> NIT Jalandhar </item>
+        <item> Jalandhar</item>
+    </string-array>
 </resources>
