@@ -2,6 +2,7 @@ package com.example.gyanesh.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CALLBACK_URL;
@@ -36,6 +38,20 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.WEBSITE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
 
 public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
+
+    private  static final  int TEZ_REQUEST_CODE = 123;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == TEZ_REQUEST_CODE){
+            //TODO process based on data in response
+            Log.e("result",data.getStringExtra("Status"));
+        }
+    }
+
+    private  static final  String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
@@ -139,20 +155,38 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Later after development set paymentDone to false
-                Boolean paymentDone = false;
+//                TODO Uncomment and integrate all payment methods
+//                //TODO Later after development set paymentDone to false
+//                Boolean paymentDone = false;
+//
+//                if(payMode==1){
+//                    paytm();
+//                    //TODO redirect to payment and set paymentDone
+//                }else{
+//                    paymentDone = true;
+//                }
+//
+//                if(paymentDone){
+//                    //TODO Check if all fields are correctly filled otherwise show Error
+//                    send_order();
+//                }
+                Uri uri = new Uri.Builder()
+                        .scheme("upi")
+                        .authority("pay")
+                        .appendQueryParameter("pa", "test@axisbank")
+                        .appendQueryParameter("pn","Test Merchant")
+                        .appendQueryParameter("mc","1234")
+                        .appendQueryParameter("tr","123456789")
+                        .appendQueryParameter("tn","test transaction note")
+                        .appendQueryParameter("am","1.00")
+                        .appendQueryParameter("cu","INR")
+                        .appendQueryParameter("url","https://test.merchant.website")
+                        .build();
 
-                if(payMode==1){
-                    paytm();
-                    //TODO redirect to payment and set paymentDone
-                }else{
-                    paymentDone = true;
-                }
-
-                if(paymentDone){
-                    //TODO Check if all fields are correctly filled otherwise show Error
-                    send_order();
-                }
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(uri);
+                intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
+                startActivityForResult(intent,TEZ_REQUEST_CODE);
             }
         });
     }
