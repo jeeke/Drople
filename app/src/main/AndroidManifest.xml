@@ -10,7 +10,9 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- TODO STOP rotation of activities -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- TODO STOP rotation of activities -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -19,23 +21,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:label="Home"/>
-        <activity android:name=".AddressActivity"
-            android:parentActivityName=".PlaceOrderActivity"
-            android:label="Edit Address"/>
-        <activity android:name=".PlaceOrderActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Place Order"/>
-        <activity android:name=".TrackOrderActivity"
+        <activity
+            android:name=".MainActivity"
+            android:label="Home" />
+        <activity
+            android:name=".AddressActivity"
+            android:label="Edit Address"
+            android:parentActivityName=".PlaceOrderActivity" />
+        <activity
+            android:name=".PlaceOrderActivity"
+            android:label="Place Order"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TrackOrderActivity"
             android:label="Track Your Orders"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".DonateActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DonateActivity"
             android:label="Donate Clothes"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".HistoryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HistoryActivity"
             android:label="History"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -57,9 +65,11 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddClothesActivity"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.example.gyanesh.myapplication;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     private double cost = 50;
     private int payMode = 1;
 
-    View v1,v2,v3,v4,v5,v6;
+    View v1,v2,v3,v4,v5,v6,v7;
     ProgressDialog dlg;
 
     HashMap<String, String> params = new HashMap<>();
@@ -75,6 +76,15 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
+        v7 = findViewById(R.id.add_clothes);
+        v7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddClothesActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar2);

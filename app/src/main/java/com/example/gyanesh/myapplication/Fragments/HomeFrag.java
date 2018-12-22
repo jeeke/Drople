@@ -1,6 +1,7 @@
 package com.example.gyanesh.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +15,13 @@ import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.TrackOrderActivity;
+import com.example.gyanesh.myapplication.ViewPagerAdapter;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 
 /**
@@ -23,8 +29,8 @@ import androidx.fragment.app.Fragment;
  */
 public class HomeFrag extends Fragment {
 
-    private ViewFlipper viewFlipper;
-
+//    private ViewFlipper viewFlipper;
+    private ViewPager viewPager;
     public HomeFrag() {
         // Required empty public constructor
     }
@@ -38,12 +44,19 @@ public class HomeFrag extends Fragment {
 
 
         //Auto Image Slider
-        viewFlipper = layout.findViewById(R.id.offers);
-        int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.donate};
+        //viewFlipper = layout.findViewById(R.id.offers);
+        viewPager=layout.findViewById(R.id.offers);
+        Context c= viewPager.getContext();
+        // int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.donate};
 
-        for(int image:images){
-            flipperImages(image);
-        }
+        //for(int image:images){
+        //flipperImages(image);
+        //  }
+        ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(c);
+        viewPager.setAdapter(viewPagerAdapter);
+        Timer timer= new Timer();
+        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
 
 //        donate clothes
         View home_button1 = layout.findViewById(R.id.constraintLayout2);
@@ -88,16 +101,36 @@ public class HomeFrag extends Fragment {
         return layout;
     }
 
+    public class MyTimerTask extends TimerTask
+    {
 
-    private void flipperImages(int image){
-        ImageView imageView = new ImageView(getContext());
-        imageView.setBackgroundResource(image);
-        viewFlipper.addView(imageView);
-        viewFlipper.setFlipInterval(4000);
-        viewFlipper.setAutoStart(true);
-        viewFlipper.setInAnimation(getContext(),android.R.anim.slide_in_left);
-        viewFlipper.setOutAnimation(getContext(),android.R.anim.slide_out_right);
+        @Override
+        public void run() {
+            getActivity().runOnUiThread(new Runnable(){
+                @Override
+                public void run()
+                {
+                    if(viewPager.getCurrentItem()==0)
+                        viewPager.setCurrentItem(1);
+                    else if(viewPager.getCurrentItem()==1)
+                        viewPager.setCurrentItem(2);
+                    else
+                        viewPager.setCurrentItem(0);
+                }
+
+            });
+        }
     }
+
+//    private void flipperImages(int image){
+//        ImageView imageView = new ImageView(getContext());
+//        imageView.setBackgroundResource(image);
+//        viewFlipper.addView(imageView);
+//        viewFlipper.setFlipInterval(4000);
+//        viewFlipper.setAutoStart(true);
+//        viewFlipper.setInAnimation(getContext(),android.R.anim.slide_in_left);
+//        viewFlipper.setOutAnimation(getContext(),android.R.anim.slide_out_right);
+//    }
 
 
 }
