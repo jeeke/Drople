@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".TrackOrderActivity">
 
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbart"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/light_grey" />
+
+
     <include
         android:id="@+id/include6"
         layout="@layout/track_item_with_tick"
@@ -14,7 +26,7 @@
         app:layout_constraintBottom_toTopOf="@+id/include7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbart" />
 
     <include
         android:id="@+id/include7"

@@ -11,18 +11,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.gyanesh.myapplication.LoginActivity;
+import com.example.gyanesh.myapplication.AuthActivity;
 import com.example.gyanesh.myapplication.R;
-import com.example.gyanesh.myapplication.SignUpActivity;
 import com.parse.ParseUser;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProfileFrag extends Fragment {
 
 
@@ -75,7 +69,7 @@ public class ProfileFrag extends Fragment {
                         dlg.show();
                         // don't forget to change the line below with the names of your Activities
                         ParseUser.logOut();
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        Intent intent = new Intent(getContext(), AuthActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         dlg.dismiss();
                         startActivity(intent);

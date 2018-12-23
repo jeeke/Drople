@@ -1,6 +1,7 @@
 package com.example.gyanesh.myapplication;
 
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Order;
-import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -20,8 +20,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-public class DonateActivity extends MyActivity {
+public class DonateActivity extends AppCompatActivity {
 
     //TODO Initialize these values as user fills the details
     private String address = "54525";
@@ -31,7 +32,11 @@ public class DonateActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
-        setContent(this,R.layout.activity_donate);
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolbard);
+        setSupportActionBar(toolbar);
+        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +83,5 @@ public class DonateActivity extends MyActivity {
             }
         });
 
-    }
-    public void retry(View view)
-    {
-        setContent(this,R.layout.activity_donate);
-    }
-    @Override
-    protected void doTheThing() {
-        ////nothing to do
     }
 }

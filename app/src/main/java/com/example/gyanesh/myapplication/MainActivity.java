@@ -1,28 +1,27 @@
 package com.example.gyanesh.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
-import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends MyActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private ActionBar toolbar;
+    private Toolbar toolbar;
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -41,26 +40,12 @@ public class MainActivity extends MyActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_refresh was selected
             case R.id.about_us:
-                Toast.makeText(this, "About Us selected", Toast.LENGTH_SHORT)
-                        .show();
+                Intent intent = new Intent(this,ExtrasActivity.class);
+                startActivity(intent);
                 break;
-            // action with ID action_settings was selected
-            case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.refer:
-                Toast.makeText(this, "Refer selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.feedback:
-                Toast.makeText(this, "Feedback selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.contact_us:
-                Toast.makeText(this, "Contact selected", Toast.LENGTH_SHORT)
+            case R.id.action_notification:
+                Toast.makeText(this, "Notification selected", Toast.LENGTH_SHORT)
                         .show();
                 break;
             case R.id.policies:
@@ -82,8 +67,8 @@ public class MainActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContent(this,R.layout.activity_main);
-        toolbar = getSupportActionBar();
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 //        Setting navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -125,13 +110,4 @@ public class MainActivity extends MyActivity {
 
 
     };
-
-    public void retry(View view)
-    {
-        setContent(MainActivity.this,R.layout.activity_main);
-    }
-    @Override
-    protected void doTheThing() {
-
-    }
 }

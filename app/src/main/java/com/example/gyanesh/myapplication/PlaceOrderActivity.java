@@ -1,11 +1,18 @@
 package com.example.gyanesh.myapplication;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +28,16 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CALLBACK_URL;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CHANNEL_ID;
@@ -35,25 +46,94 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.M_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.WEBSITE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
 
-public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
+public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
+
+    private  static final  int TEZ_REQUEST_CODE = 123;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == TEZ_REQUEST_CODE){
+            //TODO process based on data in response
+            Log.e("result",data.getStringExtra("Status"));
+        }
+    }
+
+    private  static final  String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
+    public static  int callme = 0; //none of your business.. ignore it ... but dont delete !!
     private Date c= Calendar.getInstance().getTime();
     SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
     private double cost = 50;
-    private int payMode = 1;
+    private int payMode=-1;
 
-    View v1,v2,v3,v4,v5,v6;
+    View v1,v2,v3,v4,v5,v6,v7;
     ProgressDialog dlg;
 
     HashMap<String, String> params = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
+        v7 = findViewById(R.id.add_clothes);
+        v7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddClothesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        TextView textViewn = findViewById(R.id.al_name);
+
+        TextView textViewn2 = findViewById(R.id.al_number);
+        TextView textViewn3 = findViewById(R.id.al_default);
+        TextView textViewn4 = findViewById(R.id.al_address);
+        TextView textViewn6 = findViewById(R.id.address_2);
+        TextView textViewn5 = findViewById(R.id.al_city);
+        TextView textViewn7 = findViewById(R.id.al_code);
+        textViewn4.setText("Address Not Selected");
+        textViewn5.setText("Edit address");
+        Intent intent = getIntent();
+        if(callme==1) {
+            textViewn.setText(intent.getStringExtra("name"));
+            textViewn2.setText(intent.getStringExtra("number"));
+            textViewn4.setText(intent.getStringExtra("address1"));
+            textViewn6.setText(intent.getStringExtra("address2"));
+            textViewn5.setText(intent.getStringExtra("city"));
+            textViewn7.setText(intent.getStringExtra("code"));
+            String bho = intent.getStringExtra("checkbox");
+            if(bho.equals("hello"))
+            {
+                textViewn3.setText("Default");
+            }
+
+        }callme = 0;
+
+
+
+
+
+        ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceOrderActivity.this,AddressActivity.class);
+                startActivity(intent);
+            }
+        });
 
         dlg= new ProgressDialog(this);
         Date date=Calendar.getInstance().getTime();
@@ -105,7 +185,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         cal.setTime(c);
         cal.add(Calendar.DAY_OF_YEAR,1);
         String formattedDate2=df1.format(cal.getTime());
-        int d1=cal.get(Calendar.DAY_OF_MONTH);
+        int d1=cal.get(Calendar.DAY_OF_WEEK);
         TextView day11=v1.findViewById(R.id.day);
         day11.setText(getDay(d1));
         TextView textView2=v2.findViewById(R.id.date);
@@ -136,26 +216,95 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         textView.setText("6 : 00");
         textView = v6.findViewById(R.id.day);
         textView.setText("P M");
+//Iske baad ki bakchodi dekh lena
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Later after development set paymentDone to false
+//                TODO Uncomment and integrate all payment methods
+//                //TODO Later after development set paymentDone to false
                 Boolean paymentDone = false;
 
-                if(payMode==1){
+                if(payMode==0) {
                     paytm();
-                    //TODO redirect to payment and set paymentDone
-                }else{
                     paymentDone = true;
                 }
+                    //TODO redirect to payment and set paymentDone
+                else if(payMode==1){
+                    Uri uri = new Uri.Builder()
+                            .scheme("upi")
+                            .authority("pay")
+                            .appendQueryParameter("pa", "test@axisbank")
+                            .appendQueryParameter("pn","Test Merchant")
+                            .appendQueryParameter("mc","1234")
+                            .appendQueryParameter("tr","123456789")
+                            .appendQueryParameter("tn","test transaction note")
+                            .appendQueryParameter("am","1.00")
+                            .appendQueryParameter("cu","INR")
+                            .appendQueryParameter("url","https://test.merchant.website")
+                            .build();
 
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(uri);
+                    intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
+                    startActivityForResult(intent,TEZ_REQUEST_CODE);
+
+                    paymentDone = true;
+                }
+                //TODO GK : Add 3rd else if for cash on delivery here
+                //and check  if all fields are correct.
+                else if(payMode==2){
+                    Toast.makeText(PlaceOrderActivity.this,"COD Selected", Toast.LENGTH_LONG).show();
+                }
                 if(paymentDone){
                     //TODO Check if all fields are correctly filled otherwise show Error
                     send_order();
                 }
+                Uri uri = new Uri.Builder()
+                        .scheme("upi")
+                        .authority("pay")
+                        .appendQueryParameter("pa", "test@axisbank")
+                        .appendQueryParameter("pn","Test Merchant")
+                        .appendQueryParameter("mc","1234")
+                        .appendQueryParameter("tr","123456789")
+                        .appendQueryParameter("tn","test transaction note")
+                        .appendQueryParameter("am","1.00")
+                        .appendQueryParameter("cu","INR")
+                        .appendQueryParameter("url","https://test.merchant.website")
+                        .build();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(uri);
+                intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
+                startActivityForResult(intent,TEZ_REQUEST_CODE);
             }
         });
+        Spinner spinner=(Spinner) findViewById(R.id.spinner5);
+        spinner.setOnItemSelectedListener(this);
+        List<String> options=new ArrayList<String>();
+        options.add("Paytm");
+        options.add("Tez");
+        options.add("Cash On Delivery");
+        ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,options);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+    }
+    //Return OnItemSelected item from here.. to redirect payment
+    //0 for paytm
+    //1 for Tez
+    //2 for Cash on delivery
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        payMode=position;
+        Toast.makeText(PlaceOrderActivity.this,"This selected", Toast.LENGTH_LONG).show();
+
+    }
+//GK : Tou will get position from here
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+
     }
 
     private String generateString() {
@@ -163,6 +312,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         return uuid.replaceAll("-", "");
     }
 
+    public void testing(View view)
+    {
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+    }
     private void paytm(){
 
         // Use this map to send parameters to your Cloud Code function
@@ -221,6 +375,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         Service.startPaymentTransaction(this, true, true, this);
 
     }
+
+
 
     //all these overriden method is to detect the payment result accordingly
     @Override
@@ -290,49 +446,31 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 v1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date2:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                v3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.date3:
                 v1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-              v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v1.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v2.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v3.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                v3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
             case R.id.day1:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.day2:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                break;
+                break;
             default:
                 v4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 v6.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//                v4.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v5.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                v6.findViewById(R.id.view).setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
     }
 
@@ -367,6 +505,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

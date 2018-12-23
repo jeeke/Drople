@@ -13,10 +13,36 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="contact">We are here to answer any query you have about our services. Reach to us and we will try to reach you as soon as possible.</string>
+
 
     <!--parse credentials-->
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_app_id">cVuLJj2JEkxn5SArbj3nM7AvHmeHdOR4XHGV7xSb</string>
     <string name="back4app_client_key">0tPT9sAdGbsuZPVMUsthoe6wLEiLyxgDOQbXeD7E</string>
+    <string name="title_activity_auth">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="contact">We are here to answer any query you have about our services. Reach to us and we will try to reach you as soon as possible.</string>
+
+
+    <string-array name="CityNames">
+        <item>-- Select City --</item>
+        <item> NIT Jalandhar </item>
+        <item> Jalandhar</item>
+    </string-array>
+    <string-array name="payment_options">
+        <item>Paytm</item>
+        <item>Tez</item>
+        <item>Cash On Delivery</item>
+    </string-array>
 </resources>
