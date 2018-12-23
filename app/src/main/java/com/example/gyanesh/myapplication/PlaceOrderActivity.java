@@ -8,8 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +28,11 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import androidx.annotation.Nullable;
@@ -41,7 +46,7 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.M_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.WEBSITE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
 
-public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
+public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
 
     private  static final  int TEZ_REQUEST_CODE = 123;
 
@@ -64,7 +69,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
     private double cost = 50;
-    private int payMode = 1;
+    private int payMode=-1;
 
     View v1,v2,v3,v4,v5,v6,v7;
     ProgressDialog dlg;
@@ -180,7 +185,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         cal.setTime(c);
         cal.add(Calendar.DAY_OF_YEAR,1);
         String formattedDate2=df1.format(cal.getTime());
-        int d1=cal.get(Calendar.DAY_OF_MONTH);
+        int d1=cal.get(Calendar.DAY_OF_WEEK);
         TextView day11=v1.findViewById(R.id.day);
         day11.setText(getDay(d1));
         TextView textView2=v2.findViewById(R.id.date);
@@ -211,25 +216,50 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         textView.setText("6 : 00");
         textView = v6.findViewById(R.id.day);
         textView.setText("P M");
+//Iske baad ki bakchodi dekh lena
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                TODO Uncomment and integrate all payment methods
 //                //TODO Later after development set paymentDone to false
-//                Boolean paymentDone = false;
-//
-//                if(payMode==1){
-//                    paytm();
-//                    //TODO redirect to payment and set paymentDone
-//                }else{
-//                    paymentDone = true;
-//                }
-//
-//                if(paymentDone){
-//                    //TODO Check if all fields are correctly filled otherwise show Error
-//                    send_order();
-//                }
+                Boolean paymentDone = false;
+
+                if(payMode==0) {
+                    paytm();
+                    paymentDone = true;
+                }
+                    //TODO redirect to payment and set paymentDone
+                else if(payMode==1){
+                    Uri uri = new Uri.Builder()
+                            .scheme("upi")
+                            .authority("pay")
+                            .appendQueryParameter("pa", "test@axisbank")
+                            .appendQueryParameter("pn","Test Merchant")
+                            .appendQueryParameter("mc","1234")
+                            .appendQueryParameter("tr","123456789")
+                            .appendQueryParameter("tn","test transaction note")
+                            .appendQueryParameter("am","1.00")
+                            .appendQueryParameter("cu","INR")
+                            .appendQueryParameter("url","https://test.merchant.website")
+                            .build();
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(uri);
+                    intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
+                    startActivityForResult(intent,TEZ_REQUEST_CODE);
+
+                    paymentDone = true;
+                }
+                //TODO GK : Add 3rd else if for cash on delivery here
+                //and check  if all fields are correct.
+                else if(payMode==2){
+                    Toast.makeText(PlaceOrderActivity.this,"COD Selected", Toast.LENGTH_LONG).show();
+                }
+                if(paymentDone){
+                    //TODO Check if all fields are correctly filled otherwise show Error
+                    send_order();
+                }
                 Uri uri = new Uri.Builder()
                         .scheme("upi")
                         .authority("pay")
@@ -249,6 +279,32 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 startActivityForResult(intent,TEZ_REQUEST_CODE);
             }
         });
+        Spinner spinner=(Spinner) findViewById(R.id.spinner5);
+        spinner.setOnItemSelectedListener(this);
+        List<String> options=new ArrayList<String>();
+        options.add("Paytm");
+        options.add("Tez");
+        options.add("Cash On Delivery");
+        ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,options);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+    }
+    //Return OnItemSelected item from here.. to redirect payment
+    //0 for paytm
+    //1 for Tez
+    //2 for Cash on delivery
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        payMode=position;
+        Toast.makeText(PlaceOrderActivity.this,"This selected", Toast.LENGTH_LONG).show();
+
+    }
+//GK : Tou will get position from here
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+
     }
 
     private String generateString() {
@@ -444,6 +500,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }
