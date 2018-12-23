@@ -54,6 +54,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
         dlg= new ProgressDialog(this);
         Date date=Calendar.getInstance().getTime();
         DateFormat dateFormat=new SimpleDateFormat("hh:mm");

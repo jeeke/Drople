@@ -9,22 +9,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends MyActivity {
 
         private EditText usernameView;
         private EditText passwordView;
-
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
+            setContent(this,R.layout.activity_login);
             usernameView = (EditText) findViewById(R.id.email_login);
             passwordView = (EditText) findViewById(R.id.password_login);
 
@@ -82,6 +84,7 @@ public class LoginActivity extends AppCompatActivity{
             });
         }
 
+
         private boolean isPasswordValid(String password) {
             //TODO: Replace this with your own logic
             return password.length() > 4;
@@ -124,4 +127,16 @@ public class LoginActivity extends AppCompatActivity{
             dlg.dismiss();
             startActivity(intent);
         }
+
+
+    public void retry(View view)
+    {
+        setContent(this,R.layout.activity_login);
+    }
+
+
+    @Override
+    protected void doTheThing() {
+
+    }
 }

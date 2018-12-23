@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MyActivity {
 
     private ActionBar toolbar;
 
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContent(this,R.layout.activity_main);
         toolbar = getSupportActionBar();
 
 //        Setting navigation bar
@@ -122,4 +125,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     };
+
+    public void retry(View view)
+    {
+        setContent(MainActivity.this,R.layout.activity_main);
+    }
+    @Override
+    protected void doTheThing() {
+
+    }
 }

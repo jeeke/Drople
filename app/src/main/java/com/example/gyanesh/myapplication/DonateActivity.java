@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Order;
+import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -20,7 +21,7 @@ import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DonateActivity extends AppCompatActivity {
+public class DonateActivity extends MyActivity {
 
     //TODO Initialize these values as user fills the details
     private String address = "54525";
@@ -30,6 +31,7 @@ public class DonateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
+        setContent(this,R.layout.activity_donate);
         ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,5 +78,13 @@ public class DonateActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void retry(View view)
+    {
+        setContent(this,R.layout.activity_donate);
+    }
+    @Override
+    protected void doTheThing() {
+        ////nothing to do
     }
 }
