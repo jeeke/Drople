@@ -1,15 +1,11 @@
 package com.example.gyanesh.myapplication.Fragments;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ViewFlipper;
-
 import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;

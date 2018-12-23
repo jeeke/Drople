@@ -45,7 +45,7 @@ public class ServicesFrag extends Fragment {
         final TextView textView = card.findViewById(R.id.rate_list_heading);
         RateListAdapter adapter = new RateListAdapter(items, cost);
         recyclerView.setAdapter(adapter);
-        //recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setNestedScrollingEnabled(false);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         final TextView para = card.findViewById(R.id.para);
