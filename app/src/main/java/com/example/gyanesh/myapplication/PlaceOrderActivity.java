@@ -256,11 +256,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         return uuid.replaceAll("-", "");
     }
 
-    public void testing(View view)
-    {
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
-    }
     private void paytm(){
 
         // Use this map to send parameters to your Cloud Code function

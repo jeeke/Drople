@@ -17,11 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".AddressActivity" />
-        <activity android:name=".PlaceOrderActivity" />
-        <activity android:name=".TrackOrderActivity" />
-        <activity android:name=".DonateActivity" />
-        <activity android:name=".HistoryActivity" />
+        <activity android:name=".AddressActivity"
+            android:parentActivityName=".PlaceOrderActivity"/>
+        <activity android:name=".PlaceOrderActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".TrackOrderActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Active Orders"/>
+        <activity android:name=".DonateActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".HistoryActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AddClothesActivity"
+            android:parentActivityName=".PlaceOrderActivity"/>
 
         <meta-data
             android:name="com.parse.SERVER_URL"
