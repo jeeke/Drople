@@ -32,6 +32,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="contact">We are here to answer any query you have about our services. Reach to us and we will try to reach you as soon as possible.</string>
+
 
     <string-array name="CityNames">
         <item>-- Select City --</item>
