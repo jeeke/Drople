@@ -1,6 +1,7 @@
 package com.example.gyanesh.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,26 +40,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_refresh was selected
             case R.id.about_us:
-                Toast.makeText(this, "About Us selected", Toast.LENGTH_SHORT)
-                        .show();
+                Intent intent = new Intent(this,ExtrasActivity.class);
+                startActivity(intent);
                 break;
-            // action with ID action_settings was selected
-            case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.refer:
-                Toast.makeText(this, "Refer selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.feedback:
-                Toast.makeText(this, "Feedback selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.contact_us:
-                Toast.makeText(this, "Contact selected", Toast.LENGTH_SHORT)
+            case R.id.action_notification:
+                Toast.makeText(this, "Notification selected", Toast.LENGTH_SHORT)
                         .show();
                 break;
             case R.id.policies:

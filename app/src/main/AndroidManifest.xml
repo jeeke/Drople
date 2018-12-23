@@ -7,11 +7,6 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <!-- TODO STOP rotation of activities -->
     <application
         android:name=".App"
@@ -21,29 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="Home" />
-        <activity
-            android:name=".AddressActivity"
-            android:label="Edit Address"
-            android:parentActivityName=".PlaceOrderActivity" />
-        <activity
-            android:name=".PlaceOrderActivity"
-            android:label="Place Order"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".TrackOrderActivity"
-            android:label="Track Your Orders"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".DonateActivity"
-            android:label="Donate Clothes"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".HistoryActivity"
-            android:label="History"
-            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AddressActivity" />
+        <activity android:name=".PlaceOrderActivity" />
+        <activity android:name=".TrackOrderActivity" />
+        <activity android:name=".DonateActivity" />
+        <activity android:name=".HistoryActivity" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -54,12 +32,6 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/back4app_client_key" />
-
-        <activity
-            android:name="com.paytm.pgsdk.PaytmPGActivity"
-            android:configChanges="keyboardHidden|orientation|keyboard"
-            android:screenOrientation="portrait" />
-        <activity android:name=".SaloonActivity" />
         <activity
             android:name=".AuthActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -69,7 +41,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddClothesActivity"></activity>
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SaloonActivity" />
+        <activity android:name=".ExtrasActivity"></activity>
     </application>
 
 </manifest>
