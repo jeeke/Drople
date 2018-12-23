@@ -13,7 +13,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
+    <string name="contact">We are here to answer any query you have about our services. Reach to us and we will try to reach you as soon as possible.</string>
 
     <!--parse credentials-->
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
