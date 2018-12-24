@@ -42,7 +42,7 @@ public class DonateActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DonateActivity.this,AddressActivity.class);
+                Intent intent = new Intent(DonateActivity.this,AddAddressActivity.class);
                 startActivity(intent);
             }
         });

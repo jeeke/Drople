@@ -73,7 +73,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     private int payMode=-1;
     String selectedDate;
     String selectedSlot;
-    int colorv4, colorv5, colorv6;
+    int colorv1,colorv4, colorv5, colorv6;
 
     View v1,v2,v3,v4,v5,v6,v7;
     ProgressDialog dlg;
@@ -122,14 +122,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         }
 
 
-
-
-
-        ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
+        ImageView imageView =  findViewById(R.id.edit_address_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PlaceOrderActivity.this,AddressActivity.class);
+                Intent intent = new Intent(PlaceOrderActivity.this,AddAddressActivity.class);
                 startActivity(intent);
             }
         });
@@ -409,18 +406,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         final int colorPrimary = getResources().getColor(R.color.colorPrimary);
         final int grey = getResources().getColor(R.color.grey);
 
-        if (date.after(default3)) {
-            v1.setBackgroundColor(grey);
-            v1.setClickable(false);
-        } else {
-            v1.setBackgroundColor(colorPrimary);
-            v1.setClickable(true);
-        }
-        v2.setBackgroundColor(colorPrimary);
-        v3.setBackgroundColor(colorPrimary);
-        v4.setBackgroundColor(grey);
-        v5.setBackgroundColor(grey);
-        v6.setBackgroundColor(grey);
+        //TODO Starpoint use view.onclickListener before setClickable false
 
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -450,9 +436,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                     colorv5 = colorPrimary;
                     v5.setClickable(true);
                 }
-                v6.setBackgroundColor(colorPrimary);
-                colorv6 = colorPrimary;
-                v6.setClickable(true);
             }
         });
 
@@ -461,8 +444,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             public void onClick(View v) {
                 TextView temp = v.findViewById(R.id.date);
                 selectedDate = temp.getText().toString();
-
-                v1.setBackgroundColor(colorPrimary);
+                v1.setBackgroundColor(colorv1);
                 v2.setBackgroundColor(colorPrimary);
                 v3.setBackgroundColor(colorPrimary);
                 v.setBackgroundColor(colorAccent);
@@ -494,6 +476,23 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         v4.setOnClickListener(slotListener);
         v5.setOnClickListener(slotListener);
         v6.setOnClickListener(slotListener);
+
+        if (date.after(default3)) {
+            v1.setBackgroundColor(grey);
+            colorv1 = grey;
+            v1.setClickable(false);
+            v4.setClickable(false);
+            v5.setClickable(false);
+            v6.setClickable(false);
+        } else {
+            colorv1 = colorPrimary;
+            v1.setBackgroundColor(colorPrimary);
+        }
+        v2.setBackgroundColor(colorPrimary);
+        v3.setBackgroundColor(colorPrimary);
+        v4.setBackgroundColor(grey);
+        v5.setBackgroundColor(grey);
+        v6.setBackgroundColor(grey);
 
 
         SimpleDateFormat df1 = new SimpleDateFormat("dd - MMM");
