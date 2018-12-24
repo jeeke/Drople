@@ -50,8 +50,8 @@ public class HomeFrag extends Fragment {
         //  }
         ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(c);
         viewPager.setAdapter(viewPagerAdapter);
-        Timer timer= new Timer();
-        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+//        Timer timer= new Timer();
+//        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
 
 //        donate clothes
@@ -97,26 +97,26 @@ public class HomeFrag extends Fragment {
         return layout;
     }
 
-    public class MyTimerTask extends TimerTask
-    {
-
-        @Override
-        public void run() {
-            getActivity().runOnUiThread(new Runnable(){
-                @Override
-                public void run()
-                {
-                    if(viewPager.getCurrentItem()==0)
-                        viewPager.setCurrentItem(1);
-                    else if(viewPager.getCurrentItem()==1)
-                        viewPager.setCurrentItem(2);
-                    else
-                        viewPager.setCurrentItem(0);
-                }
-
-            });
-        }
-    }
+//    public class MyTimerTask extends TimerTask
+//    {
+//
+//        @Override
+//        public void run() {
+//            getActivity().runOnUiThread(new Runnable(){
+//                @Override
+//                public void run()
+//                {
+//                    if(viewPager.getCurrentItem()==0)
+//                        viewPager.setCurrentItem(1);
+//                    else if(viewPager.getCurrentItem()==1)
+//                        viewPager.setCurrentItem(2);
+//                    else
+//                        viewPager.setCurrentItem(0);
+//                }
+//
+//            });
+//        }
+//    }
 
 //    private void flipperImages(int image){
 //        ImageView imageView = new ImageView(getContext());
