@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,69 +24,78 @@ public class AddressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
-        Button doneb = (Button) findViewById(R.id.button2);
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbaraa);
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = 0;
-                PlaceOrderActivity.callme =1;
-                EditText name = (EditText) findViewById(R.id.Name_edit_address);
-                EditText number = (EditText) findViewById(R.id.MobileNo_edit_address);
-                EditText Address1 = (EditText) findViewById(R.id.HostelNo_edit_address);
-                EditText Address2 = (EditText) findViewById(R.id.RoomNo_edit_address);
-                EditText Address3 = (EditText) findViewById(R.id.Pincode_edit_address);
-                Spinner address = (Spinner) findViewById(R.id.spinnerCitySelector);
-                if(name.getText().toString().matches(""))
-                {
-                    Toast toast = Toast.makeText(AddressActivity.this,"Please Fill Name " ,Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else if(number.getText().toString().matches(""))
-                {
-                    Toast toast = Toast.makeText(AddressActivity.this,"Please Fill Number " ,Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else if(Address1.getText().toString().matches(""))
-                {
-                    Toast toast = Toast.makeText(AddressActivity.this,"Please Fill Address " ,Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else if(Address2.getText().toString().matches(""))
-                {
-                    Toast toast = Toast.makeText(AddressActivity.this,"Please Fill address " ,Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else if(Address3.getText().toString().matches(""))
-                {
-                    Toast toast = Toast.makeText(AddressActivity.this,"Please Fill Pincode " ,Toast.LENGTH_SHORT);
-                    toast.show();
-                }
 
-                else {
-                    CheckBox box = (CheckBox) findViewById(R.id.checkBox_saver);
-                    Intent intent = new Intent(AddressActivity.this, PlaceOrderActivity.class);
-                    intent.putExtra("name", String.valueOf(name.getText()));
-                    intent.putExtra("number", String.valueOf(number.getText()));
-                    intent.putExtra("address1", String.valueOf(Address1.getText()));
-                    intent.putExtra("address2", String.valueOf(Address2.getText()));
-                    intent.putExtra("city", String.valueOf(address.getSelectedItem()));
-                    intent.putExtra("pincode", String.valueOf(Address3.getText()));
-                    if(box.isChecked())
-                    {
-                        intent.putExtra("checkbox","hello");
-                    }
-                    startActivity(intent);
-                }
+
+    }
+
+    public void add_address_button_qwerty(View view)
+    {
+        TextView name = findViewById(R.id.na_name);
+        TextView number = findViewById(R.id.na_number);
+        TextView pincode = findViewById(R.id.na_code);
+        Spinner city = findViewById(R.id.na_spinnerCitySelector);
+        TextView add1 = findViewById(R.id.na_add1);
+        TextView add2 = findViewById(R.id.na_add2);
+        RadioGroup def = findViewById(R.id.na_def);
+        int rgid = def.getCheckedRadioButtonId();
+        if(name.getText().toString().matches(""))
+        {
+            Toast toast = Toast.makeText(this,"Please Enter Name ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(number.getText().toString().matches(""))
+        {
+            Toast toast = Toast.makeText(this,"Please Enter Number ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(pincode.getText().toString().matches(""))
+        {
+            Toast toast = Toast.makeText(this,"Please Enter pincode",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(city.getSelectedItem().toString().matches("-- Select City --"))
+        {
+            Toast toast = Toast.makeText(this,"Please Select City ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(add1.getText().toString().matches(""))
+        {
+            Toast toast = Toast.makeText(this,"Please Enter Locality ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(add2.getText().toString().matches(""))
+        {
+            Toast toast = Toast.makeText(this,"Please Enter Building Name ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(rgid==-1)
+        {
+            Toast toast = Toast.makeText(this,"Please Select Address Type  ",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        else {
+
+            String s;
+            if(rgid == R.id.radioButtonHome)
+            {
+                s = "Home";
 
             }
-        };
-        doneb.setOnClickListener(onClickListener);
+            else
+            {
+                s="Temporary";
+            }
 
+            AddAddressActivity.adressAAA.add(new Adress(name.getText().toString(), number.getText().toString(), s, pincode.getText().toString(), city.getSelectedItem().toString(), add1.getText().toString(), add2.getText().toString()));
+            Intent intent = new Intent(this, AddAddressActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

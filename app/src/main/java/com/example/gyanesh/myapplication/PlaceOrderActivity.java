@@ -1,8 +1,6 @@
 package com.example.gyanesh.myapplication;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -96,31 +94,19 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        TextView textViewn = findViewById(R.id.al_name);
 
-        TextView textViewn2 = findViewById(R.id.al_number);
-        TextView textViewn3 = findViewById(R.id.al_default);
-        TextView textViewn4 = findViewById(R.id.al_address);
-        TextView textViewn6 = findViewById(R.id.address_2);
-        TextView textViewn5 = findViewById(R.id.al_city);
-        TextView textViewn7 = findViewById(R.id.al_code);
-        textViewn4.setText("Address Not Selected");
-        textViewn5.setText("Edit address");
-        Intent intent = getIntent();
-        if(callme==1) {
-            textViewn.setText(intent.getStringExtra("name"));
-            textViewn2.setText(intent.getStringExtra("number"));
-            textViewn4.setText(intent.getStringExtra("address1"));
-            textViewn6.setText(intent.getStringExtra("address2"));
-            textViewn5.setText(intent.getStringExtra("city"));
-            textViewn7.setText(intent.getStringExtra("code"));
-            String bho = intent.getStringExtra("checkbox");
-            if(bho.equals("hello"))
-            {
-                textViewn3.setText("Default");
-            }
-
-        }callme = 0;
+        //TextView textViewn = findViewById(R.id.al_name);
+//        TextView textViewn2 = findViewById(R.id.al_number);
+//        TextView textViewn3 = findViewById(R.id.al_default);
+//        TextView textViewn4 = findViewById(R.id.al_address);
+//        TextView textViewn6 = findViewById(R.id.al_address_2);
+//        TextView textViewn5 = findViewById(R.id.al_city);
+//        TextView textViewn7 = findViewById(R.id.al_code);
+//        textViewn4.setText("Address Not Selected");
+//        textViewn5.setText("Edit address");
+//        if(callme==) {
+//
+//        }
 
 
 
@@ -130,7 +116,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PlaceOrderActivity.this,AddressActivity.class);
+                Intent intent = new Intent(PlaceOrderActivity.this,AddAddressActivity.class);
                 startActivity(intent);
             }
         });
