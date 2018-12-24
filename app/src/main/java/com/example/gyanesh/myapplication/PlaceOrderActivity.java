@@ -45,6 +45,7 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.INDUSTRY_T
 import static com.example.gyanesh.myapplication.utilClasses.Constants.M_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.WEBSITE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.utilDate;
 
 public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
 
@@ -65,7 +66,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
-    public static  int callme = 0; //none of your business.. ignore it ... but dont delete !!
     private Date c= Calendar.getInstance().getTime();
     SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
