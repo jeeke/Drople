@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new HomeFrag());
 
     }
-
     //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

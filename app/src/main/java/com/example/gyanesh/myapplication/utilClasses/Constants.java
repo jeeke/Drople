@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.example.gyanesh.myapplication.R;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class Constants {
 
@@ -52,5 +56,25 @@ public class Constants {
             default:
                 return "ERR";
         }
+    }
+
+
+
+    public static Date utilDate(int type){
+
+        Calendar cal = Calendar.getInstance();
+        switch (type){
+
+            case 1:
+                cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH),9,0,0);
+                break;
+            case 2:
+                cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH),13,0,0);
+                break;
+            case 3:
+                cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH),17,0,0);
+                break;
+        }
+        return cal.getTime();
     }
 }
