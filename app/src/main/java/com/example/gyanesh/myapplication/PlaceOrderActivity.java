@@ -47,6 +47,7 @@ import static com.example.gyanesh.myapplication.utilClasses.Constants.getDay;
 public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
 
     private  static final  int TEZ_REQUEST_CODE = 123;
+    public static  int callme = -1; //none of your business.. ignore it ... but dont delete !!
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -62,7 +63,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     //TODO Initialize these values as user fills the details
     private String address = "gffgkgfhk";
-    public static  int callme = 0; //none of your business.. ignore it ... but dont delete !!
     private Date c= Calendar.getInstance().getTime();
     SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     private int clothes =10;
@@ -95,18 +95,25 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //TextView textViewn = findViewById(R.id.al_name);
-//        TextView textViewn2 = findViewById(R.id.al_number);
-//        TextView textViewn3 = findViewById(R.id.al_default);
-//        TextView textViewn4 = findViewById(R.id.al_address);
-//        TextView textViewn6 = findViewById(R.id.al_address_2);
-//        TextView textViewn5 = findViewById(R.id.al_city);
-//        TextView textViewn7 = findViewById(R.id.al_code);
-//        textViewn4.setText("Address Not Selected");
-//        textViewn5.setText("Edit address");
-//        if(callme==) {
-//
-//        }
+
+        TextView Name = findViewById(R.id.Name);
+        TextView number = findViewById(R.id.al_number);
+        TextView al_default = findViewById(R.id.al_default);
+        TextView al_Add1 = findViewById(R.id.al_address);
+        TextView al_Add2 = findViewById(R.id.al_address_2);
+        TextView Al_city = findViewById(R.id.al_city);
+        TextView Al_code = findViewById(R.id.al_code);
+
+        if(callme!=-1) {
+            Name.setText(AddAddressActivity.adressAAA.get(callme).name);
+            number.setText(AddAddressActivity.adressAAA.get(callme).number);
+            al_Add1.setText(AddAddressActivity.adressAAA.get(callme).add1);
+            al_Add2.setText(AddAddressActivity.adressAAA.get(callme).add2);
+            Al_code.setText(AddAddressActivity.adressAAA.get(callme).pincode);
+            Al_city.setText(AddAddressActivity.adressAAA.get(callme).city);
+            al_default.setText(AddAddressActivity.adressAAA.get(callme).def_value);
+
+        }
 
 
 

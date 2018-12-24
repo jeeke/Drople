@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Order;
@@ -54,6 +55,26 @@ public class DonateActivity extends AppCompatActivity {
                 send_order();
             }
         });
+
+
+        TextView Name = findViewById(R.id.Name);
+        TextView number = findViewById(R.id.al_number);
+        TextView al_default = findViewById(R.id.al_default);
+        TextView al_Add1 = findViewById(R.id.al_address);
+        TextView al_Add2 = findViewById(R.id.al_address_2);
+        TextView Al_city = findViewById(R.id.al_city);
+        TextView Al_code = findViewById(R.id.al_code);
+
+        if(PlaceOrderActivity.callme!=-1) {
+            Name.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);
+            number.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).number);
+            al_Add1.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add1);
+            al_Add2.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add2);
+            Al_code.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).pincode);
+            Al_city.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).city);
+            al_default.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).def_value);
+
+        }
     }
 
     private void send_order() {

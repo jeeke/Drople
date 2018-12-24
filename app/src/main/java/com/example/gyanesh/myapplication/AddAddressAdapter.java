@@ -1,6 +1,8 @@
 package com.example.gyanesh.myapplication;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -26,8 +28,8 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CardView cardView = holder.cardView;
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final CardView cardView = holder.cardView;
         TextView name = cardView.findViewById(R.id.Name);
         TextView number = cardView.findViewById(R.id.al_number);
         TextView pincode = cardView.findViewById(R.id.al_code);
@@ -42,6 +44,16 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
         add1.setText(myadress.get(position).add1);
         add2.setText(myadress.get(position).add2);
         def.setText(myadress.get(position).def_value);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlaceOrderActivity.callme = position;
+                Intent intent = new Intent(cardView.getContext(),PlaceOrderActivity.class);
+                cardView.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 
