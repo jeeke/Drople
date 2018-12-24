@@ -179,23 +179,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                     //TODO Check if all fields are correctly filled otherwise show Error
                     send_order();
                 }
-                Uri uri = new Uri.Builder()
-                        .scheme("upi")
-                        .authority("pay")
-                        .appendQueryParameter("pa", "test@axisbank")
-                        .appendQueryParameter("pn","Test Merchant")
-                        .appendQueryParameter("mc","1234")
-                        .appendQueryParameter("tr","123456789")
-                        .appendQueryParameter("tn","test transaction note")
-                        .appendQueryParameter("am","1.00")
-                        .appendQueryParameter("cu","INR")
-                        .appendQueryParameter("url","https://test.merchant.website")
-                        .build();
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(uri);
-                intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
-                startActivityForResult(intent,TEZ_REQUEST_CODE);
             }
         });
         Spinner spinner=(Spinner) findViewById(R.id.spinner5);
@@ -216,7 +200,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
         payMode=position;
-        Toast.makeText(PlaceOrderActivity.this,"This selected", Toast.LENGTH_LONG).show();
 
     }
 //GK : Tou will get position from here
