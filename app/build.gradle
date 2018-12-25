@@ -39,6 +39,9 @@ dependencies {
         transitive = true
     }
 
+    //Circular Indicator
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+
     repositories {
         mavenCentral()
         jcenter()
