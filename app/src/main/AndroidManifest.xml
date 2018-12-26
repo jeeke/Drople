@@ -19,8 +19,8 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
-            android:parentActivityName=".AddAddressActivity"
-            android:label="Add address"/>
+            android:label="Add address"
+            android:parentActivityName=".AddAddressActivity" />
         <activity
             android:name=".PlaceOrderActivity"
             android:parentActivityName=".MainActivity" />
@@ -37,9 +37,11 @@
         <activity
             android:name=".AddClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />
-        <activity android:name=".AddAddressActivity"
-            android:parentActivityName=".PlaceOrderActivity"
-            android:label="Choose Address"/>
+        <activity
+            android:name=".AddAddressActivity"
+            android:label="Choose Address"
+            android:parentActivityName=".PlaceOrderActivity" />
+
         <meta-data
             android:name="com.parse.SERVER_URL"
             android:value="@string/back4app_server_url" />
@@ -65,6 +67,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".SaloonActivity" />
         <activity android:name=".ExtrasActivity" />
+
+        <meta-data
+            android:name="com.google.android.actions" />
     </application>
 
 </manifest>

@@ -39,6 +39,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import static com.example.gyanesh.myapplication.R.array.*;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CALLBACK_URL;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CHANNEL_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.INDUSTRY_TYPE_ID;
@@ -200,6 +201,9 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
         payMode=position;
+        TextView mode=findViewById(R.id.textView25);
+        String Mode=parent.getSelectedItem().toString();
+        mode.setText(Mode);
 
     }
 //GK : Tou will get position from here
@@ -486,9 +490,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         cal.setTime(c);
         cal.add(Calendar.DAY_OF_YEAR, 1);
         String formattedDate2 = df1.format(cal.getTime());
+        Date now=new Date();
+        cal.setTime(now);
         int d1 = cal.get(Calendar.DAY_OF_WEEK);
         TextView day11 = v1.findViewById(R.id.day);
-        day11.setText(getDay(d1));
+
+        SimpleDateFormat sdf=new SimpleDateFormat("E");
+        day11.setText(sdf.format(now));
         TextView textView2 = v2.findViewById(R.id.date);
         textView2.setText(formattedDate2);
         int d2 = (d1 + 1) % 7;
