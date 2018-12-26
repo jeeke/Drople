@@ -1,6 +1,5 @@
 package com.example.gyanesh.myapplication.Fragments;
 
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,20 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.gyanesh.myapplication.MainActivity;
 import com.example.gyanesh.myapplication.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
-public class LoginFragment extends AuthFragment {
+public class LoginFragment extends Fragment {
 
 
     private EditText usernameView;
@@ -43,20 +41,10 @@ public class LoginFragment extends AuthFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.frag_login, container, false);
+        View view = inflater.inflate(R.layout.card_login, container, false);
         usernameView = view.findViewById(R.id.email_login);
         passwordView = view.findViewById(R.id.password_login);
-        Button login_button = view.findViewById(R.id.button);
-
-
-        TextView no_account = view.findViewById(R.id.no_account);
-        no_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener!=null) listener.loadFragment(new SignupFragment());
-            }
-        });
-
+        FloatingActionButton login_button = view.findViewById(R.id.btn_login);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override

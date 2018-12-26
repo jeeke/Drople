@@ -3,14 +3,11 @@ package com.example.gyanesh.myapplication.Fragments;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.R;
@@ -18,7 +15,9 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class SignupFragment extends AuthFragment {
+import androidx.fragment.app.Fragment;
+
+public class SignupFragment extends Fragment {
 
     private EditText usernameView;
     private EditText passwordView;
@@ -37,21 +36,13 @@ public class SignupFragment extends AuthFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.frag_signup, container, false);
+        View view = inflater.inflate(R.layout.card_signup, container, false);
         super.onCreate(savedInstanceState);
 
         usernameView = (EditText) view.findViewById(R.id.name);
         emailView = (EditText) view.findViewById(R.id.email);
         passwordView = (EditText) view.findViewById(R.id.password);
         passwordAgainView = (EditText) view.findViewById(R.id.confirm_pass);
-        TextView already_accnt = view.findViewById(R.id.already_accnt);
-        already_accnt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null)
-                    listener.loadFragment(new LoginFragment());
-            }
-        });
         return view;
     }
 
@@ -171,9 +162,10 @@ public class SignupFragment extends AuthFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        //TODO redirect to login
                         if (!error) {
-                            if (listener != null)
-                                listener.loadFragment(new LoginFragment());
+//                            if (listener != null)
+//                                listener.loadFragment(new LoginFragment());
                         }
                     }
                 });
