@@ -1,9 +1,7 @@
 package com.example.gyanesh.myapplication.Fragments;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import com.example.gyanesh.myapplication.ViewPagerAdapter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 

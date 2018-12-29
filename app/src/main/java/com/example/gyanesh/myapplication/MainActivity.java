@@ -2,14 +2,10 @@ package com.example.gyanesh.myapplication;
 
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
@@ -17,8 +13,9 @@ import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;

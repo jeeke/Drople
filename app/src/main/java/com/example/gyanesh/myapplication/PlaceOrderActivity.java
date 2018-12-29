@@ -35,11 +35,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import static com.example.gyanesh.myapplication.R.array.*;
+
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CALLBACK_URL;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.CHANNEL_ID;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.INDUSTRY_TYPE_ID;

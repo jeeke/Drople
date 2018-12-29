@@ -39,8 +39,9 @@
             android:parentActivityName=".PlaceOrderActivity" />
         <activity
             android:name=".AddAddressActivity"
-            android:label="Choose Address"
-            android:parentActivityName=".PlaceOrderActivity" />
+
+            android:parentActivityName=".PlaceOrderActivity"
+            android:label="Choose Address"/>
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -67,9 +68,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".SaloonActivity" />
         <activity android:name=".ExtrasActivity" />
-
-        <meta-data
-            android:name="com.google.android.actions" />
     </application>
 
 </manifest>
