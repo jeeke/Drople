@@ -31,7 +31,7 @@ public class ServicesFrag extends Fragment {
         setListener(card);
         card = view.findViewById(R.id.service_card3);
         setListener(card);
-        card = view.findViewById(R.id.service_card4);
+        card = view.findViewById(R.id.time_layout);
         setListener(card);
 
         return view;

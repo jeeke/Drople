@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,7 +95,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     private int payMode = -1;
     String selectedDate;
     String selectedSlot;
-    int colorv1, colorv4, colorv5, colorv6;
+    Drawable colorv1, colorv4, colorv5, colorv6;
 
     View v1, v2, v3, v4, v5, v6, v7;
     ProgressDialog dlg;
@@ -399,43 +400,46 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         final Date default1 = utilDate(1);
         final Date default2 = utilDate(2);
         final Date default3 = utilDate(3);
-        v1 = findViewById(R.id.date1);
-        v2 = findViewById(R.id.date2);
-        v3 = findViewById(R.id.date3);
-        v4 = findViewById(R.id.day1);
-        v5 = findViewById(R.id.day2);
-        v6 = findViewById(R.id.day3);
-        final int colorAccent = getResources().getColor(R.color.colorAccent);
-        final int colorPrimary = getResources().getColor(R.color.colorPrimary);
-        final int grey = getResources().getColor(R.color.grey);
+        View slotLayout,timeLayout;
+        slotLayout =findViewById(R.id.slot_layout);
+        timeLayout = findViewById(R.id.time_layout);
+        v1 = timeLayout.findViewById(R.id.date1);
+        v2 = timeLayout.findViewById(R.id.date2);
+        v3 = timeLayout.findViewById(R.id.date3);
+        v4 = slotLayout.findViewById(R.id.date1);
+        v5 = slotLayout.findViewById(R.id.date2);
+        v6 = slotLayout.findViewById(R.id.date3);
+        final Drawable colorAccent = getResources().getDrawable(R.drawable.edit_text_round_blue);
+        final Drawable colorPrimary = getResources().getDrawable(R.drawable.edit_text_corner_round_grey);
+        final Drawable grey = getResources().getDrawable(R.drawable.edit_text_corner_round_grey);
 
         //TODO Starpoint use view.onclickListener before setClickable false
 
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(colorAccent);
+                v.setBackground(colorAccent);
 
                 TextView temp = v.findViewById(R.id.date);
                 selectedDate = temp.getText().toString();
 
-                v2.setBackgroundColor(colorPrimary);
-                v3.setBackgroundColor(colorPrimary);
+                v2.setBackground(colorPrimary);
+                v3.setBackground(colorPrimary);
                 if (date.after(default1)) {
-                    v4.setBackgroundColor(grey);
+                    v4.setBackground(grey);
                     colorv4 = grey;
                     v4.setClickable(false);
                 } else {
-                    v4.setBackgroundColor(colorPrimary);
+                    v4.setBackground(colorPrimary);
                     colorv4 = colorPrimary;
                     v4.setClickable(true);
                 }
                 if (date.after(default2)) {
-                    v5.setBackgroundColor(grey);
+                    v5.setBackground(grey);
                     colorv5 = grey;
                     v5.setClickable(false);
                 } else {
-                    v5.setBackgroundColor(colorPrimary);
+                    v5.setBackground(colorPrimary);
                     colorv5 = colorPrimary;
                     v5.setClickable(true);
                 }
@@ -447,13 +451,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             public void onClick(View v) {
                 TextView temp = v.findViewById(R.id.date);
                 selectedDate = temp.getText().toString();
-                v1.setBackgroundColor(colorv1);
-                v2.setBackgroundColor(colorPrimary);
-                v3.setBackgroundColor(colorPrimary);
-                v.setBackgroundColor(colorAccent);
-                v4.setBackgroundColor(colorPrimary);
-                v5.setBackgroundColor(colorPrimary);
-                v6.setBackgroundColor(colorPrimary);
+                v1.setBackground(colorv1);
+                v2.setBackground(colorPrimary);
+                v3.setBackground(colorPrimary);
+                v.setBackground(colorAccent);
+                v4.setBackground(colorPrimary);
+                v5.setBackground(colorPrimary);
+                v6.setBackground(colorPrimary);
                 colorv4 = colorv5 = colorv6 = colorPrimary;
                 v4.setClickable(true);
                 v5.setClickable(true);
@@ -467,10 +471,10 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         View.OnClickListener slotListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v4.setBackgroundColor(colorv4);
-                v5.setBackgroundColor(colorv5);
-                v6.setBackgroundColor(colorv6);
-                v.setBackgroundColor(colorAccent);
+                v4.setBackground(colorv4);
+                v5.setBackground(colorv5);
+                v6.setBackground(colorv6);
+                v.setBackground(colorAccent);
                 TextView temp = v.findViewById(R.id.date);
                 selectedSlot = temp.getText().toString();
                 Toast.makeText(PlaceOrderActivity.this, selectedDate + "  Slot: " + selectedSlot, Toast.LENGTH_SHORT).show();
@@ -481,7 +485,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         v6.setOnClickListener(slotListener);
 
         if (date.after(default3)) {
-            v1.setBackgroundColor(grey);
+            v1.setBackground(grey);
             colorv1 = grey;
             v1.setClickable(false);
             v4.setClickable(false);
@@ -489,13 +493,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             v6.setClickable(false);
         } else {
             colorv1 = colorPrimary;
-            v1.setBackgroundColor(colorPrimary);
+            v1.setBackground(colorPrimary);
         }
-        v2.setBackgroundColor(colorPrimary);
-        v3.setBackgroundColor(colorPrimary);
-        v4.setBackgroundColor(grey);
-        v5.setBackgroundColor(grey);
-        v6.setBackgroundColor(grey);
+        v2.setBackground(colorPrimary);
+        v3.setBackground(colorPrimary);
+        v4.setBackground(grey);
+        v5.setBackground(grey);
+        v6.setBackground(grey);
 
 
         SimpleDateFormat df1 = new SimpleDateFormat("dd - MMM");

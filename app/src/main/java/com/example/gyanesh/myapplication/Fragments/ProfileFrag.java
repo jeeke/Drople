@@ -37,7 +37,7 @@ public class ProfileFrag extends Fragment {
         TextView textView = view.findViewById(R.id.include1).findViewById(R.id.name);
         textView.setText(name);
 
-        textView = view.findViewById(R.id.include2).findViewById(R.id.textView12);
+        textView = view.findViewById(R.id.slot_layout).findViewById(R.id.textView12);
         textView.setText(email);
 
 

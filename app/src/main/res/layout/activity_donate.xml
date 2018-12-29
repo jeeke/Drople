@@ -54,7 +54,7 @@
 
 
             <include
-                android:id="@+id/service_card4"
+                android:id="@+id/time_layout"
                 layout="@layout/time_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
