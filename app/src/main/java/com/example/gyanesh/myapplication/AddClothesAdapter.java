@@ -14,18 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.viewHolder> {
+public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.viewHolder>{
 
     private List<Garment> garments;
+    interface Listener{
+        void updateSelected(Garment garment,int prevCount);
+    }
+    Listener listener;
 
-    public AddClothesAdapter(List<Garment> garments) {
+    public AddClothesAdapter(Listener listener,List<Garment> garments) {
+        this.listener = listener;
         this.garments = garments;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.add_clothes_item, parent, false);
         return new viewHolder(cv);
     }
@@ -34,7 +38,7 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CardView cv = holder.cv;
         String title = garments.get(position).getType();
-        String price = garments.get(position).getPrice() + "";
+        String price = "Price : "+garments.get(position).getPrice();
         TextView garmentTitle = cv.findViewById(R.id.garment_type);
         TextView garmentPrice = cv.findViewById(R.id.garment_price);
         garmentTitle.setText(title);
@@ -46,6 +50,7 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
     public int getItemCount() {
         return garments.size();
     }
+
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private CardView cv;
@@ -65,16 +70,17 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
         @Override
         public void onClick(View v) {
 
-            int number = garments.get(getAdapterPosition()).getNumber();
-
+            Garment item = garments.get(getAdapterPosition());
+            int count = item.getNumber();
             if (v.getId() == btn_plus.getId()) {
-                garments.get(getAdapterPosition()).setNumber(number + 1);
-                garmentCount.setText(String.valueOf(number + 1));
-            } else if (v.getId() == btn_minus.getId()) {
-                garments.get(getAdapterPosition()).setNumber(number - 1);
-                garmentCount.setText(String.valueOf(number - 1));
+                garments.get(getAdapterPosition()).setNumber(count + 1);
+                garmentCount.setText(String.valueOf(count + 1));
+                listener.updateSelected(item,count);
+            } else if (v.getId() == btn_minus.getId() && count > 0) {
+                garments.get(getAdapterPosition()).setNumber(count - 1);
+                garmentCount.setText(String.valueOf(count - 1));
+                listener.updateSelected(item,count);
             }
-
         }
     }
 }

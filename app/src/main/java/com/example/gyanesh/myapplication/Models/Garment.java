@@ -1,22 +1,28 @@
 package com.example.gyanesh.myapplication.Models;
 
-public class Garment {
+import java.io.Serializable;
+
+
+//TODO implement parcelable instead of serializable
+public class Garment implements Serializable {
 
     private int number = 0;
+    private int garmentId;
     private String type;
     private int price;
 
-    public Garment(String type, int price) {
+    public Garment(int id, String type, int price) {
+        this.garmentId = id;
         this.type = type;
         this.price = price;
     }
 
-    public int getPrice() {
-        return price;
+    public int getGarmentId() {
+        return garmentId;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public int getPrice() {
+        return price;
     }
 
     public int getNumber() {
@@ -29,9 +35,5 @@ public class Garment {
 
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
