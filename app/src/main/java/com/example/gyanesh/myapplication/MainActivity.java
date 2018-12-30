@@ -69,12 +69,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_dots));
 
 //        Setting navigation bar
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        toolbar.setTitle("DASHBOARD");
 
 //        Initialising with home fragment
         loadFragment(new HomeFrag());
@@ -83,23 +82,19 @@ public class MainActivity extends AppCompatActivity {
     //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    toolbar.setTitle(R.string.nav_home);
                     fragment = new HomeFrag();
                     loadFragment(fragment);
                     return true;
                 case R.id.nav_account:
-                    toolbar.setTitle(R.string.nav_account);
                     fragment = new ProfileFrag();
                     loadFragment(fragment);
                     return true;
                 case R.id.nav_history:
-                    toolbar.setTitle(R.string.nav_history);
                     fragment = new ServicesFrag();
                     loadFragment(fragment);
                     return true;

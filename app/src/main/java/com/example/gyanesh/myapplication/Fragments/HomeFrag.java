@@ -104,6 +104,8 @@ public class HomeFrag extends Fragment {
 
         //Wash N Iron Button
         home_button = layout.findViewById(R.id.btn_home3);
+        head = home_button.findViewById(R.id.head1);
+        head.setText("Wash & Iron");
         imageView = home_button.findViewById(R.id.btn_home_img);
         imageView.setImageResource(R.drawable.normal1);
         home_button.setOnClickListener(servicesListener);
@@ -111,8 +113,6 @@ public class HomeFrag extends Fragment {
 
         //Ironing Button
         home_button = layout.findViewById(R.id.btn_home4);
-        head = home_button.findViewById(R.id.head1);
-        head.setText("Ironing");
         head = home_button.findViewById(R.id.head2);
         head.setText("min 12 hrs");
         imageView = home_button.findViewById(R.id.btn_home_img);

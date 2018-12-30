@@ -20,8 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="Home" />
+            android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
             android:label="Add Address"

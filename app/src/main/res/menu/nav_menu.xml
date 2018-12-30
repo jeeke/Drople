@@ -11,7 +11,7 @@
             android:title="@string/nav_history"/>
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/ic_account"
+            android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/nav_account"/>
     </group>
 </menu>
