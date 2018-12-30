@@ -50,6 +50,7 @@ public class HomeFrag extends Fragment {
         //flipperImages(image);
         //  }
         viewPager.setClipToPadding(false);
+        //TODO Starpoint do not remove top and bottom padding coz its unsycronizes pager indicator motion
         viewPager.setPadding(40,10,40,10);
         viewPager.setPageMargin(20);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(),layout.findViewById(R.id.pageIndicatorView));
