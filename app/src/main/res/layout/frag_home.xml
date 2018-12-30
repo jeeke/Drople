@@ -9,16 +9,11 @@
     tools:context=".Fragments.HomeFrag"
     >
 
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/offers"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_height="175dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:padding="10dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
@@ -26,6 +21,23 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/pageIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:piv_animationDuration="450"
+        app:piv_animationType="swap"
+        app:piv_dynamicCount="true"
+        app:piv_radius="3dp"
+        app:piv_selectedColor="@color/colorAccent"
+        app:piv_unselectedColor="@color/colorPrimary" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

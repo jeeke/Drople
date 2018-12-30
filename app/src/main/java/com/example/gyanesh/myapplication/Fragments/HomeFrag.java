@@ -15,6 +15,7 @@ import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.TrackOrderActivity;
 import com.example.gyanesh.myapplication.ViewPagerAdapter;
+import com.rd.IndicatorManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -25,8 +26,9 @@ import androidx.viewpager.widget.ViewPager;
  */
 public class HomeFrag extends Fragment {
 
-//    private ViewFlipper viewFlipper;
+    //    private ViewFlipper viewFlipper;
     private ViewPager viewPager;
+
     public HomeFrag() {
         // Required empty public constructor
     }
@@ -41,24 +43,26 @@ public class HomeFrag extends Fragment {
 
         //Auto Image Slider
         //viewFlipper = layout.findViewById(R.id.offers);
-        viewPager=layout.findViewById(R.id.offers);
-        Context c= viewPager.getContext();
+        viewPager = layout.findViewById(R.id.offers);
         // int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.btn_donate};
 
         //for(int image:images){
         //flipperImages(image);
         //  }
-        ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(c);
+        viewPager.setClipToPadding(false);
+        viewPager.setPadding(40,10,40,10);
+        viewPager.setPageMargin(20);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(),layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setCurrentItem(Integer.MAX_VALUE/2);
+
 //        Timer timer= new Timer();
 //        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
-
 
 
         ImageView imageView;
         View home_button;
         TextView head;
-
 //        place order
         home_button = layout.findViewById(R.id.btn_home1);
         imageView = home_button.findViewById(R.id.btn_home_img);
@@ -66,7 +70,7 @@ public class HomeFrag extends Fragment {
         home_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),PlaceOrderActivity.class);
+                Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +85,7 @@ public class HomeFrag extends Fragment {
         home_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),DonateActivity.class);
+                Intent intent = new Intent(getContext(), DonateActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,6 +94,7 @@ public class HomeFrag extends Fragment {
         //       Services Buttons
         View.OnClickListener servicesListener = new View.OnClickListener() {
             private int btnId;
+
             @Override
             public void onClick(View v) {
 
@@ -114,7 +119,6 @@ public class HomeFrag extends Fragment {
         home_button.setOnClickListener(servicesListener);
 
 
-
         //Dry Wash Button
         home_button = layout.findViewById(R.id.btn_home5);
         head = home_button.findViewById(R.id.head1);
@@ -126,7 +130,6 @@ public class HomeFrag extends Fragment {
         home_button.setOnClickListener(servicesListener);
 
 
-
         //Premium Wash Button
         home_button = layout.findViewById(R.id.btn_home6);
         head = home_button.findViewById(R.id.head1);
@@ -136,7 +139,6 @@ public class HomeFrag extends Fragment {
         imageView = home_button.findViewById(R.id.btn_home_img);
         imageView.setImageResource(R.drawable.premium4);
         home_button.setOnClickListener(servicesListener);
-
 
 
         return layout;

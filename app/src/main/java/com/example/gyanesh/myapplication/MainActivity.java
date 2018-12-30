@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ProfileFrag();
                     loadFragment(fragment);
                     return true;
-                case R.id.nav_services:
-                    toolbar.setTitle(R.string.nav_services);
+                case R.id.nav_history:
+                    toolbar.setTitle(R.string.nav_history);
                     fragment = new ServicesFrag();
                     loadFragment(fragment);
                     return true;
