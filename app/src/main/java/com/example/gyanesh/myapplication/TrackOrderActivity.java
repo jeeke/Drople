@@ -15,11 +15,11 @@ public class TrackOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.track_order_using_adapter);
-        Toolbar toolbar;
-        toolbar = findViewById(R.id.toolbar_track_order);
-        setSupportActionBar(toolbar);
-        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar;
+//        toolbar = findViewById(R.id.toolbar_track_order);
+//        setSupportActionBar(toolbar);
+//        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         String[] date={"16-01-2000","25-01-2000","31-31-2031","5-09-2000","14-04-2019"};
         String [] progress={"25","30","100","90","60"};
