@@ -13,7 +13,7 @@
             android:id="@+id/imageView17"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:src="@drawable/donate"
+            android:src="@drawable/btn_donate"
             app:layout_constraintBottom_toTopOf="@+id/textView23"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

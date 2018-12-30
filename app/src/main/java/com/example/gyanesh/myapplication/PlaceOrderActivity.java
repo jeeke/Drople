@@ -2,24 +2,21 @@ package com.example.gyanesh.myapplication;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.Models.OrderModel;
 import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
@@ -40,8 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -60,8 +55,22 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     private static final int TEZ_REQUEST_CODE = 123;
     private static final int ADD_CLOTHES_REQUEST_CODE = 124;
-    public static int callme = -1; //none of your business.. ignore it ... but dont delete !!
+    public static int callme = -1;
     Map<Integer, Garment> selectedGarments;
+    private static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
+    //TODO Initialize these values as user fills the details
+    private Address address = new Address();
+    private Date c = Calendar.getInstance().getTime();
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private int clothes = 10;
+    private double cost = 50;
+    private int payMode = 0;
+    String selectedDate;
+    String selectedSlot;
+    Drawable colorv1, colorv4, colorv5, colorv6;
+    View v1, v2, v3, v4, v5, v6, v7;
+    ProgressDialog dlg;
+    HashMap<String, String> params = new HashMap<>();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -83,25 +92,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             }
         }
     }
-
-    private static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
-
-    //TODO Initialize these values as user fills the details
-    private String address = "gffgkgfhk";
-    private Date c = Calendar.getInstance().getTime();
-    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    private int clothes = 10;
-    private double cost = 50;
-    private int payMode = -1;
-    String selectedDate;
-    String selectedSlot;
-    Drawable colorv1, colorv4, colorv5, colorv6;
-
-    View v1, v2, v3, v4, v5, v6, v7;
-    ProgressDialog dlg;
-
-    HashMap<String, String> params = new HashMap<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -156,21 +146,19 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         dlg = new ProgressDialog(this);
 
-//Iske baad ki bakchodi dekh lena
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                TODO Uncomment and integrate all payment methods
-//                //TODO Later after development set paymentDone to false
+//                TODO Later after development set paymentDone to false
                 Boolean paymentDone = false;
-
-                if (payMode == 0) {
+                //PayTm
+                if (payMode == 1) {
                     paytm();
                     paymentDone = true;
                 }
-                //TODO redirect to payment and set paymentDone
-                else if (payMode == 1) {
+                //Tez
+                else if (payMode == 0) {
                     Uri uri = new Uri.Builder()
                             .scheme("upi")
                             .authority("pay")
@@ -191,23 +179,22 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
                     paymentDone = true;
                 }
-                //TODO GK : Add 3rd else if for cash on delivery here
-                //and check  if all fields are correct.
+                //Cash On Delivery
                 else if (payMode == 2) {
-                    Toast.makeText(PlaceOrderActivity.this, "COD Selected", Toast.LENGTH_LONG).show();
+                    paymentDone = true;
                 }
                 if (paymentDone) {
                     //TODO Check if all fields are correctly filled otherwise show Error
                     send_order();
                 }
-
             }
         });
-        Spinner spinner = (Spinner) findViewById(R.id.spinner5);
+
+        Spinner spinner = findViewById(R.id.spinner5);
         spinner.setOnItemSelectedListener(this);
         List<String> options = new ArrayList<String>();
-        options.add("Paytm");
         options.add("Tez");
+        options.add("Paytm");
         options.add("Cash On Delivery");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -215,21 +202,17 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     }
 
-    //Return OnItemSelected item from here.. to redirect payment
-    //0 for paytm
-    //1 for Tez
+    //1 for paytm
+    //0 for Tez
     //2 for Cash on delivery
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         payMode = position;
-
     }
 
-    //GK : Tou will get position from here
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-
+        payMode = 2;
     }
 
     private String generateString() {
@@ -238,7 +221,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     }
 
     private void paytm() {
-
         // Use this map to send parameters to your Cloud Code function
         // Just push the parameters you want into it
         //Map<String, String> params = new HashMap<>();
@@ -362,7 +344,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         dlg.setMessage("Placing Your Order...");
         dlg.show();
         OrderModel order = new OrderModel();
-        order.setAddress(address);
+        order.setAddress(address.toString());
         order.setUserId(ParseUser.getCurrentUser().getObjectId());
         order.setClothes(clothes);
         order.setPayMode(payMode);

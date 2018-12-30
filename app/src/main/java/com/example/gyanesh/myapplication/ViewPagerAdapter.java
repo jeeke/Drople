@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.offers,R.drawable.error_image,R.drawable.donate};
+    private Integer[] images={R.drawable.offers,R.drawable.error_image,R.drawable.btn_donate};
     public ViewPagerAdapter(Context context)
     {
         this.context=context;
