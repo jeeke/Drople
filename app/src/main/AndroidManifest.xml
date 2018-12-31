@@ -27,6 +27,7 @@
             android:parentActivityName=".PlaceOrderActivity" />
         <activity
             android:name=".PlaceOrderActivity"
+            android:label="Place Order"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TrackOrderActivity"
