@@ -13,7 +13,9 @@ import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -29,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

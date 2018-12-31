@@ -206,8 +206,12 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //0 for Tez
     //2 for Cash on delivery
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        payMode = position;
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        payMode=position;
+        TextView mode=findViewById(R.id.textView25);
+        String Mode=parent.getSelectedItem().toString();
+        mode.setText(Mode);
+
     }
 
     @Override
@@ -281,8 +285,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //all these overriden method is to detect the payment result accordingly
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        params.put("CHECKSUMHASH", bundle.getString("CHECKSUMHASH"));
-        Log.e("MSG", params.toString());
+        params.put("CHECKSUMHASH",bundle.getString("CHECKSUMHASH"));
+        Log.e("MSG",params.toString());
         Log.e("Bundle", bundle.toString());
 
 //        Toast.makeText(this,"Transaction Success", Toast.LENGTH_LONG).show();
