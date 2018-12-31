@@ -17,7 +17,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/light_grey" />
+        app:titleTextColor="@color/colorPrimary"
+        android:elevation="4dp"
+        app:elevation="4dp"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
