@@ -4,14 +4,14 @@
     <item
         android:id="@+id/action_notification"
         android:orderInCategory="2"
-        android:icon="@drawable/ic_notifications"
+        android:icon="@drawable/ic_notifications2"
         android:title="Notifications"
         app:showAsAction="ifRoom">
     </item>
 
     <item
         android:id="@+id/rate_us"
-        android:icon="@drawable/ic_star"
+        android:icon="@drawable/ic_star2"
         android:orderInCategory="1"
         android:title="Rate Us"
         app:showAsAction="ifRoom" />
