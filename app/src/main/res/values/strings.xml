@@ -9,6 +9,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_account">Account</string>
     <string name="nav_history">History</string>
+    <string name="nav_support">Support</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

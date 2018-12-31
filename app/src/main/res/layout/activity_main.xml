@@ -52,6 +52,7 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/nav_menu"
+        app:labelVisibilityMode="labeled"
         android:elevation="16dp"
         app:elevation="16dp"/>
 

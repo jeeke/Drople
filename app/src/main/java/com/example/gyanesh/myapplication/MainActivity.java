@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -41,16 +42,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.about_us:
-                Intent intent = new Intent(this,ExtrasActivity.class);
-                startActivity(intent);
-                break;
             case R.id.action_notification:
                 Toast.makeText(this, "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.policies:
-                Toast.makeText(this, "Policies selected", Toast.LENGTH_SHORT)
                         .show();
                 break;
             case R.id.rate_us:
@@ -60,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return true;
     }
 
@@ -80,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new HomeFrag());
 
     }
+
     //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
+                case R.id.nav_support:
+                    fragment = new ProfileFrag();
+                    loadFragment(fragment);
+                    return true;
                 case R.id.nav_home:
                     fragment = new HomeFrag();
                     loadFragment(fragment);
@@ -102,7 +99,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
-
-
     };
 }
