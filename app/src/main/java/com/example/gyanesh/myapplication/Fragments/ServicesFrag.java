@@ -1,76 +1,96 @@
 package com.example.gyanesh.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ScrollView;
 
+import com.example.gyanesh.myapplication.ActiveOrdersAdapter;
 import com.example.gyanesh.myapplication.R;
-import com.example.gyanesh.myapplication.RateListAdapter;
 
-import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ServicesFrag extends Fragment {
 
-    private int cnt = 0;
+    //private int cnt = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.frag_services, container, false);
-        cnt++;
-        CardView card = view.findViewById(R.id.service_card1);
-        setListener(card);
-        card = view.findViewById(R.id.service_card2);
-        setListener(card);
-        card = view.findViewById(R.id.service_card3);
-        setListener(card);
-        card = view.findViewById(R.id.time_layout);
-        setListener(card);
+        final View view = inflater.inflate(R.layout.frag_services, container, false);
 
-        return view;
-    }
 
-    public void setListener(CardView card) {
 
-        String[] items = {"cloth", "kambal", "bed sheets", "rajai", "jacket", "shoes", "towel", "blazzer", "triple", "college bag", "tourist bag"};
-        int[] cost = {10, 250, 15, 250, 150, 40, 5, 100, 250, 30, 50};
-        final RecyclerView recyclerView = card.findViewById(R.id.rate_list);
-        final TextView textView = card.findViewById(R.id.rate_list_heading);
-        RateListAdapter adapter = new RateListAdapter(items, cost);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setNestedScrollingEnabled(false);
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        String[] date={"16-01-2000","25-01-2000","31-31-2031","5-09-2000"};
+        String [] progress={"25","30","90","60"};
+        String [] orderid={"#0001","#0002","#0003","#0004"};
+        ActiveOrdersAdapter activeOrdersAdapter = new ActiveOrdersAdapter(orderid,progress,date);
+        final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.activeorderrv);
+        recyclerView.setAdapter(activeOrdersAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        final TextView para = card.findViewById(R.id.para);
-        final TextView btn_more = card.findViewById(R.id.btn_more);
 
-        btn_more.setOnClickListener(new View.OnClickListener() {
+        ConstraintLayout constraintLayout = view.findViewById(R.id.newrange);
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-
-            public void onClick(View view) {
-                if (cnt % 2 == 1) {
-                    para.setMaxLines(10000);
-                    btn_more.setText("View Less");
+            public void onClick(View v) {
+                if(recyclerView.getVisibility()==View.GONE)
+                {
                     recyclerView.setVisibility(View.VISIBLE);
-                    textView.setVisibility(View.VISIBLE);
-                    cnt++;
-                } else {
-                    para.setMaxLines(2);
-                    btn_more.setText("View More");
-                    recyclerView.setVisibility(View.GONE);
-                    textView.setVisibility(View.GONE);
-                    cnt++;
                 }
+                else
+                {
+                    recyclerView.setVisibility(View.GONE);
+                }
+
             }
         });
 
+        String[] date2={"16-01-2000","25-01-2000","31-31-2031","5"};
+        String [] progress2={"100","100","100","100"};
+        String [] orderid2={"#0001","#0002","#0003","4"};
+        ActiveOrdersAdapter activeOrdersAdapter2 = new ActiveOrdersAdapter(orderid2,progress2,date2);
+        final RecyclerView recyclerView2 = (RecyclerView)view.findViewById(R.id.historyrv);
+        recyclerView2.setAdapter(activeOrdersAdapter2);
+        //recyclerView2.setMinimumHeight(1000);
+
+
+
+
+
+
+        //CustomLinearLayoutManager customLayoutManager2 = new CustomLinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        recyclerView2.setLayoutManager(linearLayoutManager2);
+
+
+        ConstraintLayout constraintLayout2 = view.findViewById(R.id.newrange2);
+        constraintLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScrollView scrollView=view.findViewById(R.id.scrolltop);
+                //scrollView.fullScroll(ScrollView.FOCUS_D);
+                if(recyclerView2.getVisibility()==View.GONE)
+                {
+                    recyclerView2.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    recyclerView2.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+
+        return view;
     }
 
 }
