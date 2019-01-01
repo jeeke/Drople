@@ -1,9 +1,12 @@
 package com.example.gyanesh.myapplication;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
 
@@ -77,12 +80,27 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardView;
+        ImageView btn_edit,btn_delete;
 
         public ViewHolder(CardView v) {
             super(v);
             cardView = v;
+            btn_edit = v.findViewById(R.id.btn_edit);
+            btn_delete = v.findViewById(R.id.btn_delete);
+            btn_edit.setOnClickListener(this);
+            btn_delete.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            if(v.getId()==R.id.btn_edit){
+                Toast.makeText((Activity)listener,"Edit Clicked",Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText((Activity)listener,"Delete Clicked",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

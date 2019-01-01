@@ -38,7 +38,7 @@ public class DonateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
+        ImageView imageView = (ImageView) findViewById(R.id.btn_edit);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

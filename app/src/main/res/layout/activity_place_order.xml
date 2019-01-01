@@ -36,7 +36,7 @@
 
             <include
                 android:id="@+id/address_layout_order_activity"
-                layout="@layout/address_layout"
+                layout="@layout/address_layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

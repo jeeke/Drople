@@ -220,14 +220,16 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             al_default.setText(df);
 
             //TODO update this to edit the current addtess
-            ImageView imageView = findViewById(R.id.edit_address_icon);
-            imageView.setOnClickListener(new View.OnClickListener() {
+            ImageView btn_edit = findViewById(R.id.btn_edit);
+            btn_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
                     startActivity(intent);
                 }
             });
+            btn_edit = findViewById(R.id.btn_delete);
+            btn_edit.setVisibility(View.GONE);
 
         } else {
             CardView cardView = findViewById(R.id.address_layout_order_activity);
