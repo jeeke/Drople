@@ -9,17 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.gyanesh.myapplication.Adapters.AddAddressAdapter;
 import com.example.gyanesh.myapplication.Models.Address;
-import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
-import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class AddAddressActivity extends AppCompatActivity implements AddAddressAdapter.Listener {
 

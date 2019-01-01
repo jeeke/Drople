@@ -1,15 +1,15 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.gyanesh.myapplication.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;

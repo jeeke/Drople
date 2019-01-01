@@ -35,12 +35,6 @@
     </string>
     <string name="contact">We are here to answer any query you have about our services. Reach to us and we will try to reach you as soon as possible.</string>
 
-
-    <string-array name="CityNames">
-        <item>-- Select City --</item>
-        <item> NIT Jalandhar </item>
-        <item> Jalandhar</item>
-    </string-array>
     <string-array name="payment_options">
         <item>Paytm</item>
         <item>Tez</item>

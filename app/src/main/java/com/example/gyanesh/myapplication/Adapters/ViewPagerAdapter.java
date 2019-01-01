@@ -1,4 +1,4 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.gyanesh.myapplication.R;
 import com.rd.PageIndicatorView;
 
 import androidx.annotation.NonNull;

@@ -1,39 +1,39 @@
 package com.example.gyanesh.myapplication.Models;
 
-import java.io.Serializable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
+@ParseClassName("Garment")
+public class Garment extends ParseObject {
+
+    public static final String COUNT = "count";
+    public static final String TITLE = "title";
+    public static final String PRICE = "price";
+    public static final String LOCALITY = "locality";
+    public static final String SERVICE_TYPE = "serviceType";
 
 
-//TODO implement parcelable instead of serializable
-public class Garment implements Serializable {
-
-    private int number = 0;
-    private int garmentId;
-    private String type;
-    private int price;
-
-    public Garment(int id, String type, int price) {
-        this.garmentId = id;
-        this.type = type;
-        this.price = price;
-    }
-
-    public int getGarmentId() {
-        return garmentId;
+    public void setCount(int count){
+        put("COUNT",count);
     }
 
     public int getPrice() {
-        return price;
+        return getInt(PRICE);
     }
 
-    public int getNumber() {
-        return number;
+    public int getCount() {
+        return getInt(COUNT);
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public int getServiceType() {
+        return getInt(SERVICE_TYPE);
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return getString(TITLE);
+    }
+
+    public String getLocality() {
+        return getString(LOCALITY);
     }
 }

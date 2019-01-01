@@ -1,4 +1,4 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gyanesh.myapplication.Models.OrderModel;
+import com.example.gyanesh.myapplication.R;
 
 import java.util.Date;
 import java.util.List;

@@ -1,9 +1,11 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.gyanesh.myapplication.R;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;

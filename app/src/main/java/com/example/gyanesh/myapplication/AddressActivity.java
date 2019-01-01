@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -12,11 +13,14 @@ import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getCityList;
+
 public class AddressActivity extends AppCompatActivity {
+
+    Spinner city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,12 @@ public class AddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_address);
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbaraa);
+
+        //Populating spinner for cities
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,getCityList());
+        city = findViewById(R.id.na_spinnerCitySelector);
+        city.setAdapter(adapter);
+
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -37,7 +47,6 @@ public class AddressActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.na_name);
         TextView number = findViewById(R.id.na_number);
         TextView pincode = findViewById(R.id.na_code);
-        Spinner city = findViewById(R.id.na_spinnerCitySelector);
         TextView add1 = findViewById(R.id.na_add1);
         TextView add2 = findViewById(R.id.na_add2);
         RadioGroup def = findViewById(R.id.na_def);
@@ -51,9 +60,9 @@ public class AddressActivity extends AppCompatActivity {
         } else if (pincode.getText().toString().matches("")) {
             Toast toast = Toast.makeText(this, "Please Enter pincode", Toast.LENGTH_SHORT);
             toast.show();
-        } else if (city.getSelectedItem().toString().matches("-- Select City --")) {
-            Toast toast = Toast.makeText(this, "Please Select City ", Toast.LENGTH_SHORT);
-            toast.show();
+//        }if (city.getSelectedItem().toString().matches("-- Select City --")) {
+//            Toast toast = Toast.makeText(this, "Please Select City ", Toast.LENGTH_SHORT);
+//            toast.show();
         } else if (add1.getText().toString().matches("")) {
             Toast toast = Toast.makeText(this, "Please Enter Locality ", Toast.LENGTH_SHORT);
             toast.show();
@@ -83,8 +92,8 @@ public class AddressActivity extends AppCompatActivity {
             address.setPin(Integer.parseInt(pincode.getText().toString()));
             address.setAddType(addType);
             Intent intent = new Intent();
-            intent.putExtra("address",address);
-            setResult(Activity.RESULT_OK,intent);
+            intent.putExtra("address", address);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         }
     }

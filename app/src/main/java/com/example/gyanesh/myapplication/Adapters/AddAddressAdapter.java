@@ -1,4 +1,4 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
+import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 
 import java.util.ArrayList;

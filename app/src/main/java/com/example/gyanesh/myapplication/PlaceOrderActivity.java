@@ -143,7 +143,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         Spinner spinner = findViewById(R.id.spinner5);
         spinner.setOnItemSelectedListener(this);
-        List<String> options = new ArrayList<String>();
+        List<String> options = new ArrayList<>();
         options.add("Tez");
         options.add("Paytm");
         options.add("Cash On Delivery");

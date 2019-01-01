@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.gyanesh.myapplication.Adapters.AddClothesAdapter;
 import com.example.gyanesh.myapplication.Models.Garment;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getGarmentsList;
 
 public class AddClothesActivity extends AppCompatActivity implements AddClothesAdapter.Listener {
 
@@ -29,31 +32,7 @@ public class AddClothesActivity extends AppCompatActivity implements AddClothesA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clothes);
-        garments = new ArrayList<>();
-        garments.add(new Garment(1,"Shirt", 6));
-        garments.add(new Garment(2,"Jacket", 15));
-        garments.add(new Garment(3,"Bed Sheet", 15));
-        garments.add(new Garment(4,"Towel", 10));
-        garments.add(new Garment(5,"Shirt", 6));
-        garments.add(new Garment(6,"Jacket", 15));
-        garments.add(new Garment(7,"Bed Sheet", 15));
-        garments.add(new Garment(8,"Towel", 10));
-        garments.add(new Garment(9,"Shirt", 6));
-        garments.add(new Garment(10,"Jacket", 15));
-        garments.add(new Garment(11,"Bed Sheet", 15));
-        garments.add(new Garment(12,"Towel", 10));
-        garments.add(new Garment(13,"Shirt", 6));
-        garments.add(new Garment(14,"Jacket", 15));
-        garments.add(new Garment(15,"Bed Sheet", 15));
-        garments.add(new Garment(16,"Towel", 10));
-        garments.add(new Garment(17,"Shirt", 6));
-        garments.add(new Garment(18,"Jacket", 15));
-        garments.add(new Garment(19,"Bed Sheet", 15));
-        garments.add(new Garment(20,"Towel", 10));
-        garments.add(new Garment(21,"Shirt", 6));
-        garments.add(new Garment(22,"Jacket", 15));
-        garments.add(new Garment(23,"Bed Sheet", 15));
-        garments.add(new Garment(24,"Towel", 10));
+        garments = getGarmentsList("DR. B R AMBEDKAR NIT JALANDHAR",0);
         total_amt = findViewById(R.id.total_amount);
         selectedGarments = new HashMap<>();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);

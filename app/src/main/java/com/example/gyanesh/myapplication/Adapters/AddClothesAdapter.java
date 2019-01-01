@@ -1,4 +1,4 @@
-package com.example.gyanesh.myapplication;
+package com.example.gyanesh.myapplication.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.gyanesh.myapplication.Models.Garment;
+import com.example.gyanesh.myapplication.R;
 
 import java.util.List;
 

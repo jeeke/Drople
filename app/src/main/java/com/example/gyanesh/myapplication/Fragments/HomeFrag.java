@@ -1,6 +1,5 @@
 package com.example.gyanesh.myapplication.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gyanesh.myapplication.DonateActivity;
-import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
-import com.example.gyanesh.myapplication.TrackOrderActivity;
-import com.example.gyanesh.myapplication.ViewPagerAdapter;
-import com.rd.IndicatorManager;
+import com.example.gyanesh.myapplication.Adapters.ViewPagerAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
