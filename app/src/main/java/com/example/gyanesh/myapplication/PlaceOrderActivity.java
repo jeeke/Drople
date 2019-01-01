@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.Models.OrderModel;
+import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
 import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
@@ -37,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
@@ -57,7 +59,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     private static final int TEZ_REQUEST_CODE = 123;
     private static final int ADD_CLOTHES_REQUEST_CODE = 124;
-    public static int callme = -1;
+    private static final int SELECT_ADDRESS_REQUEST_CODE = 126;
+    public static int selectedAddress = -1;
     Map<Integer, Garment> selectedGarments;
     private static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
     //TODO Initialize these values as user fills the details
@@ -93,7 +96,15 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 //                listView.setNestedScrollingEnabled(false);
             }
         }
+
+        if (requestCode == SELECT_ADDRESS_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                selectedAddress = data.getIntExtra("selectedAddress", -1);
+                updateSelectAddressCard();
+            }
+        }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -114,50 +125,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
-        TextView Name = findViewById(R.id.Name);
-        TextView number = findViewById(R.id.al_number);
-        TextView al_default = findViewById(R.id.al_default);
-        TextView al_Add1 = findViewById(R.id.al_address);
-        TextView al_Add2 = findViewById(R.id.al_address_2);
-        TextView Al_city = findViewById(R.id.al_city);
-        TextView Al_code = findViewById(R.id.al_code);
-
-//        if (callme != -1) {
-//            Name.setText(AddAddressActivity.adressAAA.get(callme).name);
-//            number.setText(AddAddressActivity.adressAAA.get(callme).number);
-//            al_Add1.setText(AddAddressActivity.adressAAA.get(callme).add1);
-//            al_Add2.setText(AddAddressActivity.adressAAA.get(callme).add2);
-//            Al_code.setText(AddAddressActivity.adressAAA.get(callme).pincode);
-//            Al_city.setText(AddAddressActivity.adressAAA.get(callme).city);
-//            al_default.setText(AddAddressActivity.adressAAA.get(callme).def_value);
-//            CardView cardView = findViewById(R.id.gonewala);
-//            cardView.setVisibility(View.GONE);
-//
-//        }
-        if(callme==-1)
-        {
-            CardView cardView = findViewById(R.id.address_layout_order_activity);
-            cardView.setVisibility(View.GONE);
-        }
-        TextView textView = findViewById(R.id.textView8);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        ImageView imageView = findViewById(R.id.edit_address_icon);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
-                startActivity(intent);
-            }
-        });
+        //FOr Address Selection
+        updateSelectAddressCard();
 
         setColors();
 
@@ -219,14 +188,70 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
     }
 
+
+    public void updateSelectAddressCard() {
+
+        if (selectedAddress != -1) {
+            CardView cardView = findViewById(R.id.address_layout_order_activity);
+            cardView.setVisibility(View.VISIBLE);
+            cardView = findViewById(R.id.gonewala);
+            cardView.setVisibility(View.GONE);
+
+            TextView Name = findViewById(R.id.Name);
+            TextView number = findViewById(R.id.al_number);
+            TextView al_default = findViewById(R.id.al_default);
+            TextView al_Add1 = findViewById(R.id.al_address);
+            TextView al_Add2 = findViewById(R.id.al_address_2);
+            TextView Al_city = findViewById(R.id.al_city);
+            TextView Al_code = findViewById(R.id.al_code);
+            Address address = BackgroundData.addresses.get(selectedAddress);
+            Name.setText(address.getName());
+            number.setText(address.getMobile());
+            al_Add1.setText(address.getAddLine1());
+            al_Add2.setText(address.getAddLine2());
+            Al_code.setText(String.valueOf(address.getPinCode()));
+            Al_city.setText(address.getCity());
+            String df;
+            if (address.getAddType()) {
+                df = "HOME";
+            } else {
+                df = "OTHERS";
+            }
+            al_default.setText(df);
+
+            //TODO update this to edit the current addtess
+            ImageView imageView = findViewById(R.id.edit_address_icon);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        } else {
+            CardView cardView = findViewById(R.id.address_layout_order_activity);
+            cardView.setVisibility(View.GONE);
+            TextView textView = findViewById(R.id.textView8);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
+                    startActivityForResult(intent, SELECT_ADDRESS_REQUEST_CODE);
+                }
+            });
+        }
+
+    }
+
     //1 for paytm
     //0 for Tez
     //2 for Cash on delivery
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-        payMode=position;
-        TextView mode=findViewById(R.id.textView25);
-        String Mode=parent.getSelectedItem().toString();
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        payMode = position;
+        TextView mode = findViewById(R.id.textView25);
+        String Mode = parent.getSelectedItem().toString();
         mode.setText(Mode);
 
     }
@@ -302,8 +327,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //all these overriden method is to detect the payment result accordingly
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        params.put("CHECKSUMHASH",bundle.getString("CHECKSUMHASH"));
-        Log.e("MSG",params.toString());
+        params.put("CHECKSUMHASH", bundle.getString("CHECKSUMHASH"));
+        Log.e("MSG", params.toString());
         Log.e("Bundle", bundle.toString());
 
 //        Toast.makeText(this,"Transaction Success", Toast.LENGTH_LONG).show();
@@ -403,8 +428,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         final Date default1 = utilDate(1);
         final Date default2 = utilDate(2);
         final Date default3 = utilDate(3);
-        View slotLayout,timeLayout;
-        slotLayout =findViewById(R.id.slot_layout);
+        View slotLayout, timeLayout;
+        slotLayout = findViewById(R.id.slot_layout);
         timeLayout = findViewById(R.id.time_layout);
         v1 = timeLayout.findViewById(R.id.date1);
         v2 = timeLayout.findViewById(R.id.date2);
