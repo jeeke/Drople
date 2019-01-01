@@ -1,94 +1,80 @@
 package com.example.gyanesh.myapplication.Models;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
-import java.io.Serializable;
+@ParseClassName("Address")
+public class Address extends ParseObject{
 
-import androidx.annotation.NonNull;
+    public static final String USER_ID_KEY = "userId";
+    public static final String MOBILE = "mobile";
+    public static final String PIN = "pin";
+    public static final String NAME = "name";
+    public static final String ADD_LINE1 = "addLine1";
+    public static final String ADD_LINE2 = "addLine2";
+    public static final String ADD_TYPE = "addType";
+    public static final String CITY = "city";
 
-public class Address implements Serializable {
-    public  String USER_ID_KEY = "userId";
-    private String mobile;
-    private int pinCode;
-    private String name;
-    private String addLine1;
-    private String addLine2;
-    private boolean addType;
-    private String city;
-
-    public Address(String name,String mobile, String addLine1, String addLine2, String city, int pinCode,boolean addType) {
-        this.name = name;
-        this.mobile = mobile;
-        this.pinCode = pinCode;
-        this.addLine1 = addLine1;
-        this.addLine2 = addLine2;
-        this.addType = addType;
-        this.city = city;
-    }
-
-
-    public void setUserId(String USER_ID_KEY) {
-        this.USER_ID_KEY = USER_ID_KEY;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return addLine1 + "\n" + addLine2 + "\n" + city + ", " + pinCode + "\n" + mobile;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getMobile() {
-        return mobile;
+    public void setId(String userId) {
+        put(USER_ID_KEY, userId);
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile;
+        put(MOBILE, mobile);
     }
 
-    public int getPinCode() {
-        return pinCode;
+    public void setPin(int pin) {
+        put(PIN,pin);
     }
 
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
-    }
-
-    public String getAddLine1() {
-        return addLine1;
+    public void setName(String name) {
+        put(NAME,name);
     }
 
     public void setAddLine1(String addLine1) {
-        this.addLine1 = addLine1;
-    }
-
-    public String getAddLine2() {
-        return addLine2;
+        put(ADD_LINE1,addLine1);
     }
 
     public void setAddLine2(String addLine2) {
-        this.addLine2 = addLine2;
-    }
-
-    public boolean getAddType() {
-        return addType;
+        put(ADD_LINE2,addLine2);
     }
 
     public void setAddType(boolean addType) {
-        this.addType = addType;
+        put(ADD_TYPE,addType);
     }
 
+    public void setCity(String city) {
+        put(CITY,city);
+    }
+
+    public String getId() {
+        return getString(USER_ID_KEY);
+    }
+
+    public String getMobile() {
+        return getString(MOBILE);
+    }
+
+    public int getPin() {
+        return getInt(PIN);
+    }
+
+    public String getName() {
+        return getString(NAME);
+    }
+
+    public String getAddLine1() {
+        return getString(ADD_LINE1);
+    }
+
+    public String getAddLine2() {
+        return getString(ADD_LINE2);
+    }
+
+    public boolean getAddType() {
+        return getBoolean(ADD_TYPE);
+    }
+
+    public String getCity() {
+        return getString(CITY);
+    }
 }

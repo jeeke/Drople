@@ -49,7 +49,7 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
         TextView def = cardView.findViewById(R.id.al_default);
         name.setText(myadress.get(position).getName());
         number.setText(myadress.get(position).getMobile());
-        pincode.setText(String.valueOf(myadress.get(position).getPinCode()));
+        pincode.setText(String.valueOf(myadress.get(position).getPin()));
         city.setText(myadress.get(position).getCity());
         add1.setText(myadress.get(position).getAddLine1());
         add2.setText(myadress.get(position).getAddLine2());
@@ -64,9 +64,6 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                PlaceOrderActivity.callme = position;
-//                Intent intent = new Intent(cardView.getContext(),PlaceOrderActivity.class);
-//                cardView.getContext().startActivity(intent);
                 listener.updatePrevSelection(lastPos, position);
                 lastPos = position;
             }

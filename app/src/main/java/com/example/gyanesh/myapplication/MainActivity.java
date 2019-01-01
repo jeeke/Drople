@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO Update data in background
+        BackgroundData.getRemoteAddresses();
+
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

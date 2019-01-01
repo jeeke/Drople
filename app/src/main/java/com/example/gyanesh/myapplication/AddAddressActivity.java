@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -38,9 +39,8 @@ public class AddAddressActivity extends AppCompatActivity implements AddAddressA
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        BackgroundData.refreshAddresses();
         addresses = BackgroundData.addresses;
-        addAddressAdapter = new AddAddressAdapter(this,addresses);
+        addAddressAdapter = new AddAddressAdapter(this, addresses);
         RecyclerView recyclerView = findViewById(R.id.recycler_address);
         recyclerView.setAdapter(addAddressAdapter);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -48,11 +48,14 @@ public class AddAddressActivity extends AppCompatActivity implements AddAddressA
         findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedPos ==-1){
-                    Toast.makeText(getBaseContext(),"No Address Selected",Toast.LENGTH_SHORT).show();
-                }else {Intent intent = new Intent();
-                    intent.putExtra("selectedAddress",selectedPos);
-                    setResult(Activity.RESULT_OK,intent);
+                if (selectedPos == -1) {
+                    Toast.makeText(getBaseContext(), "No Address Selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO also update BackgroudData Address
+                    BackgroundData.updateRemoteAddresses();
+                    Intent intent = new Intent();
+                    intent.putExtra("selectedAddress", selectedPos);
+                    setResult(Activity.RESULT_OK, intent);
                     finish();
                 }
 
@@ -65,9 +68,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddAddressA
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_ADDRESS_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                addresses.add((Address) data.getSerializableExtra("address"));
-                //TODO also update BackgroudData Address
-                BackgroundData.updateAddresses();
+                addresses.add((Address) data.getParcelableExtra("address"));
                 addAddressAdapter.notifyDataSetChanged();
             }
         }

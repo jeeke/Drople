@@ -41,7 +41,6 @@ import java.util.UUID;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -209,7 +208,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             number.setText(address.getMobile());
             al_Add1.setText(address.getAddLine1());
             al_Add2.setText(address.getAddLine2());
-            Al_code.setText(String.valueOf(address.getPinCode()));
+            Al_code.setText(String.valueOf(address.getPin()));
             Al_city.setText(address.getCity());
             String df;
             if (address.getAddType()) {
@@ -225,7 +224,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent,SELECT_ADDRESS_REQUEST_CODE);
                 }
             });
             btn_edit = findViewById(R.id.btn_delete);

@@ -74,7 +74,14 @@ public class AddressActivity extends AppCompatActivity {
                 addType = false;
             }
 
-            Address address = new Address(name.getText().toString(), number.getText().toString(), add1.getText().toString(), add2.getText().toString(),city.getSelectedItem().toString(),Integer.parseInt(pincode.getText().toString()),addType);
+            Address address = new Address();
+            address.setName(name.getText().toString());
+            address.setMobile(number.getText().toString());
+            address.setAddLine1(add1.getText().toString());
+            address.setAddLine2(add2.getText().toString());
+            address.setCity(city.getSelectedItem().toString());
+            address.setPin(Integer.parseInt(pincode.getText().toString()));
+            address.setAddType(addType);
             Intent intent = new Intent();
             intent.putExtra("address",address);
             setResult(Activity.RESULT_OK,intent);
