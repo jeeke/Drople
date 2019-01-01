@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.example.gyanesh.myapplication.R;
 
@@ -12,6 +11,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Constants {
+
+
+    public static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
+    public static final int TEZ_REQUEST_CODE = 123;
+    public static final int ADD_CLOTHES_REQUEST_CODE = 124;
+    public static final int SELECT_ADDRESS_REQUEST_CODE = 126;
 
     public static final String M_ID = "kbYXEa11946819800480"; //Paytm Merchand Id we got it in paytm credentials
     public static final String CHANNEL_ID = "WAP"; //Paytm Channel Id, got it in paytm credentials

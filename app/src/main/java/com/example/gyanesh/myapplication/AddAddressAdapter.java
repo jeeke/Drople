@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
+import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 
 import java.util.ArrayList;
 
@@ -40,27 +40,8 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final CardView cardView = holder.cardView;
-        TextView name = cardView.findViewById(R.id.Name);
-        TextView number = cardView.findViewById(R.id.al_number);
-        TextView pincode = cardView.findViewById(R.id.al_code);
-        TextView city = cardView.findViewById(R.id.al_city);
-        TextView add1 = cardView.findViewById(R.id.al_address);
-        TextView add2 = cardView.findViewById(R.id.al_address_2);
-        TextView def = cardView.findViewById(R.id.al_default);
-        name.setText(myadress.get(position).getName());
-        number.setText(myadress.get(position).getMobile());
-        pincode.setText(String.valueOf(myadress.get(position).getPin()));
-        city.setText(myadress.get(position).getCity());
-        add1.setText(myadress.get(position).getAddLine1());
-        add2.setText(myadress.get(position).getAddLine2());
-        String addType;
-        if (myadress.get(position).getAddType()) {
-            addType = "HOME";
-        } else {
-            addType = "OTHERS";
-        }
-        def.setText(addType);
-
+        AddressCardManager addressCardManager = new AddressCardManager(cardView);
+        addressCardManager.updateDetailsInCard(position);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
