@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gyanesh.myapplication.Models.Address;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.ViewHolder> {
 
-    private ArrayList<Adress> myadress;
+    private ArrayList<Address> myadress;
 
-    public AddAddressAdapter(ArrayList<Adress> myadress) {
+    public AddAddressAdapter(ArrayList<Address> myadress) {
         this.myadress = myadress;
     }
 
@@ -39,13 +41,19 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
         TextView add1 = cardView.findViewById(R.id.al_address);
         TextView add2 = cardView.findViewById(R.id.al_address_2);
         TextView def = cardView.findViewById(R.id.al_default);
-        name.setText(myadress.get(position).name);
-        number.setText(myadress.get(position).number);
-        pincode.setText(myadress.get(position).pincode);
-        city.setText(myadress.get(position).city);
-        add1.setText(myadress.get(position).add1);
-        add2.setText(myadress.get(position).add2);
-        def.setText(myadress.get(position).def_value);
+        name.setText(myadress.get(position).getName());
+        number.setText(myadress.get(position).getMobile());
+        pincode.setText(String.valueOf(myadress.get(position).getPinCode()));
+        city.setText(myadress.get(position).getCity());
+        add1.setText(myadress.get(position).getAddLine1());
+        add2.setText(myadress.get(position).getAddLine2());
+        String addType;
+        if(myadress.get(position).getAddType()){
+            addType = "HOME";
+        }else {
+            addType = "OTHERS";
+        }
+        def.setText(addType);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +80,4 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
             cardView = v;
         }
     }
-
-
 }

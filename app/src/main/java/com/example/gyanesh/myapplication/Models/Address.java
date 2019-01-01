@@ -1,19 +1,46 @@
 package com.example.gyanesh.myapplication.Models;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 
-public class Address {
-    private long mobile;
+public class Address implements Serializable {
+    public  String USER_ID_KEY = "userId";
+    private String mobile;
     private int pinCode;
+    private String name;
     private String addLine1;
     private String addLine2;
-    private int addType;
+    private boolean addType;
     private String city;
+
+    public Address(String name,String mobile, String addLine1, String addLine2, String city, int pinCode,boolean addType) {
+        this.name = name;
+        this.mobile = mobile;
+        this.pinCode = pinCode;
+        this.addLine1 = addLine1;
+        this.addLine2 = addLine2;
+        this.addType = addType;
+        this.city = city;
+    }
+
+
+    public void setUserId(String USER_ID_KEY) {
+        this.USER_ID_KEY = USER_ID_KEY;
+    }
 
     @NonNull
     @Override
     public String toString() {
         return addLine1 + "\n" + addLine2 + "\n" + city + ", " + pinCode + "\n" + mobile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCity() {
@@ -24,11 +51,11 @@ public class Address {
         this.city = city;
     }
 
-    public long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -56,11 +83,11 @@ public class Address {
         this.addLine2 = addLine2;
     }
 
-    public int getAddType() {
+    public boolean getAddType() {
         return addType;
     }
 
-    public void setAddType(int addType) {
+    public void setAddType(boolean addType) {
         this.addType = addType;
     }
 

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.nfc.cardemulation.CardEmulation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +61,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     Map<Integer, Garment> selectedGarments;
     private static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
     //TODO Initialize these values as user fills the details
-    private Address address = new Address();
+//    private Address address = new Address();
     private Date c = Calendar.getInstance().getTime();
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private int clothes = 10;
@@ -124,18 +123,18 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         TextView Al_city = findViewById(R.id.al_city);
         TextView Al_code = findViewById(R.id.al_code);
 
-        if (callme != -1) {
-            Name.setText(AddAddressActivity.adressAAA.get(callme).name);
-            number.setText(AddAddressActivity.adressAAA.get(callme).number);
-            al_Add1.setText(AddAddressActivity.adressAAA.get(callme).add1);
-            al_Add2.setText(AddAddressActivity.adressAAA.get(callme).add2);
-            Al_code.setText(AddAddressActivity.adressAAA.get(callme).pincode);
-            Al_city.setText(AddAddressActivity.adressAAA.get(callme).city);
-            al_default.setText(AddAddressActivity.adressAAA.get(callme).def_value);
-            CardView cardView = findViewById(R.id.gonewala);
-            cardView.setVisibility(View.GONE);
-
-        }
+//        if (callme != -1) {
+//            Name.setText(AddAddressActivity.adressAAA.get(callme).name);
+//            number.setText(AddAddressActivity.adressAAA.get(callme).number);
+//            al_Add1.setText(AddAddressActivity.adressAAA.get(callme).add1);
+//            al_Add2.setText(AddAddressActivity.adressAAA.get(callme).add2);
+//            Al_code.setText(AddAddressActivity.adressAAA.get(callme).pincode);
+//            Al_city.setText(AddAddressActivity.adressAAA.get(callme).city);
+//            al_default.setText(AddAddressActivity.adressAAA.get(callme).def_value);
+//            CardView cardView = findViewById(R.id.gonewala);
+//            cardView.setVisibility(View.GONE);
+//
+//        }
         if(callme==-1)
         {
             CardView cardView = findViewById(R.id.address_layout_order_activity);
@@ -366,7 +365,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         dlg.setMessage("Placing Your Order...");
         dlg.show();
         OrderModel order = new OrderModel();
-        order.setAddress(address.toString());
+//        order.setAddress(address.toString());
         order.setUserId(ParseUser.getCurrentUser().getObjectId());
         order.setClothes(clothes);
         order.setPayMode(payMode);
