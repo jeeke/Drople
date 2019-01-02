@@ -13,6 +13,8 @@ import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.Adapters.ViewPagerAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -24,6 +26,7 @@ public class HomeFrag extends Fragment {
 
     //    private ViewFlipper viewFlipper;
     private ViewPager viewPager;
+    private Toolbar toolbar;
 
     public HomeFrag() {
         // Required empty public constructor
@@ -34,24 +37,18 @@ public class HomeFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.frag_home, container, false);
+
+        toolbar = layout.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        Attaching Listeners to Home buttons
-
-
-        //Auto Image Slider
-        //viewFlipper = layout.findViewById(R.id.offers);
         viewPager = layout.findViewById(R.id.offers);
-        // int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.btn_donate};
-
-        //for(int image:images){
-        //flipperImages(image);
-        //  }
 //        viewPager.setClipToPadding(false);
 //        //TODO Starpoint do not remove top and bottom padding coz its unsycronizes pager indicator motion
 //        viewPager.setPadding(40,10,40,10);
 //        viewPager.setPageMargin(20);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(),layout.findViewById(R.id.pageIndicatorView));
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(), layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setCurrentItem(Integer.MAX_VALUE/2);
+        viewPager.setCurrentItem(Integer.MAX_VALUE / 2);
 
 //        Timer timer= new Timer();
 //        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
