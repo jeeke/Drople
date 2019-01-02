@@ -21,7 +21,7 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
 
     private ArrayList<Address> myadress;
     private int lastPos = -1;
-    interface Listener{
+    public interface Listener{
         void updatePrevSelection(int lastPos,int position);
     }
     private Listener listener;

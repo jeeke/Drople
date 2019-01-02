@@ -14,7 +14,6 @@ import com.example.gyanesh.myapplication.Adapters.AddClothesAdapter;
 import com.example.gyanesh.myapplication.Models.Garment;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getGa
 public class AddClothesActivity extends AppCompatActivity implements AddClothesAdapter.Listener {
 
     List<Garment> garments;
-    Map<Integer, Garment> selectedGarments;
+    Map<String, Garment> selectedGarments;
     TextView total_amt;
     int total_amount = 0;
 
@@ -54,13 +53,13 @@ public class AddClothesActivity extends AppCompatActivity implements AddClothesA
     @Override
     public void updateSelected(Garment item,int prevCount) {
 
-        if (selectedGarments.containsKey(item.getGarmentId())) {
+        if (selectedGarments.containsKey(item.getObjectId())) {
             total_amount -= item.getPrice()*prevCount;
-            total_amount += item.getPrice()*item.getNumber();
+            total_amount += item.getPrice()*item.getCount();
 
         } else {
-            total_amount += item.getPrice() * item.getNumber();
-            selectedGarments.put(item.getGarmentId(), item);
+            total_amount += item.getPrice() * item.getCount();
+            selectedGarments.put(item.getObjectId(), item);
         }
         total_amt.setText(String.valueOf(total_amount));
     }

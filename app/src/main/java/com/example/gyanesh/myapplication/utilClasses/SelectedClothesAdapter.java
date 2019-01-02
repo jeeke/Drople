@@ -33,11 +33,11 @@ public class SelectedClothesAdapter extends RecyclerView.Adapter<SelectedClothes
         final View cardView = holder.cardView;
         Garment item = garments.get(position);
         TextView temp = cardView.findViewById(R.id.title);
-        temp.setText(item.getType());
+        temp.setText(item.getTitle());
         temp = cardView.findViewById(R.id.count);
-        temp.setText(String.valueOf(item.getNumber()));
+        temp.setText(String.valueOf(item.getCount()));
         temp = cardView.findViewById(R.id.price);
-        temp.setText(String.valueOf(item.getNumber() * item.getPrice()));
+        temp.setText(String.valueOf(item.getCount() * item.getPrice()));
         temp = cardView.findViewById(R.id.service_type);
         //TODO set service type
         temp.setText("W & I");

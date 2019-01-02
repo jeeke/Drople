@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.viewHolder>{
 
     private List<Garment> garments;
-    interface Listener{
+    public interface Listener{
         void updateSelected(Garment garment,int prevCount);
     }
-    Listener listener;
+    private Listener listener;
 
     public AddClothesAdapter(Listener listener,List<Garment> garments) {
         this.listener = listener;
@@ -38,7 +38,7 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CardView cv = holder.cv;
-        String title = garments.get(position).getType();
+        String title = garments.get(position).getTitle();
         String price = "Price : "+garments.get(position).getPrice();
         TextView garmentTitle = cv.findViewById(R.id.garment_type);
         TextView garmentPrice = cv.findViewById(R.id.garment_price);
@@ -72,13 +72,13 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
         public void onClick(View v) {
 
             Garment item = garments.get(getAdapterPosition());
-            int count = item.getNumber();
+            int count = item.getCount();
             if (v.getId() == btn_plus.getId()) {
-                garments.get(getAdapterPosition()).setNumber(count + 1);
+                garments.get(getAdapterPosition()).setCount(count + 1);
                 garmentCount.setText(String.valueOf(count + 1));
                 listener.updateSelected(item,count);
             } else if (v.getId() == btn_minus.getId() && count > 0) {
-                garments.get(getAdapterPosition()).setNumber(count - 1);
+                garments.get(getAdapterPosition()).setCount(count - 1);
                 garmentCount.setText(String.valueOf(count - 1));
                 listener.updateSelected(item,count);
             }
