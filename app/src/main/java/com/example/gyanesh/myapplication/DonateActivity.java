@@ -22,6 +22,7 @@ import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 public class DonateActivity extends AppCompatActivity {
 

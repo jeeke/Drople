@@ -6,17 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DonateActivity">
+
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbard"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/light_grey"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="DONATE"
+        app:titleTextColor="@color/light_grey" />
 
 
     <ScrollView
@@ -51,7 +53,6 @@
 
             </include>
 
-
             <include
                 android:id="@+id/time_layout"
                 layout="@layout/time_layout"
@@ -65,7 +66,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/address_layout_order_activity"></include>
+                app:layout_constraintTop_toBottomOf="@+id/address_layout_order_activity"
+                app:layout_constraintBottom_toTopOf="@+id/service_card5"></include>
+            <include
+                android:id="@+id/service_card5"
+                layout="@layout/slot_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_card4"></include>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -116,10 +132,10 @@
                         android:id="@+id/editText"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
                         android:ems="10"
                         android:hint="Enter Number Of Clothes"
                         android:inputType="number"
