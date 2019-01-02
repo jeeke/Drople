@@ -37,11 +37,14 @@ public class ProfileFrag extends Fragment {
         TextView textView = view.findViewById(R.id.include1).findViewById(R.id.name);
         textView.setText(name);
 
-        textView = view.findViewById(R.id.slot_layout).findViewById(R.id.textView12);
+        textView = view.findViewById(R.id.profile_layout).findViewById(R.id.textView20);
         textView.setText(email);
 
+        TextView textView1 = view.findViewById(R.id.profile_layout).findViewById(R.id.textView33);
+        textView1.setText("Name : "+ name);
 
-        final LinearLayout logout_button = view.findViewById(R.id.include1).findViewById(R.id.logout_button);
+
+        final TextView logout_button = view.findViewById(R.id.profile_layout).findViewById(R.id.textView35);
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
