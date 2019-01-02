@@ -1,11 +1,11 @@
 package com.example.gyanesh.myapplication;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
@@ -18,13 +18,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Toolbar toolbar;
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -65,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
         BackgroundData.getRemoteAddresses();
 
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_dots));
 
 //        Setting navigation bar
         BottomNavigationView navigation = findViewById(R.id.navigation);
