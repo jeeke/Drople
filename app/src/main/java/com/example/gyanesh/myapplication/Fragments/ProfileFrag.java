@@ -6,22 +6,53 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.AuthActivity;
 import com.example.gyanesh.myapplication.R;
 import com.parse.ParseUser;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 public class ProfileFrag extends Fragment {
 
 
+    private Toolbar toolbar;
     public ProfileFrag() {
         // Required empty public constructor
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.toolbar_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_notification:
+                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case R.id.rate_us:
+                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
 
@@ -30,6 +61,10 @@ public class ProfileFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.frag_profile, container, false);
+        setHasOptionsMenu(true);
+
+        toolbar = view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         String name = ParseUser.getCurrentUser().getUsername();
         String email = ParseUser.getCurrentUser().getEmail();

@@ -2,11 +2,7 @@ package com.example.gyanesh.myapplication;
 
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
@@ -28,30 +24,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_notification:
-                Toast.makeText(this, "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.rate_us:
-                Toast.makeText(this, "Rate selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                break;
-        }
-        return true;
     }
 
     @Override

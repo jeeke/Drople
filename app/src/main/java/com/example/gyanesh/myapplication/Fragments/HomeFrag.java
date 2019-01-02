@@ -3,10 +3,14 @@ package com.example.gyanesh.myapplication.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
@@ -32,12 +36,36 @@ public class HomeFrag extends Fragment {
         // Required empty public constructor
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.toolbar_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_notification:
+                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case R.id.rate_us:
+                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.frag_home, container, false);
-
+        setHasOptionsMenu(true);
         toolbar = layout.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        Attaching Listeners to Home buttons
@@ -158,16 +186,5 @@ public class HomeFrag extends Fragment {
 //            });
 //        }
 //    }
-
-//    private void flipperImages(int image){
-//        ImageView imageView = new ImageView(getContext());
-//        imageView.setBackgroundResource(image);
-//        viewFlipper.addView(imageView);
-//        viewFlipper.setFlipInterval(4000);
-//        viewFlipper.setAutoStart(true);
-//        viewFlipper.setInAnimation(getContext(),android.R.anim.slide_in_left);
-//        viewFlipper.setOutAnimation(getContext(),android.R.anim.slide_out_right);
-//    }
-
 
 }
