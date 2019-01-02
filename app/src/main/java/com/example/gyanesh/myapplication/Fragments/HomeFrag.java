@@ -13,6 +13,7 @@ import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
+import com.example.gyanesh.myapplication.ServicesActivity;
 import com.example.gyanesh.myapplication.TrackOrderActivity;
 import com.example.gyanesh.myapplication.ViewPagerAdapter;
 import com.rd.IndicatorManager;
@@ -93,17 +94,22 @@ public class HomeFrag extends Fragment {
 
 
         //       Services Buttons
+        int btnId = 0;
+        final int finalBtnId = btnId;
         View.OnClickListener servicesListener = new View.OnClickListener() {
-            private int btnId;
 
             @Override
             public void onClick(View v) {
+                Intent intent =new Intent(getContext(),ServicesActivity.class);
+                intent.putExtra("btnId", finalBtnId);
+                startActivity(intent);
 
             }
         };
 
         //Wash N Iron Button
         home_button = layout.findViewById(R.id.btn_home3);
+        btnId=R.id.btn_home3;
         head = home_button.findViewById(R.id.head1);
         head.setText("Wash & Iron");
         imageView = home_button.findViewById(R.id.btn_home_img);
@@ -113,6 +119,7 @@ public class HomeFrag extends Fragment {
 
         //Ironing Button
         home_button = layout.findViewById(R.id.btn_home4);
+        btnId=R.id.btn_home4;
         head = home_button.findViewById(R.id.head2);
         head.setText("min 12 hrs");
         imageView = home_button.findViewById(R.id.btn_home_img);
@@ -122,6 +129,7 @@ public class HomeFrag extends Fragment {
 
         //Dry Wash Button
         home_button = layout.findViewById(R.id.btn_home5);
+        btnId=R.id.btn_home5;
         head = home_button.findViewById(R.id.head1);
         head.setText("Dry Wash");
         head = home_button.findViewById(R.id.head2);
@@ -133,6 +141,7 @@ public class HomeFrag extends Fragment {
 
         //Premium Wash Button
         home_button = layout.findViewById(R.id.btn_home6);
+        btnId=R.id.btn_home6;
         head = home_button.findViewById(R.id.head1);
         head.setText("Premium");
         head = home_button.findViewById(R.id.head2);
