@@ -10,7 +10,9 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- TODO STOP rotation of activities -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- TODO STOP rotation of activities -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -19,8 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
             android:label="Add Address"
@@ -44,9 +45,11 @@
         <activity
             android:name=".AddClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />
-        <activity android:name=".AddAddressActivity"
-            android:parentActivityName=".PlaceOrderActivity"
-            android:label="Choose Address"/>
+        <activity
+            android:name=".AddAddressActivity"
+            android:label="Choose Address"
+            android:parentActivityName=".PlaceOrderActivity" />
+
         <meta-data
             android:name="com.parse.SERVER_URL"
             android:value="@string/back4app_server_url" />
@@ -67,20 +70,19 @@
         <activity android:name=".SaloonActivity" />
         <activity
             android:name=".AuthActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-        <activity android:name=".Splash_activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".Splash_activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        >
         <activity android:name=".IntroActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".notification"></activity>
     </application>
 
 </manifest>

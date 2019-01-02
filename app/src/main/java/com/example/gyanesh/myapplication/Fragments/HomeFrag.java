@@ -16,6 +16,7 @@ import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.Adapters.ViewPagerAdapter;
+import com.example.gyanesh.myapplication.notification;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -47,8 +48,9 @@ public class HomeFrag extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_notification:
-                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
+//                        .show();
+                startActivity(new Intent(getActivity(),notification.class));
                 break;
             case R.id.rate_us:
                 Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
