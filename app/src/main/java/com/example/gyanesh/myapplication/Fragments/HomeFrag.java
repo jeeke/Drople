@@ -6,15 +6,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.HistoryActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
+import com.example.gyanesh.myapplication.ServicesActivity;
 import com.example.gyanesh.myapplication.TrackOrderActivity;
 import com.example.gyanesh.myapplication.ViewPagerAdapter;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.rd.IndicatorManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -25,8 +27,9 @@ import androidx.viewpager.widget.ViewPager;
  */
 public class HomeFrag extends Fragment {
 
-//    private ViewFlipper viewFlipper;
+    //    private ViewFlipper viewFlipper;
     private ViewPager viewPager;
+
     public HomeFrag() {
         // Required empty public constructor
     }
@@ -41,59 +44,113 @@ public class HomeFrag extends Fragment {
 
         //Auto Image Slider
         //viewFlipper = layout.findViewById(R.id.offers);
-        viewPager=layout.findViewById(R.id.offers);
-        Context c= viewPager.getContext();
-        // int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.donate};
+        viewPager = layout.findViewById(R.id.offers);
+        // int images[] = {R.drawable.offers,R.drawable.error_image,R.drawable.btn_donate};
 
         //for(int image:images){
         //flipperImages(image);
         //  }
-        ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(c);
+        viewPager.setClipToPadding(false);
+        //TODO Starpoint do not remove top and bottom padding coz its unsycronizes pager indicator motion
+        viewPager.setPadding(40,10,40,10);
+        viewPager.setPageMargin(20);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(),layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setCurrentItem(Integer.MAX_VALUE/2);
+
 //        Timer timer= new Timer();
 //        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
 
-//        donate clothes
-        View home_button1 = layout.findViewById(R.id.constraintLayout2);
-        home_button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(),DonateActivity.class);
-                startActivity(intent);
-            }
-        });
-
-//        track order
-        View home_button2 = layout.findViewById(R.id.constraintLayout3);
-        home_button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(),TrackOrderActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        ImageView imageView;
+        View home_button;
+        TextView head;
 //        place order
-        View home_button3 = layout.findViewById(R.id.constraintLayout4);
-        home_button3.setOnClickListener(new View.OnClickListener() {
+        home_button = layout.findViewById(R.id.btn_home1);
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.place);
+        home_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),PlaceOrderActivity.class);
+                Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
                 startActivity(intent);
             }
         });
 
-//        OrderModel History
 
-        View home_button4 = layout.findViewById(R.id.constraintLayout5);
-        home_button4.setOnClickListener(new View.OnClickListener() {
+//        btn_donate clothes
+        home_button = layout.findViewById(R.id.btn_home2);
+        head = home_button.findViewById(R.id.head1);
+        head.setText("Donate Clothes");
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.btn_donate);
+        home_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),HistoryActivity.class);
+                Intent intent = new Intent(getContext(), DonateActivity.class);
                 startActivity(intent);
             }
         });
+
+
+        //       Services Buttons
+        int btnId = 0;
+        final int finalBtnId = btnId;
+        View.OnClickListener servicesListener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(),ServicesActivity.class);
+                intent.putExtra("btnId", finalBtnId);
+                startActivity(intent);
+
+            }
+        };
+
+        //Wash N Iron Button
+        home_button = layout.findViewById(R.id.btn_home3);
+        btnId=R.id.btn_home3;
+        head = home_button.findViewById(R.id.head1);
+        head.setText("Wash & Iron");
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.normal1);
+        home_button.setOnClickListener(servicesListener);
+
+
+        //Ironing Button
+        home_button = layout.findViewById(R.id.btn_home4);
+        btnId=R.id.btn_home4;
+        head = home_button.findViewById(R.id.head2);
+        head.setText("min 12 hrs");
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.wash_n_iron);
+        home_button.setOnClickListener(servicesListener);
+
+
+        //Dry Wash Button
+        home_button = layout.findViewById(R.id.btn_home5);
+        btnId=R.id.btn_home5;
+        head = home_button.findViewById(R.id.head1);
+        head.setText("Dry Wash");
+        head = home_button.findViewById(R.id.head2);
+        head.setText("min 2 days");
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.dry);
+        home_button.setOnClickListener(servicesListener);
+
+
+        //Premium Wash Button
+        home_button = layout.findViewById(R.id.btn_home6);
+        btnId=R.id.btn_home6;
+        head = home_button.findViewById(R.id.head1);
+        head.setText("Premium");
+        head = home_button.findViewById(R.id.head2);
+        head.setText("min 1 days");
+        imageView = home_button.findViewById(R.id.btn_home_img);
+        imageView.setImageResource(R.drawable.premium4);
+        home_button.setOnClickListener(servicesListener);
+
+
         return layout;
     }
 

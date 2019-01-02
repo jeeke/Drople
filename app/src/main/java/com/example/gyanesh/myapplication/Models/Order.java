@@ -5,8 +5,6 @@ import com.parse.ParseObject;
 
 @ParseClassName("Order")
 public class Order extends ParseObject {
-
-
     public static final String USER_ID_KEY = "userId";
     public static final String ORDER_ID_KEY = "orderId";
     public static final String ADDRESS_KEY = "address";

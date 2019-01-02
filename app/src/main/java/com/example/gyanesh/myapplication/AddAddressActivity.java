@@ -1,21 +1,33 @@
 package com.example.gyanesh.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.example.gyanesh.myapplication.Models.Address;
+import com.example.gyanesh.myapplication.Models.Garment;
+import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
+import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class AddAddressActivity extends AppCompatActivity {
+public class AddAddressActivity extends AppCompatActivity implements AddAddressAdapter.Listener {
 
-//    public Adress one = new Adress("Rakesh Pandey","8652751124","HOME","421605","Mumbai","Valaram Apartment","Room no A-1/302 ");
-//    public Adress two = new Adress("Gyanesh Kumar","12345679","HOME","123456","UP","near station road","on street");
-    public  static ArrayList<Adress> adressAAA = new ArrayList<Adress>();
+    private static int ADD_ADDRESS_REQUEST_CODE = 125;
+    private ArrayList<Address> addresses;
+    AddAddressAdapter addAddressAdapter;
+    LinearLayoutManager linearLayoutManager;
+    int selectedPos = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +36,58 @@ public class AddAddressActivity extends AppCompatActivity {
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
-        androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        AddAddressAdapter addAddressAdapter = new AddAddressAdapter(adressAAA);
+        addresses = BackgroundData.addresses;
+        addAddressAdapter = new AddAddressAdapter(this, addresses);
         RecyclerView recyclerView = findViewById(R.id.recycler_address);
         recyclerView.setAdapter(addAddressAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
+        findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedPos == -1) {
+                    Toast.makeText(getBaseContext(), "No Address Selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO also update BackgroudData Address
+                    BackgroundData.updateRemoteAddresses();
+                    Intent intent = new Intent();
+                    intent.putExtra("selectedAddress", selectedPos);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+
+            }
+        });
     }
 
-    public void addressSetter(View view)
-    {
-        Intent intent = new Intent(this,AddressActivity.class);
-        startActivity(intent);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ADDRESS_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                addresses.add((Address) data.getParcelableExtra("address"));
+                addAddressAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    public void addressSetter(View view) {
+        Intent intent = new Intent(this, AddressActivity.class);
+        startActivityForResult(intent, ADD_ADDRESS_REQUEST_CODE);
+    }
+
+    @Override
+    public void updatePrevSelection(int lastPos, int position) {
+        View view;
+        if (lastPos != -1) {
+            view = linearLayoutManager.findViewByPosition(lastPos);
+            view.setBackground(null);
+        }
+        view = linearLayoutManager.findViewByPosition(position);
+        view.setBackground(getDrawable(R.drawable.edit_text_round_blue));
+        selectedPos = position;
     }
 }

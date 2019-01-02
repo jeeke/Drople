@@ -39,7 +39,7 @@ public class DonateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        ImageView imageView = (ImageView) findViewById(R.id.edit_address_icon);
+        ImageView imageView = (ImageView) findViewById(R.id.btn_edit);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,16 +66,16 @@ public class DonateActivity extends AppCompatActivity {
         TextView Al_city = findViewById(R.id.al_city);
         TextView Al_code = findViewById(R.id.al_code);
 
-        if(PlaceOrderActivity.callme!=-1) {
-            Name.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);
-            number.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).number);
-            al_Add1.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add1);
-            al_Add2.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add2);
-            Al_code.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).pincode);
-            Al_city.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).city);
-            al_default.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).def_value);
-
-        }
+//        if(PlaceOrderActivity.callme!=-1) {
+//            Name.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);
+//            number.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).number);
+//            al_Add1.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add1);
+//            al_Add2.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add2);
+//            Al_code.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).pincode);
+//            Al_city.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).city);
+//            al_default.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).def_value);
+//
+//        }
     }
 
     private void send_order() {

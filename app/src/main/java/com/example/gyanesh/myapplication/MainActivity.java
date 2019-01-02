@@ -11,9 +11,12 @@ import android.widget.Toast;
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -40,16 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.about_us:
-                Intent intent = new Intent(this,ExtrasActivity.class);
-                startActivity(intent);
-                break;
             case R.id.action_notification:
                 Toast.makeText(this, "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.policies:
-                Toast.makeText(this, "Policies selected", Toast.LENGTH_SHORT)
                         .show();
                 break;
             case R.id.rate_us:
@@ -59,54 +54,55 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO Update data in background
+        BackgroundData.getRemoteAddresses();
+
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_dots));
 
 //        Setting navigation bar
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        toolbar.setTitle("DASHBOARD");
 
 //        Initialising with home fragment
         loadFragment(new HomeFrag());
 
     }
+
     //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
+                case R.id.nav_support:
+                    fragment = new ProfileFrag();
+                    loadFragment(fragment);
+                    return true;
                 case R.id.nav_home:
-                    toolbar.setTitle(R.string.nav_home);
                     fragment = new HomeFrag();
                     loadFragment(fragment);
                     return true;
                 case R.id.nav_account:
-                    toolbar.setTitle(R.string.nav_account);
                     fragment = new ProfileFrag();
                     loadFragment(fragment);
                     return true;
-                case R.id.nav_services:
-                    toolbar.setTitle(R.string.nav_services);
+                case R.id.nav_history:
                     fragment = new ServicesFrag();
                     loadFragment(fragment);
                     return true;
             }
             return false;
         }
-
-
     };
 }

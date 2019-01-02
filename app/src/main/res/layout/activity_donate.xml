@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,7 +38,7 @@
 
             <include
                 android:id="@+id/address_layout_order_activity"
-                layout="@layout/address_layout"
+                layout="@layout/address_layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -55,7 +54,7 @@
             </include>
 
             <include
-                android:id="@+id/service_card4"
+                android:id="@+id/time_layout"
                 layout="@layout/time_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

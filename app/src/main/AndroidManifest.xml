@@ -20,12 +20,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="Home" />
+            android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
             android:label="Add Address"
             android:parentActivityName=".PlaceOrderActivity" />
+        <activity android:name=".ServicesActivity"
+            android:label="add services"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PlaceOrderActivity"
             android:label="Place Order"
@@ -57,6 +59,9 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/back4app_client_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"

@@ -9,39 +9,50 @@
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white"
+        android:elevation="4dp"
+        app:elevation="4dp"/>
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/view10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <View
+        android:background="@color/light_grey"
+        android:id="@+id/view10"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:ignore="Suspicious0dp" />
-    <!--android:layout_weight="1"-->
+        app:layout_constraintTop_toBottomOf="@+id/frame_container" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_container"
-        app:menu="@menu/nav_menu" />
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/nav_menu"
+        app:labelVisibilityMode="labeled"
+        android:elevation="16dp"
+        app:elevation="16dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
