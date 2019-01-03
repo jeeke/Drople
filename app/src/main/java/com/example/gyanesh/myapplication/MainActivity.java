@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.OrdersFrag;
-import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
+import com.example.gyanesh.myapplication.utilClasses.CloudDbHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //TODO Update data in background
-        BackgroundData.updateDetails();
+        CloudDbHelper.updateDetails();
 
         setContentView(R.layout.activity_main);
 

@@ -12,13 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
-import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.cities;
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.detailsUpdated;
+import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.cities;
+import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.detailsUpdated;
 
 public class AddressActivity extends AppCompatActivity{
 

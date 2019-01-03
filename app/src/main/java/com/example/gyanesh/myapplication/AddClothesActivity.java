@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getGarmentsList;
+import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.getGarmentsList;
 
 public class AddClothesActivity extends AppCompatActivity implements AddClothesAdapter.Listener {
 

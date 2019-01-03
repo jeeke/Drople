@@ -20,12 +20,12 @@ import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapter.ViewHolder> {
+public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
 
 
     private List<Order> orders;
 
-    public ActiveOrdersAdapter(List<Order> orders) {
+    public OrderDetailAdapter(List<Order> orders) {
         this.orders = orders;
     }
 

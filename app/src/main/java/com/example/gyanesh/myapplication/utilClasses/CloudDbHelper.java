@@ -18,7 +18,7 @@ import java.util.List;
 
 import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
 
-public class BackgroundData {
+public class CloudDbHelper {
 
     public interface Listener {
         void onAddressFetch(List<Address> addressList);
@@ -41,7 +41,7 @@ public class BackgroundData {
     private ArrayList<Order> activeOrders;
     private ArrayList<Order> completedOrders;
 
-    public BackgroundData(Listener listener) {
+    public CloudDbHelper(Listener listener) {
         this.listener = listener;
         activeOrders = new ArrayList<>();
         completedOrders = new ArrayList<>();

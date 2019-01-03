@@ -15,18 +15,18 @@ import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Adapters.AddAddressAdapter;
 import com.example.gyanesh.myapplication.Models.Address;
-import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
+import com.example.gyanesh.myapplication.utilClasses.CloudDbHelper;
 
 import java.util.List;
 
-public class SelectAddressActivity extends AppCompatActivity implements AddAddressAdapter.Listener, BackgroundData.Listener {
+public class SelectAddressActivity extends AppCompatActivity implements AddAddressAdapter.Listener, CloudDbHelper.Listener {
 
     private static int ADD_ADDRESS_REQUEST_CODE = 125;
     private List<Address> addresses;
     AddAddressAdapter addAddressAdapter;
     LinearLayoutManager linearLayoutManager;
     int selectedPos = -1;
-    BackgroundData backgroundData;
+    CloudDbHelper cloudDbHelper;
     ProgressDialog dialog;
     static boolean toUpdate = false;
 
@@ -37,8 +37,8 @@ public class SelectAddressActivity extends AppCompatActivity implements AddAddre
         dialog.setTitle("Please Wait, Fetching your addresses....");
         dialog.show();
         //Get Address List from server
-        backgroundData = new BackgroundData(this);
-        backgroundData.getCloudAddressList();
+        cloudDbHelper = new CloudDbHelper(this);
+        cloudDbHelper.getCloudAddressList();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class SelectAddressActivity extends AppCompatActivity implements AddAddre
                         dialog = new ProgressDialog(SelectAddressActivity.this);
                         dialog.setTitle("Updating your address List, Please Wait.....");
                         dialog.show();
-                        backgroundData.updateCloudAddressList(addresses);
+                        cloudDbHelper.updateCloudAddressList(addresses);
                     } else {
                         finishActivity();
                     }
