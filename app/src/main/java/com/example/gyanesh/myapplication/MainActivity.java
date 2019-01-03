@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO Update data in background
         BackgroundData.getRemoteAddresses();
+        BackgroundData.refreshOrders();
 
         setContentView(R.layout.activity_main);
 

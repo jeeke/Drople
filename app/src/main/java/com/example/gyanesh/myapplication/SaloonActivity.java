@@ -4,7 +4,7 @@
 //import android.os.Bundle;
 //import android.util.Log;
 //
-//import com.example.gyanesh.myapplication.Models.OrderModel;
+//import com.example.gyanesh.myapplication.Models.Order;
 //import com.parse.FindCallback;
 //import com.parse.ParseException;
 //import com.parse.ParseQuery;
@@ -24,10 +24,10 @@
 //
 //        final ProgressDialog dlg = new ProgressDialog(SaloonActivity.this);
 //        dlg.setTitle("Please, wait a moment.");
-//        dlg.setMessage("Fetching your orders...");
+//        dlg.setMessage("Fetching your genericOrders...");
 //        dlg.show();
 //        // Construct query to execute
-//        ParseQuery<OrderModel> query = ParseQuery.getQuery(OrderModel.class);
+//        ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
 //        // Configure limit and sort order
 //        query.whereEqualTo("CITY", "JALANDHAR").whereEqualTo("SHOP_ID",1);
 //        // This is equivalent to a SELECT query with SQL

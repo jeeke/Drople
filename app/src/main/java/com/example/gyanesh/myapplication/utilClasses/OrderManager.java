@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.HistoryActivity;
-import com.example.gyanesh.myapplication.Models.OrderModel;
+import com.example.gyanesh.myapplication.Models.Order;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -18,8 +18,8 @@ import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.addre
 
 public class OrderManager {
 
-    public static OrderModel make_order(int position, int clothes, int payMode, double cost) {
-        OrderModel order = new OrderModel();
+    public static Order make_order(int position, int clothes, int payMode, double cost) {
+        Order order = new Order();
         order.setAddress(addresses.get(position).toString());
         order.setUserId(ParseUser.getCurrentUser().getObjectId());
         order.setClothes(clothes);
@@ -30,13 +30,14 @@ public class OrderManager {
         order.setOrderId(orderId);
         //TODO Calculate cost
         order.setCost(cost);
+        order.setStatus(0);
         return order;
     }
 
-    public static void sendOrder(final Context context, OrderModel order){
+    public static void sendOrder(final Context context, Order order){
         final ProgressDialog dlg = new ProgressDialog(context);
         dlg.setTitle("Please, wait a moment.");
-        dlg.setMessage("Placing Your Order...");
+        dlg.setMessage("Placing Your GenericOrder...");
         dlg.show();
         order.saveInBackground(new SaveCallback() {
             @Override
@@ -44,7 +45,6 @@ public class OrderManager {
                 if (e == null) {
                     dlg.dismiss();
                     Toast.makeText(context, "Successfully placed order", Toast.LENGTH_SHORT).show();
-                    context.startActivity(new Intent(context, HistoryActivity.class));
                 } else {
                     dlg.dismiss();
                     Log.e("Failed to create order", e.toString());

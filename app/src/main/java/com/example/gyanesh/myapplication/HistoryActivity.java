@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.gyanesh.myapplication.Adapters.OrderHistoryAdapter;
-import com.example.gyanesh.myapplication.Models.OrderModel;
+import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.utilClasses.MyActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -21,12 +21,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.gyanesh.myapplication.Models.Order.PICKUP_TIME_KEY;
-import static com.example.gyanesh.myapplication.Models.Order.USER_ID_KEY;
+import static com.example.gyanesh.myapplication.Models.GenericOrder.PICKUP_TIME_KEY;
+import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
 
 public class HistoryActivity extends MyActivity {
 
-    ArrayList<OrderModel> mOrders = new ArrayList<>();
+    ArrayList<Order> mOrders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +61,19 @@ public class HistoryActivity extends MyActivity {
 
         final ProgressDialog dlg = new ProgressDialog(HistoryActivity.this);
         dlg.setTitle("Please, wait a moment.");
-        dlg.setMessage("Fetching your orders...");
+        dlg.setMessage("Fetching your genericOrders...");
         dlg.show();
         // Construct query to execute
         //TODO add donation also to history
-        ParseQuery<OrderModel> query = ParseQuery.getQuery(OrderModel.class);
+        ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
         // Configure limit and sort order
         query.setLimit(50);
         query.orderByDescending(PICKUP_TIME_KEY);
-        // Execute query to fetch all orders from Parse asynchronously
+        // Execute query to fetch all genericOrders from Parse asynchronously
         query.whereEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
         // This is equivalent to a SELECT query with SQL
-        query.findInBackground(new FindCallback<OrderModel>() {
-            public void done(List<OrderModel> orders, ParseException e) {
+        query.findInBackground(new FindCallback<Order>() {
+            public void done(List<Order> orders, ParseException e) {
                 if (e == null) {
                     mOrders.clear();
                     mOrders.addAll(orders);

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.gyanesh.myapplication.Models.OrderModel;
+import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
 
 import java.util.Date;
@@ -16,9 +16,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder> {
-    private List<OrderModel> mOrders;
+    private List<Order> mOrders;
 
-    public OrderHistoryAdapter(List<OrderModel> orders) {
+    public OrderHistoryAdapter(List<Order> orders) {
         Log.e(OrderHistoryAdapter.class.getName(),orders.size()+"");
         mOrders = orders;
     }
@@ -32,7 +32,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CardView cv = holder.cv;
-        OrderModel order = mOrders.get(position);
+        Order order = mOrders.get(position);
         Double cost = order.getCost();
         Date pickUp = order.getPickupTime();
         String orderId = "ID: " + order.getObjectId();

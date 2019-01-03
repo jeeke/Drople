@@ -181,8 +181,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         } else {
             CardView cardView = findViewById(R.id.address_layout_order_activity);
             cardView.setVisibility(View.GONE);
-            TextView textView = findViewById(R.id.textView8);
-            textView.setOnClickListener(new View.OnClickListener() {
+            View view = findViewById(R.id.gonewala);
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);

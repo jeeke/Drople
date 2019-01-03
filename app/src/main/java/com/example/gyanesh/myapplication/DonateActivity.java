@@ -1,7 +1,6 @@
 package com.example.gyanesh.myapplication;
 
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gyanesh.myapplication.Models.Order;
+import com.example.gyanesh.myapplication.Models.GenericOrder;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -22,7 +21,6 @@ import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 
 public class DonateActivity extends AppCompatActivity {
 
@@ -81,26 +79,26 @@ public class DonateActivity extends AppCompatActivity {
     private void send_order() {
         final ProgressDialog dlg = new ProgressDialog(this);
         dlg.setTitle("Please, wait a moment.");
-        dlg.setMessage("Placing Your Order...");
+        dlg.setMessage("Placing Your GenericOrder...");
         dlg.show();
-        Order order = new Order();
-        order.setAddress(address);
-        order.setUserId(ParseUser.getCurrentUser().getObjectId());
-        order.setClothes(clothes);
-        order.setPickupTime(time);
+        GenericOrder genericOrder = new GenericOrder();
+        genericOrder.setAddress(address);
+        genericOrder.setUserId(ParseUser.getCurrentUser().getObjectId());
+        genericOrder.setClothes(clothes);
+        genericOrder.setPickupTime(time);
         //TODO Create new Object Id
-        order.setOrderId(1234);
+        genericOrder.setOrderId(1234);
 
-        order.saveInBackground(new SaveCallback() {
+        genericOrder.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
                     dlg.dismiss();
-                    Toast.makeText(DonateActivity.this, "Successfully placed order", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonateActivity.this, "Successfully placed genericOrder", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DonateActivity.this, HistoryActivity.class));
                 } else {
                     dlg.dismiss();
-                    Log.e("Failed to create order", e.toString());
+                    Log.e("Failed to create genericOrder", e.toString());
                 }
             }
         });

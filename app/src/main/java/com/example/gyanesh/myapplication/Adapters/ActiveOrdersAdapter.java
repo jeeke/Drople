@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -19,14 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapter.ViewHolder> {
 
 
-    private String[] ordersno;
-    private String[] progressno;
-    private String[] date;
+    private List<Order> orders;
 
-    public ActiveOrdersAdapter(String[] ordersno, String[] progressno,String[] date) {
-        this.ordersno = ordersno;
-        this.progressno = progressno;
-        this.date=date;
+    public ActiveOrdersAdapter(List<Order> orders) {
+        this.orders = orders;
     }
 
     @NonNull
@@ -42,17 +42,22 @@ public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         CardView cardView = holder.cardView;
-        TextView number =(TextView) cardView.findViewById(R.id.orderno_cv);
-        TextView date_cv = (TextView) cardView.findViewById(R.id.orderdate_cv);
-        number.setText(ordersno[position]);
-        date_cv.setText(date[position]);
-        ProgressBar progressBar = (ProgressBar) cardView.findViewById(R.id.progressBar);
-        progressBar.setProgress(Integer.parseInt(progressno[position]));
+
+        Order currentOrder = orders.get(position);
+        TextView number =cardView.findViewById(R.id.orderno_cv);
+        TextView date_cv =  cardView.findViewById(R.id.orderdate_cv);
+        ProgressBar progressBar = cardView.findViewById(R.id.progressBar);
         TextView in_progress = cardView.findViewById(R.id.IN_progress);
         TextView pickup = cardView.findViewById(R.id.ac_pickup);
         TextView processing = cardView.findViewById(R.id.ac_processing);
         TextView delivery = cardView.findViewById(R.id.ac_delivery);
-        if(Integer.parseInt(progressno[position])==100)
+
+
+        number.setText(String.valueOf(currentOrder.getOrderId()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        date_cv.setText(dateFormat.format(currentOrder.getPickupTime()));
+
+        if(currentOrder.getStatus()==3)
         {
             in_progress.setText("COMPLETED");
             in_progress.setTextColor(Color.parseColor("#2bb657"));
@@ -61,22 +66,26 @@ public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapte
             pickup.setTextColor(Color.parseColor("#2bb657"));
             processing.setTextColor(Color.parseColor("#2bb657"));
             delivery.setTextColor(Color.parseColor("#2bb657"));
+            progressBar.setProgress(100);
         }
-        else if(Integer.parseInt(progressno[position])>=75)
+        else if(currentOrder.getStatus()==2)
         {
             pickup.setTextColor(Color.parseColor("#2bb657"));
             processing.setTextColor(Color.parseColor("#2bb657"));
             delivery.setTextColor(Color.parseColor("#EF6C00"));
+            progressBar.setProgress(75);
         }
-        else if(Integer.parseInt(progressno[position])>=40)
+        else if(currentOrder.getStatus()==1)
         {
             pickup.setTextColor(Color.parseColor("#2bb657"));
             processing.setTextColor(Color.parseColor("#EF6C00"));
+            progressBar.setProgress(50);
             //delivery.setTextColor(R.color.colorPrimary);
         }
         else
         {
             pickup.setTextColor(Color.parseColor("#EF6C00"));
+            progressBar.setProgress(25);
            // processing.setTextColor(R.color.colorAccent);
             //delivery.setTextColor(R.color.colorPrimary);
         }
@@ -84,7 +93,7 @@ public class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrdersAdapte
 
     @Override
     public int getItemCount() {
-        return ordersno.length;
+        return orders.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -19,7 +19,7 @@ public class OrdersFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.frag_orders_new, container, false);
+        final View view = inflater.inflate(R.layout.frag_orders, container, false);
 
         OrdersAdaptor orderHistoryAdapter = new OrdersAdaptor(getChildFragmentManager());
         ViewPager viewPager = view.findViewById(R.id.viewpagerorders);

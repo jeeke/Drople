@@ -6,8 +6,8 @@ import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.City;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.Models.Locality;
+import com.example.gyanesh.myapplication.Models.GenericOrder;
 import com.example.gyanesh.myapplication.Models.Order;
-import com.example.gyanesh.myapplication.Models.OrderModel;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -15,8 +15,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ParseObject.registerSubclass(OrderModel.class);
         ParseObject.registerSubclass(Order.class);
+        ParseObject.registerSubclass(GenericOrder.class);
         ParseObject.registerSubclass(Address.class);
         ParseObject.registerSubclass(City.class);
         ParseObject.registerSubclass(Locality.class);

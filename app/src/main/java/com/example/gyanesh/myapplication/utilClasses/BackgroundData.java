@@ -1,8 +1,11 @@
 package com.example.gyanesh.myapplication.utilClasses;
 
+import android.util.Log;
+
 import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.City;
 import com.example.gyanesh.myapplication.Models.Garment;
+import com.example.gyanesh.myapplication.Models.GenericOrder;
 import com.example.gyanesh.myapplication.Models.Locality;
 import com.example.gyanesh.myapplication.Models.Order;
 import com.parse.FindCallback;
@@ -14,11 +17,12 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.gyanesh.myapplication.Models.Order.USER_ID_KEY;
+import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
 
 public class BackgroundData {
     public static ArrayList<Address> addresses = new ArrayList<>();
-    public static ArrayList<Order> orders;
+    private static ArrayList<Order> activeOrders = new ArrayList<>();
+    private static ArrayList<Order> completedOrders = new ArrayList<>();
     private static ArrayList<Garment> garments = new ArrayList<>();
     private static ArrayList<Garment> garment0 = new ArrayList<>();
     private static ArrayList<Garment> garment1 = new ArrayList<>();
@@ -26,10 +30,42 @@ public class BackgroundData {
     private static ArrayList<Garment> garment3 = new ArrayList<>();
     public static ArrayList<City> cities = new ArrayList<>();
     public static ArrayList<Locality> localities = new ArrayList<>();
+
     public static boolean prevSendSuccess;
     public static boolean prevFetchSuccess;
 
     private BackgroundData() {
+    }
+
+    public static void refreshOrders() {
+        ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
+        query.findInBackground(new FindCallback<Order>() {
+            public void done(List<Order> mOrders, ParseException e) {
+                if (e == null) {
+                    for(Order x:mOrders){
+                        if(x.getStatus()==3){
+                            completedOrders.add(x);
+                        }else{
+                            activeOrders.add(x);
+                        }
+                    }
+                    Log.e("Remote Orders: ",mOrders.toString());
+                    Log.e("Remote Orders: ",activeOrders.toString());
+                    prevFetchSuccess = true;
+                } else {
+                    Log.e("Error",e.toString());
+                    prevFetchSuccess = false;
+                }
+            }
+        });
+    }
+
+    public static List<Order> getActiveOrders(){
+        return activeOrders;
+    }
+
+    public static List<Order> getCompletedOrders(){
+        return completedOrders;
     }
 
     public static void refreshCities() {
@@ -153,7 +189,7 @@ public class BackgroundData {
         ParseQuery<Address> query = ParseQuery.getQuery(Address.class);
         // Configure limit and sort order
         query.setLimit(10);
-        // Execute query to fetch all orders from Parse asynchronously
+        // Execute query to fetch all genericOrders from Parse asynchronously
         query.whereEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
         // This is equivalent to a SELECT query with SQL
         query.findInBackground(new FindCallback<Address>() {
