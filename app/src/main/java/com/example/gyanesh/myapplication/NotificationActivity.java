@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.gyanesh.myapplication.Adapters.notificationRecyclerAdapter;
+import com.example.gyanesh.myapplication.Adapters.NotificationAdapter;
 import com.example.gyanesh.myapplication.Models.NotificationData;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class NotificationActivity extends AppCompatActivity {
         list.add(data2);
         list.add(data3);
 
-        final notificationRecyclerAdapter adapter = new notificationRecyclerAdapter(list);
+        final NotificationAdapter adapter = new NotificationAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class notificationRecyclerAdapter extends RecyclerView.Adapter<notificationRecyclerAdapter.holder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.holder> {
 
     ArrayList<NotificationData> list;
     View mView;
 
-    public notificationRecyclerAdapter(ArrayList<NotificationData> list)
+    public NotificationAdapter(ArrayList<NotificationData> list)
     {
         this.list = list;
     }
@@ -27,7 +27,7 @@ public class notificationRecyclerAdapter extends RecyclerView.Adapter<notificati
     @Override
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_custom,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_notification,parent,false);
         mView = view;
         holder viewholder = new holder(view);
         return viewholder;

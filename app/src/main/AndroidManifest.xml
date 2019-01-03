@@ -27,7 +27,7 @@
             android:label="Add Address"
             android:parentActivityName=".PlaceOrderActivity" />
         <activity android:name=".ServicesActivity"
-            android:label="add services"
+            android:label="Services"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PlaceOrderActivity"
