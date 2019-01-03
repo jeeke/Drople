@@ -5,21 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
-
-import com.example.gyanesh.myapplication.Adapters.ActiveOrdersAdapter;
-import com.example.gyanesh.myapplication.Adapters.OrderHistoryAdapter;
 import com.example.gyanesh.myapplication.Adapters.OrdersAdaptor;
-import com.example.gyanesh.myapplication.Models.OrderModel;
 import com.example.gyanesh.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 public class OrdersFrag extends Fragment {

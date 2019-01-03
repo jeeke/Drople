@@ -33,10 +33,6 @@
             android:label="Place Order"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".TrackOrderActivity"
-            android:label="Active Orders"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".DonateActivity"
             android:label="Donate Clothes"
             android:parentActivityName=".MainActivity" />

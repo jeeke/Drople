@@ -31,9 +31,9 @@ public class HistoryActivity extends MyActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContent(this,R.layout.activity_history);
+        setContent(this,R.layout.activity_main);
         Toolbar toolbar;
-        toolbar = findViewById(R.id.toolbarh);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -45,7 +45,7 @@ public class HistoryActivity extends MyActivity {
     }
 
     public void retry(View view){
-        setContent(this,R.layout.activity_history);
+        setContent(this,R.layout.activity_main);
     }
 
     public void updateUi() {
