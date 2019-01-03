@@ -30,6 +30,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="Demi">This is one of the best storytelling examples on this list. Aside from a fun video, the page has Jeff, its founder, tell the story of how he struggled to answer a difficult question about design, which eventually led him to creating this company. By the end you feel intimately tied to Jeff and Ugmonk’s goals and ideals.</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
