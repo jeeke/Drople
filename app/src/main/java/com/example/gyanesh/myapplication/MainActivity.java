@@ -6,7 +6,7 @@ import android.view.MenuItem;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
-import com.example.gyanesh.myapplication.Fragments.ServicesFrag;
+import com.example.gyanesh.myapplication.Fragments.OrdersFrag;
 import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(fragment);
                     return true;
                 case R.id.nav_history:
-                    fragment = new ServicesFrag();
+                    fragment = new OrdersFrag();
                     loadFragment(fragment);
                     return true;
             }
