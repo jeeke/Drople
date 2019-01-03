@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 public class ProfileFrag extends Fragment {
 
 
-    private Toolbar toolbar;
     public ProfileFrag() {
         // Required empty public constructor
     }
@@ -63,7 +62,7 @@ public class ProfileFrag extends Fragment {
         View view = inflater.inflate(R.layout.frag_profile, container, false);
         setHasOptionsMenu(true);
 
-        toolbar = view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         String name = ParseUser.getCurrentUser().getUsername();

@@ -17,9 +17,6 @@ import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.Adapters.ViewPagerAdapter;
 import com.example.gyanesh.myapplication.ServicesActivity;
-import com.example.gyanesh.myapplication.TrackOrderActivity;
-import com.example.gyanesh.myapplication.ViewPagerAdapter;
-import com.rd.IndicatorManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -117,15 +114,12 @@ public class HomeFrag extends Fragment {
         });
 
 
-        //       Services Buttons
-        int btnId = 0;
-        final int finalBtnId = btnId;
         View.OnClickListener servicesListener = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getContext(),ServicesActivity.class);
-                intent.putExtra("btnId", finalBtnId);
+                intent.putExtra("btnId", v.getId());
                 startActivity(intent);
 
             }
@@ -133,7 +127,6 @@ public class HomeFrag extends Fragment {
 
         //Wash N Iron Button
         home_button = layout.findViewById(R.id.btn_home3);
-        btnId=R.id.btn_home3;
         head = home_button.findViewById(R.id.head1);
         head.setText("Wash & Iron");
         imageView = home_button.findViewById(R.id.btn_home_img);
@@ -143,7 +136,6 @@ public class HomeFrag extends Fragment {
 
         //Ironing Button
         home_button = layout.findViewById(R.id.btn_home4);
-        btnId=R.id.btn_home4;
         head = home_button.findViewById(R.id.head2);
         head.setText("min 12 hrs");
         imageView = home_button.findViewById(R.id.btn_home_img);
