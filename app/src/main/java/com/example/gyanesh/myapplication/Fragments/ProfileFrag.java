@@ -23,37 +23,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-public class ProfileFrag extends Fragment {
+public class ProfileFrag extends MainActivityFragments {
 
 
     public ProfileFrag() {
         // Required empty public constructor
     }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.toolbar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_notification:
-                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.rate_us:
-                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +37,7 @@ public class ProfileFrag extends Fragment {
         View view = inflater.inflate(R.layout.frag_profile, container, false);
         setHasOptionsMenu(true);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         String name = ParseUser.getCurrentUser().getUsername();

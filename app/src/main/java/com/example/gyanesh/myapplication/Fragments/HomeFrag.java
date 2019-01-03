@@ -10,17 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.DonateActivity;
 import com.example.gyanesh.myapplication.PlaceOrderActivity;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.Adapters.ViewPagerAdapter;
-import com.example.gyanesh.myapplication.NotificationActivity;
 import com.example.gyanesh.myapplication.ServicesActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -28,38 +25,10 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFrag extends Fragment {
-
-    //    private ViewFlipper viewFlipper;
-    private ViewPager viewPager;
-    private Toolbar toolbar;
+public class HomeFrag extends MainActivityFragments {
 
     public HomeFrag() {
         // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.toolbar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_notification:
-                Intent intent = new Intent(getContext(), NotificationActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.rate_us:
-                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                break;
-        }
-        return true;
     }
 
     @Override
@@ -71,7 +40,8 @@ public class HomeFrag extends Fragment {
         toolbar = layout.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        Attaching Listeners to Home buttons
-        viewPager = layout.findViewById(R.id.offers);
+        //    private ViewFlipper viewFlipper;
+        ViewPager viewPager = layout.findViewById(R.id.offers);
 //        viewPager.setClipToPadding(false);
 //        //TODO Starpoint do not remove top and bottom padding coz its unsycronizes pager indicator motion
 //        viewPager.setPadding(40,10,40,10);
