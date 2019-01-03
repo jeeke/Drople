@@ -45,7 +45,7 @@
             android:name=".AddClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />
         <activity
-            android:name=".AddAddressActivity"
+            android:name=".SelectAddressActivity"
             android:label="Choose Address"
             android:parentActivityName=".PlaceOrderActivity" />
 

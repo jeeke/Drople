@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.City;
 import com.example.gyanesh.myapplication.Models.Garment;
-import com.example.gyanesh.myapplication.Models.GenericOrder;
 import com.example.gyanesh.myapplication.Models.Locality;
 import com.example.gyanesh.myapplication.Models.Order;
 import com.parse.FindCallback;
@@ -20,131 +19,115 @@ import java.util.List;
 import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
 
 public class BackgroundData {
-    public static ArrayList<Address> addresses = new ArrayList<>();
-    private static ArrayList<Order> activeOrders = new ArrayList<>();
-    private static ArrayList<Order> completedOrders = new ArrayList<>();
-    private static ArrayList<Garment> garments = new ArrayList<>();
-    private static ArrayList<Garment> garment0 = new ArrayList<>();
-    private static ArrayList<Garment> garment1 = new ArrayList<>();
-    private static ArrayList<Garment> garment2 = new ArrayList<>();
-    private static ArrayList<Garment> garment3 = new ArrayList<>();
-    public static ArrayList<City> cities = new ArrayList<>();
-    public static ArrayList<Locality> localities = new ArrayList<>();
 
-    public static boolean prevSendSuccess;
-    public static boolean prevFetchSuccess;
+    public interface Listener {
+        void onAddressFetch(List<Address> addressList);
 
-    private BackgroundData() {
+        void onAddressUpdate(Boolean error);
+
+        void onOrdersFetch(Boolean error);
     }
 
-    public static void refreshOrders() {
+    public static ArrayList<Garment> garment0;
+    public static ArrayList<Garment> garment1;
+    public static ArrayList<Garment> garment2;
+    public static ArrayList<Garment> garment3;
+    public static ArrayList<Locality> localities;
+    public static ArrayList<String> cities;
+    public static boolean detailsUpdated = false;
+
+
+    private Listener listener;
+    private ArrayList<Order> activeOrders;
+    private ArrayList<Order> completedOrders;
+
+    public BackgroundData(Listener listener) {
+        this.listener = listener;
+        activeOrders = new ArrayList<>();
+        completedOrders = new ArrayList<>();
+    }
+
+
+    //Helper Fucntions related to orders
+    public void refreshOrders() {
         ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
+        query.setLimit(20);
         query.findInBackground(new FindCallback<Order>() {
             public void done(List<Order> mOrders, ParseException e) {
                 if (e == null) {
-                    for(Order x:mOrders){
-                        if(x.getStatus()==3){
-                            completedOrders.add(x);
-                        }else{
-                            activeOrders.add(x);
-                        }
-                    }
-                    Log.e("Remote Orders: ",mOrders.toString());
-                    Log.e("Remote Orders: ",activeOrders.toString());
-                    prevFetchSuccess = true;
+                    processOrders(mOrders);
+                    listener.onOrdersFetch(true);
                 } else {
-                    Log.e("Error",e.toString());
-                    prevFetchSuccess = false;
+                    Log.e("Error", e.toString());
+                    listener.onOrdersFetch(false);
                 }
             }
         });
     }
 
-    public static List<Order> getActiveOrders(){
+    private void processOrders(List<Order> mOrders) {
+        for (Order x : mOrders) {
+            if (x.getStatus() == 3) {
+                completedOrders.add(x);
+            } else {
+                activeOrders.add(x);
+            }
+        }
+    }
+
+    public List<Order> getActiveOrders() {
         return activeOrders;
     }
 
-    public static List<Order> getCompletedOrders(){
+    public List<Order> getCompletedOrders() {
         return completedOrders;
     }
 
-    public static void refreshCities() {
-        ParseQuery<City> query = ParseQuery.getQuery(City.class);
-        query.findInBackground(new FindCallback<City>() {
-            public void done(List<City> mCities, ParseException e) {
+
+    //Helper functions related to address
+    public void getCloudAddressList() {
+        ParseQuery<Address> query = ParseQuery.getQuery(Address.class);
+        // Configure limit and sort order
+        query.setLimit(10);
+        // Execute query to fetch all genericOrders from Parse asynchronously
+        query.whereEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
+        // This is equivalent to a SELECT query with SQL
+        query.findInBackground(new FindCallback<Address>() {
+            public void done(List<Address> mAddresses, ParseException e) {
                 if (e == null) {
-                    cities.clear();
-                    cities.addAll(mCities);
-                    prevFetchSuccess = true;
+                    listener.onAddressFetch(mAddresses);
                 } else {
-                    prevFetchSuccess = false;
+                    listener.onAddressFetch(null);
                 }
             }
         });
     }
 
-    public static void refreshLocalities() {
-        ParseQuery<Locality> query = ParseQuery.getQuery(Locality.class);
-        query.findInBackground(new FindCallback<Locality>() {
-            public void done(List<Locality> mLocalities, ParseException e) {
-                if (e == null) {
-                    localities.clear();
-                    localities.addAll(mLocalities);
-                    prevFetchSuccess = true;
-                } else {
-                    prevFetchSuccess = false;
+    public void updateCloudAddressList(List<Address> addresses) {
+        for (Address address : addresses) {
+            address.setId(ParseUser.getCurrentUser().getObjectId());
+            address.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        listener.onAddressUpdate(true);
+                    } else {
+                        listener.onAddressUpdate(false);
+                    }
                 }
-            }
-        });
-    }
-
-    public static ArrayList<String> getCityList() {
-        ArrayList<String> list = new ArrayList<>();
-        for (City x : cities) {
-            list.add(x.getTitle());
+            });
         }
-        return list;
     }
 
-    public static ArrayList<String> getLocalitiesForCity(String city) {
+
+    public ArrayList<String> getLocalitiesForCity(String city) {
         ArrayList<String> list = new ArrayList<>();
         for (Locality x : localities) {
-            if (x.getCity() == city) {
-                list.add(x.getTitle());
+            if (x.getCity().equals(city)) {
+                list.add(x.getObjectId());
             }
         }
         return list;
-    }
-
-
-    public static void refreshGarments() {
-        ParseQuery<Garment> query = ParseQuery.getQuery(Garment.class);
-        query.findInBackground(new FindCallback<Garment>() {
-            public void done(List<Garment> mGarments, ParseException e) {
-                if (e == null) {
-                    garments.clear();
-                    garments.addAll(mGarments);
-                    prevFetchSuccess = true;
-                } else {
-                    prevFetchSuccess = false;
-                }
-            }
-        });
-    }
-
-    private static void processGarments() {
-        for (Garment x : garments) {
-            int serviceType = x.getServiceType();
-            if (serviceType == 0) {
-                garment0.add(x);
-            } else if (serviceType == 1) {
-                garment1.add(x);
-            } else if (serviceType == 2) {
-                garment2.add(x);
-            } else {
-                garment3.add(x);
-            }
-        }
     }
 
     public static List<Garment> getGarmentsList(String locality, int serviceType) {
@@ -185,40 +168,77 @@ public class BackgroundData {
     }
 
 
-    public static void getRemoteAddresses() {
-        ParseQuery<Address> query = ParseQuery.getQuery(Address.class);
-        // Configure limit and sort order
-        query.setLimit(10);
-        // Execute query to fetch all genericOrders from Parse asynchronously
-        query.whereEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
-        // This is equivalent to a SELECT query with SQL
-        query.findInBackground(new FindCallback<Address>() {
-            public void done(List<Address> mAddresses, ParseException e) {
+    public static void updateDetails() {
+        getCitiesList();
+        getLocalitiesList();
+        getGarmentsList();
+    }
+
+    //Helper functions for cities and localities
+    private static void getCitiesList() {
+        ParseQuery<City> query = ParseQuery.getQuery(City.class);
+        query.findInBackground(new FindCallback<City>() {
+            public void done(List<City> mCities, ParseException e) {
                 if (e == null) {
-                    addresses.clear();
-                    addresses.addAll(mAddresses);
-                    prevFetchSuccess = true;
+                    cities = new ArrayList<>();
+                    for(City x:mCities){
+                        cities.add(x.getObjectId());
+                    }
+                    detailsUpdated = true;
                 } else {
-                    prevFetchSuccess = false;
+                    detailsUpdated = false;
+                }
+            }
+        });
+    }
+
+    private static void getLocalitiesList() {
+        ParseQuery<Locality> query = ParseQuery.getQuery(Locality.class);
+        query.findInBackground(new FindCallback<Locality>() {
+            public void done(List<Locality> mLocalities, ParseException e) {
+                if (e == null) {
+                    localities = new ArrayList<>();
+                    localities.addAll(mLocalities);
+                    detailsUpdated = true;
+                } else {
+                    detailsUpdated = false;
                 }
             }
         });
     }
 
 
-    public static void updateRemoteAddresses() {
-        for (Address address : addresses) {
-            address.setId(ParseUser.getCurrentUser().getObjectId());
-            address.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        prevSendSuccess = true;
-                    } else {
-                        prevSendSuccess = false;
-                    }
+    public static void getGarmentsList() {
+        ParseQuery<Garment> query = ParseQuery.getQuery(Garment.class);
+        query.findInBackground(new FindCallback<Garment>() {
+            public void done(List<Garment> mGarments, ParseException e) {
+                if (e == null) {
+                    processGarments(mGarments);
+                    detailsUpdated = true;
+                } else {
+                    detailsUpdated = false;
                 }
-            });
+            }
+        });
+    }
+
+
+    private static void processGarments(List<Garment> mGarments) {
+        garment0 = new ArrayList<>();
+        garment1 = new ArrayList<>();
+        garment2 = new ArrayList<>();
+        garment3 = new ArrayList<>();
+        for (Garment x : mGarments) {
+            int serviceType = x.getServiceType();
+            if (serviceType == 0) {
+                garment0.add(x);
+            } else if (serviceType == 1) {
+                garment1.add(x);
+            } else if (serviceType == 2) {
+                garment2.add(x);
+            } else {
+                garment3.add(x);
+            }
         }
     }
 

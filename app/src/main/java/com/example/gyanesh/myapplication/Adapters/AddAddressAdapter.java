@@ -12,6 +12,7 @@ import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,14 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.ViewHolder> {
 
-    private ArrayList<Address> myadress;
+    private List<Address> myadress;
     private int lastPos = -1;
     public interface Listener{
         void updatePrevSelection(int lastPos,int position);
     }
     private Listener listener;
 
-    public AddAddressAdapter(Listener listener,ArrayList<Address> myadress) {
+    public AddAddressAdapter(Listener listener,List<Address> myadress) {
         this.listener = listener;
         this.myadress = myadress;
     }
@@ -41,8 +42,8 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final CardView cardView = holder.cardView;
-        AddressCardManager addressCardManager = new AddressCardManager(cardView);
-        addressCardManager.updateDetailsInCard(position);
+        AddressCardManager addressCardManager = new AddressCardManager(cardView,myadress.get(position));
+        addressCardManager.updateDetailsInCard();
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

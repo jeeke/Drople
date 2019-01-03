@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
+import com.example.gyanesh.myapplication.utilClasses.BackgroundData;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder> {
     private List<Order> mOrders;
 
-    public OrderHistoryAdapter(List<Order> orders) {
+    public OrderHistoryAdapter(List<Order> orders,BackgroundData backgroundData) {
         Log.e(OrderHistoryAdapter.class.getName(),orders.size()+"");
         mOrders = orders;
     }

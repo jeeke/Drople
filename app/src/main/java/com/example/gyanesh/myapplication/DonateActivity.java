@@ -41,7 +41,7 @@ public class DonateActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DonateActivity.this,AddAddressActivity.class);
+                Intent intent = new Intent(DonateActivity.this,SelectAddressActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,13 +65,13 @@ public class DonateActivity extends AppCompatActivity {
         TextView Al_code = findViewById(R.id.al_code);
 
 //        if(PlaceOrderActivity.callme!=-1) {
-//            Name.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);
-//            number.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).number);
-//            al_Add1.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add1);
-//            al_Add2.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add2);
-//            Al_code.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).pincode);
-//            Al_city.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).city);
-//            al_default.setText(AddAddressActivity.adressAAA.get(PlaceOrderActivity.callme).def_value);
+//            Name.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);
+//            number.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).number);
+//            al_Add1.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add1);
+//            al_Add2.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).add2);
+//            Al_code.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).pincode);
+//            Al_city.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).city);
+//            al_default.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).def_value);
 //
 //        }
     }
@@ -95,7 +95,7 @@ public class DonateActivity extends AppCompatActivity {
                 if (e == null) {
                     dlg.dismiss();
                     Toast.makeText(DonateActivity.this, "Successfully placed genericOrder", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(DonateActivity.this, HistoryActivity.class));
+                    startActivity(new Intent(DonateActivity.this, MainActivity.class));
                 } else {
                     dlg.dismiss();
                     Log.e("Failed to create genericOrder", e.toString());

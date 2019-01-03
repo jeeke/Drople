@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //TODO Update data in background
-        BackgroundData.getRemoteAddresses();
-        BackgroundData.refreshOrders();
+        BackgroundData.updateDetails();
 
         setContentView(R.layout.activity_main);
 

@@ -12,27 +12,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
+import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getCityList;
+import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.cities;
+import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.detailsUpdated;
 
-public class AddressActivity extends AppCompatActivity {
+public class AddressActivity extends AppCompatActivity{
 
     Spinner city;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SelectAddressActivity.toUpdate = true;
         setContentView(R.layout.activity_address);
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbaraa);
 
         //Populating spinner for cities
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,getCityList());
-        city = findViewById(R.id.na_spinnerCitySelector);
-        city.setAdapter(adapter);
+        if(detailsUpdated){
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,cities);
+            city = findViewById(R.id.na_spinnerCitySelector);
+            city.setAdapter(adapter);
+        }
 
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
@@ -97,5 +104,4 @@ public class AddressActivity extends AppCompatActivity {
             finish();
         }
     }
-
 }

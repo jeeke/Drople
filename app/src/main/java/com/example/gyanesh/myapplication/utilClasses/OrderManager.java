@@ -2,11 +2,10 @@ package com.example.gyanesh.myapplication.utilClasses;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.gyanesh.myapplication.HistoryActivity;
+import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Order;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -14,13 +13,11 @@ import com.parse.SaveCallback;
 
 import java.util.Calendar;
 
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.addresses;
-
 public class OrderManager {
 
-    public static Order make_order(int position, int clothes, int payMode, double cost) {
+    public static Order make_order(Address address, int clothes, int payMode, double cost) {
         Order order = new Order();
-        order.setAddress(addresses.get(position).toString());
+        order.setAddress(address.toString());
         order.setUserId(ParseUser.getCurrentUser().getObjectId());
         order.setClothes(clothes);
         order.setPayMode(payMode);

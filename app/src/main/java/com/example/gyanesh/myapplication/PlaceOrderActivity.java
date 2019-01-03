@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 import com.example.gyanesh.myapplication.utilClasses.DateSelectManager;
@@ -45,9 +46,10 @@ import static com.example.gyanesh.myapplication.utilClasses.OrderManager.sendOrd
 
 public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
 
-    public int selectedAddress = -1;
+    private Address selectedAddress = null;
     Map<Integer, Garment> selectedGarments;
     //TODO Initialize these values as user fills the details
+    //Todo restrict user to add only 10 addresses
 //    private Address address = new Address();
     private int clothes = 10;
     private double cost = 50;
@@ -78,7 +80,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         if (requestCode == SELECT_ADDRESS_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                selectedAddress = data.getIntExtra("selectedAddress", -1);
+                selectedAddress = data.getParcelableExtra(("selectedAddress"));
                 updateAddressCard();
             }
         }
@@ -155,13 +157,13 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
 
     public void updateAddressCard() {
-        if (selectedAddress != -1) {
+        if (selectedAddress != null) {
 
             CardView cardView = findViewById(R.id.address_layout_order_activity);
             cardView.setVisibility(View.VISIBLE);
 
-            AddressCardManager addressCardManager = new AddressCardManager(cardView);
-            addressCardManager.updateDetailsInCard(selectedAddress);
+            AddressCardManager addressCardManager = new AddressCardManager(cardView,selectedAddress);
+            addressCardManager.updateDetailsInCard();
 
             cardView = findViewById(R.id.gonewala);
             cardView.setVisibility(View.GONE);
@@ -171,7 +173,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             btn_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
+                    Intent intent = new Intent(PlaceOrderActivity.this, SelectAddressActivity.class);
                     startActivityForResult(intent, SELECT_ADDRESS_REQUEST_CODE);
                 }
             });
@@ -185,7 +187,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PlaceOrderActivity.this, AddAddressActivity.class);
+                    Intent intent = new Intent(PlaceOrderActivity.this, SelectAddressActivity.class);
                     startActivityForResult(intent, SELECT_ADDRESS_REQUEST_CODE);
                 }
             });

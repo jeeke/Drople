@@ -15,10 +15,7 @@ import com.example.gyanesh.myapplication.Adapters.ActiveOrdersAdapter;
 import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getActiveOrders;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,8 +23,13 @@ import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.getAc
 public class ActiveOrders extends Fragment {
 
 
+    List<Order> orders;
     public ActiveOrders() {
         // Required empty public constructor
+    }
+
+    public void setOrders(List<Order> orders){
+        this.orders = orders;
     }
 
 
@@ -36,10 +38,7 @@ public class ActiveOrders extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.frag_active_orders, container, false);
-
-
-        List<Order> activeOrders = getActiveOrders();
-        ActiveOrdersAdapter activeOrdersAdapter = new ActiveOrdersAdapter(activeOrders);
+        ActiveOrdersAdapter activeOrdersAdapter = new ActiveOrdersAdapter(orders);
         final RecyclerView recyclerView = view.findViewById(R.id.activerecycler);
         recyclerView.setAdapter(activeOrdersAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

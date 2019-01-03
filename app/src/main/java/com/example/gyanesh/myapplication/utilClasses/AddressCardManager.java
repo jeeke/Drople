@@ -6,16 +6,16 @@ import android.widget.TextView;
 import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.R;
 
-import static com.example.gyanesh.myapplication.utilClasses.BackgroundData.addresses;
-
 public class AddressCardManager {
 
-    private  View view;
-    public AddressCardManager(View view){
-        this.view = view;
-    }
+    private Address address;
 
-    public void updateDetailsInCard(int position){
+    private  View view;
+    public AddressCardManager(View view,Address address){
+        this.view = view;
+        this.address = address;
+    }
+    public void updateDetailsInCard(){
 
         TextView Name = view.findViewById(R.id.Name);
         TextView number = view.findViewById(R.id.al_number);
@@ -24,8 +24,6 @@ public class AddressCardManager {
         TextView al_Add2 = view.findViewById(R.id.al_address_2);
         TextView Al_city = view.findViewById(R.id.al_city);
         TextView Al_code = view.findViewById(R.id.al_code);
-
-        Address address = addresses.get(position);
 
         Name.setText(address.getName());
         number.setText(address.getMobile());
