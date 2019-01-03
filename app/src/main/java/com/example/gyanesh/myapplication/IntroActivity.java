@@ -39,7 +39,7 @@ public class IntroActivity extends AppCompatActivity {
             finish();
         }
 
-        // Making notification bar transparent
+        // Making NotificationActivity bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
@@ -58,7 +58,7 @@ public class IntroActivity extends AppCompatActivity {
                 R.layout.intro3,
                 R.layout.intro4};
 
-        // making notification bar transparent
+        // making NotificationActivity bar transparent
         changeStatusBarColor();
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -102,7 +102,7 @@ public class IntroActivity extends AppCompatActivity {
     };
 
     /**
-     * Making notification bar transparent
+     * Making NotificationActivity bar transparent
      */
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

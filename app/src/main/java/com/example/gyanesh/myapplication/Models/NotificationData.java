@@ -1,6 +1,6 @@
 package com.example.gyanesh.myapplication.Models;
 
-public class notification_data {
+public class NotificationData {
 
     private String text,time;
     private int image;
@@ -18,7 +18,7 @@ public class notification_data {
         return time;
     }
 
-    public notification_data(String text, int image,String time) {
+    public NotificationData(String text, int image, String time) {
         this.text = text;
         this.time = time;
         this.image = image;

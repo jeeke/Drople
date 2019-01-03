@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gyanesh.myapplication.Models.notification_data;
+import com.example.gyanesh.myapplication.Models.NotificationData;
 import com.example.gyanesh.myapplication.R;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class notificationRecyclerAdapter extends RecyclerView.Adapter<notificationRecyclerAdapter.holder> {
 
-    ArrayList<notification_data> list;
+    ArrayList<NotificationData> list;
     View mView;
 
-    public notificationRecyclerAdapter(ArrayList<notification_data> list)
+    public notificationRecyclerAdapter(ArrayList<NotificationData> list)
     {
         this.list = list;
     }
