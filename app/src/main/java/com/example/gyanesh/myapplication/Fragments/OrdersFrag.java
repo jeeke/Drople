@@ -38,7 +38,7 @@ public class OrdersFrag extends Fragment {
 
         TabLayout tabLayout = view.findViewById(R.id.tablayoutorders);
         tabLayout.setupWithViewPager(viewPager);
-        
+
         return view;
     }
 
