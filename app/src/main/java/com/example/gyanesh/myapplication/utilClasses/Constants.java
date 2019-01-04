@@ -9,6 +9,7 @@ import com.example.gyanesh.myapplication.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class Constants {
 
@@ -17,6 +18,10 @@ public class Constants {
     public static final int TEZ_REQUEST_CODE = 123;
     public static final int ADD_CLOTHES_REQUEST_CODE = 124;
     public static final int SELECT_ADDRESS_REQUEST_CODE = 126;
+//    public static final int ADDRESS_NOT_SELECTED = 127;
+//    public static final int PICKUP_TIME_NOT_SELECTED = 128;
+//    public static final int CLOTHES_NOT_SELECTED = 129;
+//    public static final int ORDER_DETAILS_VALID = 130;
 
     public static final String M_ID = "kbYXEa11946819800480"; //Paytm Merchand Id we got it in paytm credentials
     public static final String CHANNEL_ID = "WAP"; //Paytm Channel Id, got it in paytm credentials
@@ -65,7 +70,7 @@ public class Constants {
 
 
 
-    public static Date utilDate(int type){
+    static Date utilDate(int type){
 
         Calendar cal = Calendar.getInstance();
         switch (type){
@@ -81,5 +86,10 @@ public class Constants {
                 break;
         }
         return cal.getTime();
+    }
+
+    public static String generateString() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replaceAll("-", "");
     }
 }

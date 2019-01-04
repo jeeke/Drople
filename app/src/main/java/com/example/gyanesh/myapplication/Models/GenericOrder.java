@@ -12,7 +12,7 @@ public class GenericOrder extends ParseObject {
     public static final String PICKUP_TIME_KEY = "pickUpTime";
     public static final String CLOTHES_KEY = "clothes";
 
-    public void setClothes(int clothes) {
+    public void setClothes(String clothes) {
         put(CLOTHES_KEY, clothes);
     }
 
@@ -21,7 +21,7 @@ public class GenericOrder extends ParseObject {
     }
 
     //TODO set readable id to readable ID++
-    public void setOrderId(int id) {
+    public void setOrderId(String id) {
         put(ORDER_ID_KEY, id);
     }
 
@@ -29,8 +29,8 @@ public class GenericOrder extends ParseObject {
         put(STATUS_KEY, status);
     }
 
-    public int getOrderId() {
-        return getInt(ORDER_ID_KEY);
+    public String getOrderId() {
+        return getString(ORDER_ID_KEY);
     }
 
 //    public String getAddress() {
@@ -45,7 +45,8 @@ public class GenericOrder extends ParseObject {
         put(ADDRESS_KEY, body);
     }
 
-    public void setPickupTime(java.util.Date pickupTime) {
+    //Update this to use Date instead of string
+    public void setPickupTime(String pickupTime) {
         put(PICKUP_TIME_KEY, pickupTime);
     }
 
@@ -57,7 +58,7 @@ public class GenericOrder extends ParseObject {
         return getInt(STATUS_KEY);
     }
 
-    public  int getClothes() {
-        return getInt(CLOTHES_KEY);
+    public  String getClothes() {
+        return getString(CLOTHES_KEY);
     }
 }

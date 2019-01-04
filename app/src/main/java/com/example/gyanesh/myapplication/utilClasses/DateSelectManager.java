@@ -109,7 +109,6 @@ public class DateSelectManager {
                 v.setBackground(colorAccent);
                 TextView temp = v.findViewById(R.id.date);
                 selectedSlot = temp.getText().toString();
-                Toast.makeText(activity, selectedDate + "  Slot: " + selectedSlot, Toast.LENGTH_SHORT).show();
             }
         };
         v4.setOnClickListener(slotListener);
@@ -173,5 +172,9 @@ public class DateSelectManager {
         textView.setText("6 : 00");
         textView = v6.findViewById(R.id.day);
         textView.setText("P M");
+    }
+
+    public String getSelectedDate() {
+        return selectedDate + "  Slot: "+selectedSlot;
     }
 }

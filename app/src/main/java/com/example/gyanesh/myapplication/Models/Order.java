@@ -13,7 +13,7 @@ public class Order extends GenericOrder {
     }
 
     public  double getCost() {
-        return getDouble(TOTAL_COST_KEY);
+        return getInt(TOTAL_COST_KEY);
     }
 
     public java.util.Date getReturnTime() {
@@ -25,7 +25,7 @@ public class Order extends GenericOrder {
         put(PAY_MODE_KEY, mode);
     }
 
-    public void setCost(Double cost) {
+    public void setCost(int cost) {
         put(TOTAL_COST_KEY, cost);
     }
 

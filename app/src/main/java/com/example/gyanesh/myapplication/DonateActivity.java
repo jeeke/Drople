@@ -81,27 +81,27 @@ public class DonateActivity extends AppCompatActivity {
         dlg.setTitle("Please, wait a moment.");
         dlg.setMessage("Placing Your GenericOrder...");
         dlg.show();
-        GenericOrder genericOrder = new GenericOrder();
-        genericOrder.setAddress(address);
-        genericOrder.setUserId(ParseUser.getCurrentUser().getObjectId());
-        genericOrder.setClothes(clothes);
-        genericOrder.setPickupTime(time);
-        //TODO Create new Object Id
-        genericOrder.setOrderId(1234);
-
-        genericOrder.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    dlg.dismiss();
-                    Toast.makeText(DonateActivity.this, "Successfully placed genericOrder", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(DonateActivity.this, MainActivity.class));
-                } else {
-                    dlg.dismiss();
-                    Log.e("Failed to create genericOrder", e.toString());
-                }
-            }
-        });
+//        GenericOrder genericOrder = new GenericOrder();
+//        genericOrder.setAddress(address);
+//        genericOrder.setUserId(ParseUser.getCurrentUser().getObjectId());
+//        genericOrder.setClothes(clothes);
+//        genericOrder.setPickupTime(time);
+//        //TODO Create new Object Id
+//        genericOrder.setOrderId(1234);
+//
+//        genericOrder.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    dlg.dismiss();
+//                    Toast.makeText(DonateActivity.this, "Successfully placed genericOrder", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(DonateActivity.this, MainActivity.class));
+//                } else {
+//                    dlg.dismiss();
+//                    Log.e("Failed to create genericOrder", e.toString());
+//                }
+//            }
+//        });
 
     }
 }
