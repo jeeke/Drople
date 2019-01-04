@@ -14,11 +14,23 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
+
+import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.garmentToHashMap;
 
 public class OrderManager {
+
+    public OrderManager(Listener listener){
+        this.listener = listener;
+    }
+
+    public interface Listener{
+        void onOrderVerified(boolean match);
+        void onError(boolean err);
+    }
+    private Listener listener;
 
     public static Order make_order(Address address, int clothes, int payMode, double cost) {
         Order order = new Order();
@@ -36,22 +48,22 @@ public class OrderManager {
         return order;
     }
 
-//    public void verifyAmount(List<Garment> garments, int amount) {
-//        HashMap<String, String> params;
-//        ParseCloud.callFunctionInBackground("verifyAmount", params, new FunctionCallback<HashMap<String, String>>() {
-//            @Override
-//            public void done(HashMap mapObject, ParseException e) {
-//                dlg.dismiss();
-//                if (e == null) {
-//                    Log.e("Generated CheckSum ", mapObject.toString());
-//                    //Toast.makeText(PlaceOrderActivity.this,mapObject.toString(), Toast.LENGTH_LONG).show();
-//                    initializePaytmPayment(mapObject);
-//                } else {
-//                    Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//    }
+    public void verifyOrder(ArrayList<Garment> garments, int amount) {
+        HashMap<String, Object> params = garmentToHashMap(garments);
+        params.put("amount", amount);
+        ParseCloud.callFunctionInBackground("verify", params, new FunctionCallback<Boolean>() {
+            @Override
+            public void done(Boolean match, ParseException e) {
+                if (e == null) {
+                    listener.onOrderVerified(match);
+                } else {
+                    listener.onError(true);
+                    Log.e("Error 404", e.toString());
+                    //todo accordingly
+                }
+            }
+        });
+    }
 
     public static void sendOrder(final Context context, Order order) {
         final ProgressDialog dlg = new ProgressDialog(context);

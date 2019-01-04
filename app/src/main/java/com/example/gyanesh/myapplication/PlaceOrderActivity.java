@@ -2,6 +2,7 @@ package com.example.gyanesh.myapplication;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,12 +19,12 @@ import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 import com.example.gyanesh.myapplication.utilClasses.DateSelectManager;
-import com.example.gyanesh.myapplication.utilClasses.PaytmManager;
+import com.example.gyanesh.myapplication.utilClasses.OrderManager;
 import com.example.gyanesh.myapplication.utilClasses.SelectedClothesAdapter;
-import com.example.gyanesh.myapplication.utilClasses.TejManager;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -41,22 +43,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.ADD_CLOTHES_REQUEST_CODE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.TEZ_REQUEST_CODE;
-import static com.example.gyanesh.myapplication.utilClasses.OrderManager.make_order;
-import static com.example.gyanesh.myapplication.utilClasses.OrderManager.sendOrder;
 
-public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener {
+public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener,OrderManager.Listener {
 
     private Address selectedAddress = null;
-    Map<Integer, Garment> selectedGarments;
+    ArrayList<Garment> selectedGarments;
     //TODO Initialize these values as user fills the details
     //Todo restrict user to add only 10 addresses
 //    private Address address = new Address();
     private int clothes = 10;
-    private double cost = 50;
+    private int total_amount = 50;
     private int payMode = 0;
-    View v7;
+    View addClothes;
     ProgressDialog dlg;
     HashMap<String, String> params = new HashMap<>();
+    OrderManager orderManager;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -69,10 +70,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         if (requestCode == ADD_CLOTHES_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                selectedGarments = (Map<Integer, Garment>) data.getSerializableExtra("selectedGarments");
+                selectedGarments = new ArrayList<>(((Map<Integer, Garment>) data.getSerializableExtra("selectedGarments")).values());
+                total_amount = data.getIntExtra("total_amount",0);
                 RecyclerView listView = findViewById(R.id.selectedList);
 //                listView.setVisibility(View.VISIBLE);
-                listView.setAdapter(new SelectedClothesAdapter(new ArrayList<>(selectedGarments.values())));
+                listView.setAdapter(new SelectedClothesAdapter(selectedGarments));
                 listView.setLayoutManager(new LinearLayoutManager(this));
 //                listView.setNestedScrollingEnabled(false);
             }
@@ -91,11 +93,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
-        v7 = findViewById(R.id.add_clothes);
-        v7.setOnClickListener(new View.OnClickListener() {
+        addClothes = findViewById(R.id.add_clothes);
+        addClothes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddClothesActivity.class);
+                Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
                 startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
             }
         });
@@ -113,33 +115,40 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         DateSelectManager dateSelectManager = new DateSelectManager(this);
         dateSelectManager.setColors();
 
+        orderManager = new OrderManager(this);
+
         dlg = new ProgressDialog(this);
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                TODO Later after development set paymentDone to false
-                Boolean paymentDone = false;
-                //PayTm
-                if (payMode == 1) {
-                    PaytmManager paytmManager = new PaytmManager(PlaceOrderActivity.this);
-                    paytmManager.paytm(params, dlg);
-                    paymentDone = true;
-                }
-                //Tez
-                else if (payMode == 0) {
-                    TejManager tejManager = new TejManager(PlaceOrderActivity.this);
-                    tejManager.tej();
-                    paymentDone = true;
-                }
-                //Cash On Delivery
-                else if (payMode == 2) {
-                    paymentDone = true;
-                }
-                if (paymentDone) {
-                    //TODO Check if all fields are correctly filled otherwise show Error
-                    sendOrder(PlaceOrderActivity.this, make_order(selectedAddress, clothes, payMode, cost));
-                }
+                Log.e("I ran","But not");
+                dlg = new ProgressDialog(PlaceOrderActivity.this);
+                dlg.setTitle("Placing Your Order");
+                dlg.show();
+                orderManager.verifyOrder(selectedGarments,total_amount);
+////                TODO Later after development set paymentDone to false
+//                Boolean paymentDone = false;
+//                //PayTm
+//                if (payMode == 1) {
+//                    PaytmManager paytmManager = new PaytmManager(PlaceOrderActivity.this);
+//                    paytmManager.paytm(params, dlg);
+//                    paymentDone = true;
+//                }
+//                //Tez
+//                else if (payMode == 0) {
+//                    TejManager tejManager = new TejManager(PlaceOrderActivity.this);
+//                    tejManager.tej();
+//                    paymentDone = true;
+//                }
+//                //Cash On Delivery
+//                else if (payMode == 2) {
+//                    paymentDone = true;
+//                }
+//                if (paymentDone) {
+//                    //TODO Check if all fields are correctly filled otherwise show Error
+//                    sendOrder(PlaceOrderActivity.this, make_order(selectedAddress, clothes, payMode, total_amount));
+//                }
             }
         });
 
@@ -236,6 +245,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         });
     }
 
+    //Paytm Callbacks
+
     @Override
     public void networkNotAvailable() {
         dlg.dismiss();
@@ -275,5 +286,42 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+
+
+    //Order Manager Callbacks
+
+    @Override
+    public void onOrderVerified(boolean match) {
+        dlg.dismiss();
+        if (match)
+            Log.v("OrderManager","Order Verified");
+            //Todo proceed to payment
+        else {
+            alertDisplayer("Order Not Verified","Something bad happened, Please try again.");
+            Log.e("OrderManager","Order Tampered");
+        }
+
+    }
+
+    @Override
+    public void onError(boolean err) {
+
+    }
+
+
+    private void alertDisplayer(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Todo On clicked Ok
+                    }
+                });
+        AlertDialog ok = builder.create();
+        ok.show();
     }
 }

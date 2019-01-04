@@ -3,6 +3,11 @@ package com.example.gyanesh.myapplication.Models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import androidx.annotation.Nullable;
+
 @ParseClassName("Garment")
 public class Garment extends ParseObject {
 
@@ -14,7 +19,7 @@ public class Garment extends ParseObject {
 
 
     public void setCount(int count){
-        put("COUNT",count);
+        put(COUNT,count);
     }
 
     public int getPrice() {

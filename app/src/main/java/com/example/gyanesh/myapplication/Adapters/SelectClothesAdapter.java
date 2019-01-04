@@ -9,23 +9,31 @@ import android.widget.TextView;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.viewHolder>{
+import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.getGarmentsList;
+
+public class SelectClothesAdapter extends RecyclerView.Adapter<SelectClothesAdapter.viewHolder> {
 
     private List<Garment> garments;
-    public interface Listener{
-        void updateSelected(Garment garment,int prevCount);
+
+    public interface Listener {
+        void updateSelected(Garment garment, int prevCount);
     }
+
     private Listener listener;
 
-    public AddClothesAdapter(Listener listener,List<Garment> garments) {
+    public SelectClothesAdapter(Listener listener) {
         this.listener = listener;
-        this.garments = garments;
+
+        //TODO update this to get current locality
+        this.garments = new ArrayList<>();
+        garments.addAll(getGarmentsList("DR. B R AMBEDKAR NIT JALANDHAR", 0));
     }
 
     @NonNull
@@ -38,12 +46,12 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CardView cv = holder.cv;
-        String title = garments.get(position).getTitle();
-        String price = "Price : "+garments.get(position).getPrice();
+        Garment item = garments.get(position);
         TextView garmentTitle = cv.findViewById(R.id.garment_type);
         TextView garmentPrice = cv.findViewById(R.id.garment_price);
-        garmentTitle.setText(title);
-        garmentPrice.setText(price);
+        garmentTitle.setText(item.getTitle());
+        garmentPrice.setText(String.valueOf(item.getPrice()));
+        holder.garmentCount.setText(String.valueOf(item.getCount()));
     }
 
 
@@ -70,17 +78,16 @@ public class AddClothesAdapter extends RecyclerView.Adapter<AddClothesAdapter.vi
 
         @Override
         public void onClick(View v) {
-
             Garment item = garments.get(getAdapterPosition());
             int count = item.getCount();
             if (v.getId() == btn_plus.getId()) {
-                garments.get(getAdapterPosition()).setCount(count + 1);
+                item.setCount(count + 1);
                 garmentCount.setText(String.valueOf(count + 1));
-                listener.updateSelected(item,count);
+                listener.updateSelected(item, count);
             } else if (v.getId() == btn_minus.getId() && count > 0) {
                 garments.get(getAdapterPosition()).setCount(count - 1);
                 garmentCount.setText(String.valueOf(count - 1));
-                listener.updateSelected(item,count);
+                listener.updateSelected(item, count);
             }
         }
     }

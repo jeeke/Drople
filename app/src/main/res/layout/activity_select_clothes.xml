@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddClothesActivity">
+    tools:context=".SelectClothesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -27,7 +27,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:onClick="onDone"
         android:id="@+id/done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

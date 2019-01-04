@@ -13,9 +13,16 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static com.example.gyanesh.myapplication.Models.Garment.COUNT;
+import static com.example.gyanesh.myapplication.Models.Garment.LOCALITY;
+import static com.example.gyanesh.myapplication.Models.Garment.SERVICE_TYPE;
 import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
 
 public class CloudDbHelper {
@@ -181,7 +188,7 @@ public class CloudDbHelper {
             public void done(List<City> mCities, ParseException e) {
                 if (e == null) {
                     cities = new ArrayList<>();
-                    for(City x:mCities){
+                    for (City x : mCities) {
                         cities.add(x.getObjectId());
                     }
                     detailsUpdated = true;
@@ -240,6 +247,26 @@ public class CloudDbHelper {
                 garment3.add(x);
             }
         }
+    }
+
+    static HashMap<String, Object> garmentToHashMap(ArrayList<Garment> garments) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        ArrayList<String> objectIds = new ArrayList<>();
+        ArrayList<Integer> counts = new ArrayList<>();
+        ArrayList<String> localities = new ArrayList<>();
+        ArrayList<Integer> serviceType = new ArrayList<>();
+        int i = 0;
+        for (Garment x : garments) {
+            objectIds.add(i, x.getObjectId());
+            counts.add(i, x.getCount());
+            localities.add(i, x.getLocality());
+            serviceType.add(i, x.getServiceType());
+        }
+        hashMap.put(COUNT, counts);
+        hashMap.put(LOCALITY, localities);
+        hashMap.put(SERVICE_TYPE, serviceType);
+        hashMap.put("objectId", objectIds);
+        return hashMap;
     }
 
 }

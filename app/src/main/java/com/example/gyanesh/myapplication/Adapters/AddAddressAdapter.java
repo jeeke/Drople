@@ -11,7 +11,6 @@ import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.utilClasses.AddressCardManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -35,7 +34,7 @@ public class AddAddressAdapter extends RecyclerView.Adapter<AddAddressAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.address_layout_2, parent, false);
+        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.address_layout, parent, false);
         return new ViewHolder(cv);
     }
 
