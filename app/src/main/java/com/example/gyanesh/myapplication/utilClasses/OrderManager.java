@@ -70,15 +70,15 @@ public class OrderManager {
 
     private Listener listener;
 
-    public boolean isValid(Context context) {
+    public boolean isValid() {
         if (selectedAddress == null) {
-            Toast.makeText(context, "Please Select An Address", Toast.LENGTH_SHORT).show();
+            Toast.makeText((Context) listener, "Please Select An Address", Toast.LENGTH_SHORT).show();
             return false;
         } else if (selectedDate == null) {
-            Toast.makeText(context, "Please Select Pickup Time", Toast.LENGTH_SHORT).show();
+            Toast.makeText((Context) listener, "Please Select Pickup Time", Toast.LENGTH_SHORT).show();
             return false;
         } else if (selectedGarments == null) {
-            Toast.makeText(context, "Please Select Clothes", Toast.LENGTH_SHORT).show();
+            Toast.makeText((Context) listener, "Please Select Clothes", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -102,9 +102,9 @@ public class OrderManager {
         });
     }
 
-    public void sendOrder(final Context context) {
+    public void sendOrder() {
         //Todo something with this to verify the transaction status
-        final ProgressDialog dlg = new ProgressDialog(context);
+        final ProgressDialog dlg = new ProgressDialog((Context) listener);
         dlg.setTitle("Please, wait a moment.");
         dlg.setMessage("Placing Your Order...");
         dlg.show();
@@ -123,7 +123,7 @@ public class OrderManager {
             public void done(ParseException e) {
                 if (e == null) {
                     dlg.dismiss();
-                    Toast.makeText(context, "Successfully placed order", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((Context) listener, "Successfully placed order", Toast.LENGTH_SHORT).show();
                 } else {
                     dlg.dismiss();
                     Log.e("Failed to create order", e.toString());
@@ -133,18 +133,18 @@ public class OrderManager {
     }
 
 
-    public boolean redirectToPayment(Activity activity) {
+    public boolean redirectToPayment() {
 //        Todo proceed to payment
 //        TODO Later after development set paymentDone to false
         //Tez
         if (payMode == 0) {
-            TejManager tejManager = new TejManager(activity);
+            TejManager tejManager = new TejManager((Activity) listener);
             tejManager.tej(total_amount);
             return false;
         }
         //PayTm
         else if (payMode == 1) {
-            PaytmManager paytmManager = new PaytmManager(activity);
+            PaytmManager paytmManager = new PaytmManager((Activity) listener);
             paytmManager.paytm(total_amount);
             return false;
         }
@@ -156,9 +156,9 @@ public class OrderManager {
         return new SelectedClothesAdapter(selectedGarments);
     }
 
-    public void updateAddressCard(final Activity activity) {
+    public void updateAddressCard() {
+        final Activity activity = (Activity) listener;
         if (selectedAddress != null) {
-
             CardView cardView = activity.findViewById(R.id.address_layout_order_activity);
             cardView.setVisibility(View.VISIBLE);
 

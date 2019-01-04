@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.R;
 
@@ -175,6 +174,7 @@ public class DateSelectManager {
     }
 
     public String getSelectedDate() {
+        if(selectedSlot == null || selectedDate == null) return null;
         return selectedDate + "  Slot: "+selectedSlot;
     }
 }

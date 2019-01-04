@@ -72,7 +72,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         if (requestCode == SELECT_ADDRESS_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 orderManager.setSelectedAddress((Address) data.getParcelableExtra(("selectedAddress")));
-                orderManager.updateAddressCard(this);
+                orderManager.updateAddressCard();
             }
         }
     }
@@ -99,7 +99,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //FOr Address Selection
-        orderManager.updateAddressCard(this);
+        orderManager.updateAddressCard();
 
         //For handling date and time selection
         dateSelectManager = new DateSelectManager(this);
@@ -111,7 +111,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
             @Override
             public void onClick(View v) {
                 orderManager.setSelectedDate(dateSelectManager.getSelectedDate());
-                if (orderManager.isValid(PlaceOrderActivity.this)) {
+                if (orderManager.isValid()) {
                     dlg = new ProgressDialog(PlaceOrderActivity.this);
                     dlg.setTitle("Placing Your Order");
                     dlg.show();
@@ -224,8 +224,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         dlg.dismiss();
         if (match) {
             Log.v("OrderManager", "Order Verified");
-            if (orderManager.redirectToPayment(this)) {
-                orderManager.sendOrder(this);
+            if (orderManager.redirectToPayment()) {
+                orderManager.sendOrder();
             }
         } else {
             alertDisplayer();
