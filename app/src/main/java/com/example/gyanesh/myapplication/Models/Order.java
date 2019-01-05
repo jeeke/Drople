@@ -2,31 +2,23 @@ package com.example.gyanesh.myapplication.Models;
 
 import com.parse.ParseClassName;
 
+import static com.example.gyanesh.myapplication.utilClasses.Constants.PAY_MODE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.RETURN_TIME;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.TOTAL_COST;
+
 @ParseClassName("Order")
 public class Order extends GenericOrder {
-    public static final String RETURN_TIME_KEY = "returnTime";
-    public static final String TOTAL_COST_KEY = "cost";
-    public static final String PAY_MODE_KEY = "payMode";
 
     public  int getPayMode() {
-        return getInt(PAY_MODE_KEY);
+        return getInt(PAY_MODE);
     }
 
     public  double getCost() {
-        return getInt(TOTAL_COST_KEY);
+        return getInt(TOTAL_COST);
     }
 
     public java.util.Date getReturnTime() {
-        return getDate(RETURN_TIME_KEY);
-    }
-
-
-    public void setPayMode(int mode) {
-        put(PAY_MODE_KEY, mode);
-    }
-
-    public void setCost(int cost) {
-        put(TOTAL_COST_KEY, cost);
+        return getDate(RETURN_TIME);
     }
 
 }

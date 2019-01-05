@@ -4,17 +4,10 @@ package com.example.gyanesh.myapplication;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.gyanesh.myapplication.Models.GenericOrder;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -59,10 +52,9 @@ public class DonateActivity extends AppCompatActivity {
         TextView Name = findViewById(R.id.Name);
         TextView number = findViewById(R.id.al_number);
         TextView al_default = findViewById(R.id.al_default);
-        TextView al_Add1 = findViewById(R.id.al_address);
-        TextView al_Add2 = findViewById(R.id.al_address_2);
+        TextView al_Add1 = findViewById(R.id.al_address_desc);
         TextView Al_city = findViewById(R.id.al_city);
-        TextView Al_code = findViewById(R.id.al_code);
+        TextView Al_code = findViewById(R.id.al_locality);
 
 //        if(PlaceOrderActivity.callme!=-1) {
 //            Name.setText(SelectAddressActivity.adressAAA.get(PlaceOrderActivity.callme).name);

@@ -13,17 +13,14 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.gyanesh.myapplication.Models.Garment.COUNT;
-import static com.example.gyanesh.myapplication.Models.Garment.LOCALITY;
-import static com.example.gyanesh.myapplication.Models.Garment.SERVICE_TYPE;
-import static com.example.gyanesh.myapplication.Models.GenericOrder.USER_ID_KEY;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.COUNT;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.LOCALITY;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.SERVICE_TYPE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.USER_ID;
 
 public class CloudDbHelper {
 
@@ -97,7 +94,7 @@ public class CloudDbHelper {
         // Configure limit and sort order
         query.setLimit(10);
         // Execute query to fetch all genericOrders from Parse asynchronously
-        query.whereEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
+        query.whereEqualTo(USER_ID, ParseUser.getCurrentUser().getObjectId());
         // This is equivalent to a SELECT query with SQL
         query.findInBackground(new FindCallback<Address>() {
             public void done(List<Address> mAddresses, ParseException e) {
@@ -112,7 +109,7 @@ public class CloudDbHelper {
 
     public void updateCloudAddressList(List<Address> addresses) {
         for (Address address : addresses) {
-            address.setId(ParseUser.getCurrentUser().getObjectId());
+            address.setUserId(ParseUser.getCurrentUser().getObjectId());
             address.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {

@@ -18,13 +18,9 @@ import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
 import com.example.gyanesh.myapplication.utilClasses.DateSelectManager;
 import com.example.gyanesh.myapplication.utilClasses.OrderManager;
-import com.parse.FunctionCallback;
-import com.parse.ParseCloud;
-import com.parse.ParseException;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +41,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //Todo restrict user to add only 10 addresses
     View addClothes;
     ProgressDialog dlg;
-    HashMap<String, String> params = new HashMap<>();
     OrderManager orderManager;
     DateSelectManager dateSelectManager;
 
@@ -115,7 +110,9 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
                     dlg = new ProgressDialog(PlaceOrderActivity.this);
                     dlg.setTitle("Placing Your Order");
                     dlg.show();
-                    orderManager.verifyOrder();
+                    if (orderManager.redirectToPayment()) {
+                        orderManager.verifyAndPlaceOrder(null);
+                    }
                 }
             }
         });
@@ -153,25 +150,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //all these overriden method is to detect the payment result accordingly
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        params.put("CHECKSUMHASH", bundle.getString("CHECKSUMHASH"));
-        Log.e("MSG", params.toString());
-        Log.e("Bundle", bundle.toString());
-
-//        Toast.makeText(this,"Transaction Success", Toast.LENGTH_LONG).show();
-        ParseCloud.callFunctionInBackground("verifyCheckSum", params, new FunctionCallback<Boolean>() {
-            @Override
-            public void done(Boolean ret, ParseException e) {
-                dlg.dismiss();
-                if (e == null) {
-                    Log.e("verified CheckSum ", ret.toString());
-                    dlg.dismiss();
-                    Toast.makeText(PlaceOrderActivity.this, ret.toString(), Toast.LENGTH_LONG).show();
-                } else {
-                    Log.e("Error", e.toString());
-                    Toast.makeText(PlaceOrderActivity.this, e.toString(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        orderManager.verifyAndPlaceOrder(bundle);
     }
 
     //Paytm Callbacks
@@ -217,27 +196,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     }
 
 
-    //Order Manager Callbacks
+    //Order Manager Listener Callbacks
 
-    @Override
-    public void onOrderVerified(boolean match) {
-        dlg.dismiss();
-        if (match) {
-            Log.v("OrderManager", "Order Verified");
-            if (orderManager.redirectToPayment()) {
-                orderManager.sendOrder();
-            }
-        } else {
-            alertDisplayer();
-            Log.e("OrderManager", "Order Tampered");
-        }
-
-    }
-
-    @Override
-    public void onError(boolean err) {
-
-    }
 
     private void alertDisplayer() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
 
 import java.util.Calendar;
@@ -13,22 +14,48 @@ import java.util.UUID;
 
 public class Constants {
 
+    //order keys constants
+    public static final String USER_ID = "userId";
+    public static final String ORDER_ID = "orderId";
+    public static final String ADDRESS = "address";
+    public static final String STATUS = "status";
+    public static final String PICKUP_TIME = "pickupTime";
+    public static final String GARMENTS = "garments";
+    public static final String RETURN_TIME = "returnTime";
+    public static final String TOTAL_COST = "cost";
+    public static final String PAY_MODE = "payMode";
 
-    public static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
+    //Address keys constants
+    public static final String MOBILE = "mobile";
+    public static final String NAME = "name";
+    public static final String ADD_DESC = "addDesc";
+    public static final String ADD_TYPE = "addType";
+    public static final String CITY = "city";
+    public static final String LOCALITY = "locality";
+
+
+    //Garment keys constants
+    public static final String COUNT = "count";
+    public static final String TITLE = "title";
+    public static final String PRICE = "price";
+    public static final String SERVICE_TYPE = "serviceType";
+
+
+    //Activity result codes
+    static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
     public static final int TEZ_REQUEST_CODE = 123;
     public static final int ADD_CLOTHES_REQUEST_CODE = 124;
     public static final int SELECT_ADDRESS_REQUEST_CODE = 126;
-//    public static final int ADDRESS_NOT_SELECTED = 127;
-//    public static final int PICKUP_TIME_NOT_SELECTED = 128;
-//    public static final int CLOTHES_NOT_SELECTED = 129;
-//    public static final int ORDER_DETAILS_VALID = 130;
 
-    public static final String M_ID = "kbYXEa11946819800480"; //Paytm Merchand Id we got it in paytm credentials
-    public static final String CHANNEL_ID = "WAP"; //Paytm Channel Id, got it in paytm credentials
-    public static final String INDUSTRY_TYPE_ID = "Retail"; //Paytm industry type got it in paytm credential
+    //Paytm Constants
+    static final String M_ID = "kbYXEa11946819800480"; //Paytm Merchand Id we got it in paytm credentials
+    static final String CHANNEL_ID = "WAP"; //Paytm Channel Id, got it in paytm credentials
+    static final String INDUSTRY_TYPE_ID = "Retail"; //Paytm industry type got it in paytm credential
+    static final String WEBSITE = "WEBSTAGING";
+    static final String CALLBACK_URL = "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=";
 
-    public static final String WEBSITE = "WEBSTAGING";
-    public static final String CALLBACK_URL = "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=";
+
+
 
     private static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
@@ -88,8 +115,9 @@ public class Constants {
         return cal.getTime();
     }
 
-    public static String generateString() {
+    static String generateString() {
         String uuid = UUID.randomUUID().toString();
+        Order order = new Order();
         return uuid.replaceAll("-", "");
     }
 }

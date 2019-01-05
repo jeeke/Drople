@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,26 +12,31 @@ import android.widget.Toast;
 
 import com.example.gyanesh.myapplication.Models.Address;
 import com.example.gyanesh.myapplication.Models.Garment;
-import com.example.gyanesh.myapplication.Models.Order;
 import com.example.gyanesh.myapplication.R;
 import com.example.gyanesh.myapplication.SelectAddressActivity;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import androidx.cardview.widget.CardView;
 
 import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.garmentToHashMap;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.ADDRESS;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.GARMENTS;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.PAY_MODE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.PICKUP_TIME;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
-import static com.example.gyanesh.myapplication.utilClasses.Constants.generateString;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.TOTAL_COST;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.USER_ID;
 
 public class OrderManager {
-
     //    private Order order;
     private Address selectedAddress;
     private ArrayList<Garment> selectedGarments;
@@ -63,9 +69,6 @@ public class OrderManager {
     }
 
     public interface Listener {
-        void onOrderVerified(boolean match);
-
-        void onError(boolean err);
     }
 
     private Listener listener;
@@ -85,57 +88,58 @@ public class OrderManager {
         }
     }
 
-    public void verifyOrder() {
-        HashMap<String, Object> params = garmentToHashMap(selectedGarments);
-        params.put("amount", total_amount);
-        ParseCloud.callFunctionInBackground("verify", params, new FunctionCallback<Boolean>() {
-            @Override
-            public void done(Boolean match, ParseException e) {
-                if (e == null) {
-                    listener.onOrderVerified(match);
-                } else {
-                    listener.onError(true);
-                    Log.e("Error 404", e.toString());
-                    //todo accordingly
-                }
-            }
-        });
-    }
+    public void verifyAndPlaceOrder(Bundle bundle) {
+        final ProgressDialog dialog = new ProgressDialog((Context) listener);
+        dialog.setTitle("Placing Your Order, Please Wait....");
+        dialog.show();
 
-    public void sendOrder() {
-        //Todo something with this to verify the transaction status
-        final ProgressDialog dlg = new ProgressDialog((Context) listener);
-        dlg.setTitle("Please, wait a moment.");
-        dlg.setMessage("Placing Your Order...");
-        dlg.show();
-        Order order = new Order();
-        order.setAddress(selectedAddress.toString());
-        order.setUserId(ParseUser.getCurrentUser().getObjectId());
-        order.setClothes(selectedGarments.toString());
-        order.setPayMode(payMode);
-        order.setPickupTime(selectedDate);
-        //TODO calculate order Id
-        order.setOrderId(generateString());
-        //TODO Calculate cost
-        order.setCost(total_amount);
-        order.saveInBackground(new SaveCallback() {
+        //Paytm Bundle
+        HashMap<String,Object> params = new HashMap<>();
+        if(bundle!=null){
+            Log.e("Paytm Bundle",bundle.toString());
+            params.put("paytm",bundleToMap(bundle));
+        }
+
+        //Order Details
+        params.put(ADDRESS,selectedAddress.toString());
+        params.put(PAY_MODE,payMode);
+        //TODO update this to get selected time
+        params.put(PICKUP_TIME,Calendar.getInstance().getTime());
+        params.put(USER_ID,ParseUser.getCurrentUser().getObjectId());
+        params.put(TOTAL_COST,total_amount);
+
+        //Verification Details
+        HashMap<String, Object> verify = garmentToHashMap(selectedGarments);
+        params.put("verify", verify);
+
+        ParseCloud.callFunctionInBackground("genCheckSum", params, new FunctionCallback<String>() {
             @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    dlg.dismiss();
+            public void done(String ret, ParseException e) {
+                dialog.dismiss();
+                if (e==null) {
+                    Log.e("Error",ret);
                     Toast.makeText((Context) listener, "Successfully placed order", Toast.LENGTH_SHORT).show();
                 } else {
-                    dlg.dismiss();
-                    Log.e("Failed to create order", e.toString());
+                    Log.e("Error", e.toString());
+                    Toast.makeText((Context) listener, "Order couldn't be placed", Toast.LENGTH_LONG).show();
                 }
             }
         });
+        //Todo something with this to verify the transaction status
+    }
+
+
+    private Map<String,String> bundleToMap(Bundle bundle){
+        Map<String,String> map = new HashMap<>();
+        Set<String> keys = bundle.keySet();
+        for(String key:keys){
+            map.put(key,bundle.getString(key));
+        }
+        return map;
     }
 
 
     public boolean redirectToPayment() {
-//        Todo proceed to payment
-//        TODO Later after development set paymentDone to false
         //Tez
         if (payMode == 0) {
             TejManager tejManager = new TejManager((Activity) listener);

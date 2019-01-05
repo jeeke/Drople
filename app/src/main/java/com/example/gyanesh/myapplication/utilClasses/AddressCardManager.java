@@ -20,16 +20,14 @@ public class AddressCardManager {
         TextView Name = view.findViewById(R.id.Name);
         TextView number = view.findViewById(R.id.al_number);
         TextView al_default = view.findViewById(R.id.al_default);
-        TextView al_Add1 = view.findViewById(R.id.al_address);
-        TextView al_Add2 = view.findViewById(R.id.al_address_2);
+        TextView al_Add1 = view.findViewById(R.id.al_address_desc);
         TextView Al_city = view.findViewById(R.id.al_city);
-        TextView Al_code = view.findViewById(R.id.al_code);
+        TextView Al_code = view.findViewById(R.id.al_locality);
 
         Name.setText(address.getName());
         number.setText(address.getMobile());
-        al_Add1.setText(address.getAddLine1());
-        al_Add2.setText(address.getAddLine2());
-        Al_code.setText(String.valueOf(address.getPin()));
+        al_Add1.setText(address.getAddDesc());
+        Al_code.setText(String.valueOf(address.getLocality()));
         Al_city.setText(address.getCity());
         String df;
         if (address.getAddType()) {

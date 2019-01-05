@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/al_address"
+            android:id="@+id/al_address_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,9 +58,10 @@
             android:layout_height="19dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
             android:text="CITY"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/al_address_2" />
+            app:layout_constraintTop_toBottomOf="@+id/al_address_desc" />
 
         <TextView
             android:id="@+id/al_number"
@@ -80,27 +81,15 @@
             app:layout_constraintTop_toBottomOf="@+id/al_city" />
 
         <TextView
-            android:id="@+id/al_code"
+            android:id="@+id/al_locality"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="421604"
-            app:layout_constraintStart_toEndOf="@+id/al_city"
-            app:layout_constraintTop_toBottomOf="@+id/al_address_2" />
-
-        <TextView
-            android:id="@+id/al_address_2"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="address 2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/al_address" />
+            android:text="421604"
+            app:layout_constraintBottom_toBottomOf="@+id/al_city"
+            app:layout_constraintStart_toEndOf="@+id/al_city"
+            app:layout_constraintTop_toTopOf="@+id/al_city" />
 
         <ImageView
             android:id="@+id/btn_delete"

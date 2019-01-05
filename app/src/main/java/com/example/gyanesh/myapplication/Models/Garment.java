@@ -8,14 +8,15 @@ import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
 
+import static com.example.gyanesh.myapplication.utilClasses.Constants.COUNT;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.LOCALITY;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.PRICE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.SERVICE_TYPE;
+import static com.example.gyanesh.myapplication.utilClasses.Constants.TITLE;
+
 @ParseClassName("Garment")
 public class Garment extends ParseObject {
 
-    public static final String COUNT = "count";
-    public static final String TITLE = "title";
-    public static final String PRICE = "price";
-    public static final String LOCALITY = "locality";
-    public static final String SERVICE_TYPE = "serviceType";
 
 
     public void setCount(int count){
