@@ -29,7 +29,6 @@ import androidx.cardview.widget.CardView;
 
 import static com.example.gyanesh.myapplication.utilClasses.CloudDbHelper.garmentToHashMap;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.ADDRESS;
-import static com.example.gyanesh.myapplication.utilClasses.Constants.GARMENTS;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.PAY_MODE;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.PICKUP_TIME;
 import static com.example.gyanesh.myapplication.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
@@ -99,7 +98,6 @@ public class OrderManager {
             Log.e("Paytm Bundle",bundle.toString());
             params.put("paytm",bundleToMap(bundle));
         }
-
         //Order Details
         params.put(ADDRESS,selectedAddress.toString());
         params.put(PAY_MODE,payMode);
@@ -112,7 +110,7 @@ public class OrderManager {
         HashMap<String, Object> verify = garmentToHashMap(selectedGarments);
         params.put("verify", verify);
 
-        ParseCloud.callFunctionInBackground("genCheckSum", params, new FunctionCallback<String>() {
+        ParseCloud.callFunctionInBackground("verify", params, new FunctionCallback<String>() {
             @Override
             public void done(String ret, ParseException e) {
                 dialog.dismiss();

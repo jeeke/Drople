@@ -64,7 +64,7 @@ public class Constants {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static boolean setUI(Activity activity, int layout1){
+    static boolean setUI(Activity activity, int layout1){
         if (isNetworkAvailable(activity)) {
             activity.setContentView(layout1);
             return true;

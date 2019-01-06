@@ -35,19 +35,10 @@ class PaytmManager {
         final ProgressDialog dlg = new ProgressDialog(activity);
         HashMap<String, String> params = new HashMap<>();
         String random = generateString();
-
         params.put("ORDER_ID", random);
-        params.put("MID", M_ID);
-        params.put("INDUSTRY_TYPE_ID", INDUSTRY_TYPE_ID);
-        params.put("CHANNEL_ID", CHANNEL_ID);
-        params.put("WEBSITE", WEBSITE);
-        params.put("CALLBACK_URL", CALLBACK_URL + random);
-
-//      TODO ADD "ORDER_ID" "CUST_ID" "TXN_AMOUNT" "EMAIL" "MOBILE_NO" in parameters
         params.put("CUST_ID", ParseUser.getCurrentUser().getObjectId());
         params.put("TXN_AMOUNT", String.valueOf(total_amt));
         params.put("EMAIL", ParseUser.getCurrentUser().getEmail());
-//        params.put("MOBILE_NO", "7777777777");
 
         dlg.setTitle("Please, wait a moment.");
         dlg.setMessage("Redirecting to payment...");
