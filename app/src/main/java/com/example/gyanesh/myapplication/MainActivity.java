@@ -3,12 +3,12 @@ package com.example.gyanesh.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.example.gyanesh.myapplication.Fragments.HomeFrag;
 import com.example.gyanesh.myapplication.Fragments.ProfileFrag;
 import com.example.gyanesh.myapplication.Fragments.OrdersFrag;
 import com.example.gyanesh.myapplication.utilClasses.CloudDbHelper;
+import com.example.gyanesh.myapplication.Fragments.frag_support;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.nav_support:
-                    fragment = new ProfileFrag();
+                    fragment = new frag_support();
                     loadFragment(fragment);
                     return true;
                 case R.id.nav_home:
