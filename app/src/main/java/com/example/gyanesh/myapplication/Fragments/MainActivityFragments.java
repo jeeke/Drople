@@ -16,23 +16,24 @@ public class MainActivityFragments extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.toolbar_menu, menu);
+//        inflater.inflate(R.menu.toolbar_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_notification:
-                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case R.id.rate_us:
-                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                break;
-        }
+//        switch (item.getItemId()) {
+//            case R.id.action_notification:
+//                Toast.makeText(getContext(), "Notification selected", Toast.LENGTH_SHORT)
+//                        .show();
+//                break;
+//            case R.id.rate_us:
+//                Toast.makeText(getContext(), "Rate selected", Toast.LENGTH_SHORT)
+//                        .show();
+//                break;
+//            default:
+//                break;
+//        }
+        super.onOptionsItemSelected(item);
         return true;
     }
 }
