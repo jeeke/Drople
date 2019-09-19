@@ -87,7 +87,7 @@ public class DonateActivity extends AppCompatActivity {
 //                if (e == null) {
 //                    dlg.dismiss();
 //                    Toast.makeText(DonateActivity.this, "Successfully placed genericOrder", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(DonateActivity.this, MainActivity.class));
+//                    startActivity(new Intent(DonateActivity.this, DashboardActivity.class));
 //                } else {
 //                    dlg.dismiss();
 //                    Log.e("Failed to create genericOrder", e.toString());

@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -35,6 +39,7 @@ dependencies {
     implementation "com.leodroidcoder:generic-adapter:1.0.0"
     //parse sdk
     implementation 'com.github.parse-community.Parse-SDK-Android:parse:1.18.5'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
     //paytm
     implementation('com.paytm:pgplussdk:1.2.3') {
         transitive = true
@@ -42,6 +47,7 @@ dependencies {
 
     //Circular Indicator
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
     repositories {
         mavenCentral()

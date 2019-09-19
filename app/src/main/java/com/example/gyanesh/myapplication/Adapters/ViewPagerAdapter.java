@@ -15,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
-    private LayoutInflater layoutInflater;
     private PageIndicatorView pageIndicatorView;
     private Integer[] images = {R.drawable.offers, R.drawable.error_image, R.drawable.donate};
 
@@ -40,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         int real_pos = position % images.length;
         pageIndicatorView.setSelection((real_pos+1)%3);
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
         ImageView imageView = view.findViewById(R.id.imageView16);
         imageView.setImageResource(images[real_pos]);

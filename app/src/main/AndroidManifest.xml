@@ -21,26 +21,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".DashboardActivity" />
         <activity
             android:name=".AddressActivity"
             android:label="Add Address"
             android:parentActivityName=".PlaceOrderActivity" />
         <activity android:name=".ServicesActivity"
             android:label="Services"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".DashboardActivity"/>
         <activity
             android:name=".PlaceOrderActivity"
             android:label="Place Order"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".DonateActivity"
             android:label="Donate Clothes"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".HistoryActivity"
             android:label="History"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".DashboardActivity" />
         <activity
             android:name=".SelectClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />
@@ -69,11 +69,9 @@
         <activity android:name=".SaloonActivity" />
         <activity
             android:name=".AuthActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity
-            android:name=".Splash_activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity><![CDATA[
         >
+        ]]>
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NotificationActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".DashboardActivity"/>
     </application>
 
 </manifest>
