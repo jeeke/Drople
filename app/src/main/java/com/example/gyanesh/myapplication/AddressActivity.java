@@ -33,7 +33,8 @@ public class AddressActivity extends AppCompatActivity{
         setContentView(R.layout.activity_address);
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbaraa);
-        city = findViewById(R.id.na_spinnerCitySelector);
+        toolbar.setTitle("Address");
+        //city = findViewById(R.id.na_spinnerCitySelector);
         locality = findViewById(R.id.na_spinnerLocalitySelector);
 
         //Populating spinner for cities
@@ -44,10 +45,10 @@ public class AddressActivity extends AppCompatActivity{
 //            Todo update locality spinner
             locality.setAdapter(adapter);
         }
-
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
 
     }

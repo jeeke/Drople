@@ -5,14 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <!-- TODO STOP rotation of activities -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -21,14 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".VendorActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
             android:label="Add Address"
             android:parentActivityName=".PlaceOrderActivity" />
-        <activity android:name=".ServicesActivity"
+        <activity
+            android:name=".ServicesActivity"
             android:label="Services"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PlaceOrderActivity"
             android:label="Place Order"
@@ -37,10 +36,7 @@
             android:name=".DonateActivity"
             android:label="Donate Clothes"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".HistoryActivity"
-            android:label="History"
-            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".SelectClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />
@@ -66,14 +62,12 @@
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
             android:screenOrientation="portrait" />
-        <activity android:name=".SaloonActivity" />
         <activity
             android:name=".AuthActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Splash_activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,8 +75,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".NotificationActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

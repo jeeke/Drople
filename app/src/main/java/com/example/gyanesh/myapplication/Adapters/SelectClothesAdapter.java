@@ -33,7 +33,7 @@ public class SelectClothesAdapter extends RecyclerView.Adapter<SelectClothesAdap
 
         //TODO update this to get current locality
         this.garments = new ArrayList<>();
-        garments.addAll(getGarmentsList("DR. B R AMBEDKAR NIT JALANDHAR", 0));
+        //garments.addAll(getGarmentsList("DR. B R AMBEDKAR NIT JALANDHAR", 0));
     }
 
     @NonNull

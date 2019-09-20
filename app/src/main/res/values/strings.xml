@@ -41,4 +41,15 @@
         <item>Tez</item>
         <item>Cash On Delivery</item>
     </string-array>
+
+    <string-array name="Hostel_names">
+        <item>Select Hostel</item>
+        <item>Hostel 1</item>
+        <item>Hostel 2</item>
+        <item>Hostel 3</item>
+        <item>Hostel 4</item>
+        <item>MBH A</item>
+    </string-array>
 </resources>
+
+
