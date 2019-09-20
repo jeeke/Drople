@@ -6,6 +6,7 @@
         <item name="colorControlHighlight">@color/colorPrimaryLight</item>
         <item name="android:textViewStyle">@style/FontFamilyTextView</item>
         <item name="buttonStyle">@style/FontFamilyButton</item>
+        <item name="homeAsUpIndicator">@drawable/ic_back</item>
     </style>
 
     <!--<item name="android:windowLightStatusBar" tools:targetApi="23">true</item>-->
