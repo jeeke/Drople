@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.drople.Models.Address;
 import com.drople.Models.Garment;
@@ -157,37 +156,43 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
     @Override
     public void networkNotAvailable() {
         dlg.dismiss();
-        Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
+        showSnackBar(this,"Network Error");
+//        Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void clientAuthenticationFailed(String s) {
         dlg.dismiss();
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        showSnackBar(this,s);
+//        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void someUIErrorOccurred(String s) {
         dlg.dismiss();
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        showSnackBar(this,s);
+//        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onErrorLoadingWebPage(int i, String s, String s1) {
         dlg.dismiss();
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        showSnackBar(this,s);
+//        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressedCancelTransaction() {
         dlg.dismiss();
-        Toast.makeText(this, "Back Pressed", Toast.LENGTH_LONG).show();
+        showSnackBar(this,"Back Pressed");
+//        Toast.makeText(this, , Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onTransactionCancel(String s, Bundle bundle) {
         dlg.dismiss();
-        Toast.makeText(this, s + bundle.toString(), Toast.LENGTH_LONG).show();
+        showSnackBar(this,"Transaction Cancelled");
+//        Toast.makeText(this, s + bundle.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

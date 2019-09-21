@@ -1,7 +1,7 @@
 package com.drople.Fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.drople.AuthActivity;
+import com.drople.BaseActivity;
 import com.drople.DashboardActivity;
 import com.drople.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import static com.drople.AuthActivity.TAG;
+import static com.drople.BaseActivity.showSnackBar;
 
 public class LoginFragment extends Fragment {
 
@@ -63,7 +66,7 @@ public class LoginFragment extends Fragment {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                Toast.makeText(getContext(), "Google sign in failed :\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                showSnackBar(getActivity(),"Google sign in failed");
                 Log.e(TAG, "Google sign in failed", e);
 //                updateUI();
             }
@@ -73,7 +76,9 @@ public class LoginFragment extends Fragment {
     private void updateUI() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            startActivity(new Intent(getContext(), DashboardActivity.class));
+            Intent intent = new Intent(getContext(), DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             getActivity().finish();
         }
     }
@@ -106,7 +111,7 @@ public class LoginFragment extends Fragment {
                     if (task.isSuccessful()) {
                         updateUI();
                     } else {
-                        Toast.makeText(getContext(), "Authentication Failed", Toast.LENGTH_SHORT).show();
+                        showSnackBar(getActivity(),"Authentication Failed");
                     }
                 });
     }
@@ -135,57 +140,18 @@ public class LoginFragment extends Fragment {
         validationErrorMessage.append(".");
 
         if (validationError) {
-            Toast.makeText(getActivity(), validationErrorMessage.toString(), Toast.LENGTH_LONG).show();
+            showSnackBar(getActivity(), validationErrorMessage.toString());
             return;
         }
 
-        dlg.setTitle("Please, wait a moment.");
-        dlg.setMessage("Logging in...");
-        dlg.show();
-
-        passwordView.setError(null);
-
+        BaseActivity activity = (BaseActivity) getActivity();
+        activity.server.login(usernameView.getText().toString(),passwordView.getText().toString());
     }
-
-    private void alertDisplayer(String title, String message, final boolean error) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", (dialog, which) -> {
-                    dialog.cancel();
-                    if (!error) {
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
-                });
-        AlertDialog ok = builder.create();
-        ok.show();
-    }
-
-
-//    public static void signOut(Activity context) {
-//        // Firebase sign out
-//        FirebaseAuth.getInstance().signOut();
-//
-//        // Google sign out
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(context.getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
-//        mGoogleSignInClient.signOut();
-//        //redirect to login screen
-//        Intent intent = new Intent(context, MainActivity.class);
-////        intent.putExtra("from", false);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        context.startActivity(intent);
-//    }
 
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 7;
     }
 
     private boolean isEmpty(EditText text) {

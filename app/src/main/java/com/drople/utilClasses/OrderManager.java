@@ -26,6 +26,7 @@ import java.util.Set;
 
 import androidx.cardview.widget.CardView;
 
+import static com.drople.BaseActivity.showSnackBar;
 import static com.drople.utilClasses.Constants.ADDRESS;
 import static com.drople.utilClasses.Constants.PAY_MODE;
 import static com.drople.utilClasses.Constants.PICKUP_TIME;
@@ -78,13 +79,13 @@ public class OrderManager {
 
     public boolean isValid(Address addresses,String selectedDate,ArrayList<Garment> selectedGarments) {
         if (addresses == null) {
-            Toast.makeText((Context) listener, "Please Select An Address", Toast.LENGTH_SHORT).show();
+            showSnackBar((Activity) listener, "Please Select An Address");
             return false;
         } else if (selectedDate == null) {
-            Toast.makeText((Context) listener, "Please Select Pickup Time", Toast.LENGTH_SHORT).show();
+            showSnackBar((Activity) listener, "Please Select Pickup Time");
             return false;
         } else if (selectedGarments != null) {
-            Toast.makeText((Context) listener, "Please Select Clothes", Toast.LENGTH_SHORT).show();
+            showSnackBar((Activity) listener, "Please Select Clothes");
             return false;
         } else {
             return true;

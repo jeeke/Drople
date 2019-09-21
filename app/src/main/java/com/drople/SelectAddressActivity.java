@@ -97,7 +97,8 @@ public class SelectAddressActivity extends BaseActivity implements AddAddressAda
 
     public void finishActivity() {
         if (selectedPos == -1) {
-            Toast.makeText(this, "Please select an address", Toast.LENGTH_SHORT).show();
+            showSnackBar(this,"Please select an address");
+//            Toast.makeText(this, "Please select an address", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent();
             intent.putExtra("address", addAddressAdapter.getSelectedAddress(selectedPos));

@@ -48,13 +48,10 @@ public class ProfileFrag extends MainActivityFragments {
 
 
         final TextView logout_button = view.findViewById(R.id.profile_layout).findViewById(R.id.textView35);
-        logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        logout_button.setOnClickListener(v -> {
 
-                //TODO Cofirmation dialog on logout click
-                alertDisplayer("So, you're going...", "Ok...Bye-bye then");
-            }
+            //TODO Cofirmation dialog on logout click
+            alertDisplayer("So, you're going...", "Ok...Bye-bye then");
         });
         return view;
     }
@@ -66,20 +63,9 @@ public class ProfileFrag extends MainActivityFragments {
                 .setMessage(message)
                 .setPositiveButton("OK", (dialog, which) -> {
                     dialog.cancel();
-//                     Logging out of Parse
-                    ProgressDialog dlg = new ProgressDialog(getContext());
-                    dlg.setTitle("Please, wait a moment.");
-                    dlg.setMessage("Redirecting you to register...");
-                    dlg.show();
-                    // don't forget to change the line below with the names of your Activities
-//                        FirebaseAuth.logOut();
-                    Intent intent = new Intent(getContext(), AuthActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    dlg.dismiss();
-                    startActivity(intent);
+                    AuthActivity.signOut(getActivity());
                 });
         AlertDialog ok = builder.create();
         ok.show();
     }
-
 }

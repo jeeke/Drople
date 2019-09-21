@@ -51,20 +51,15 @@ public class AddressActivity extends BaseActivity {
         String hostel = mHostel.getSelectedItem().toString();
         int rgid = mDef.getCheckedRadioButtonId();
         if (name.equals("")) {
-            Toast toast = Toast.makeText(this, "Please Enter Name ", Toast.LENGTH_SHORT);
-            toast.show();
+            showSnackBar(this, "Please Enter Name ");
         } else if (number.equals("")) {
-            Toast toast = Toast.makeText(this, "Please Enter Number ", Toast.LENGTH_SHORT);
-            toast.show();
+            showSnackBar(this, "Please Enter Number ");
         } else if (room.equals("")) {
-            Toast toast = Toast.makeText(this, "Please Enter Room No", Toast.LENGTH_SHORT);
-            toast.show();
+            showSnackBar(this, "Please Enter Room No");
         } else if (hostel.equals("Select Hostel")) {
-            Toast toast = Toast.makeText(this, "Please Select Hostel", Toast.LENGTH_SHORT);
-            toast.show();
+            showSnackBar(this, "Please Select Hostel");
         } else if (rgid == -1) {
-            Toast toast = Toast.makeText(this, "Please Select Address Type  ", Toast.LENGTH_SHORT);
-            toast.show();
+            showSnackBar(this, "Please Select Address Type  ");
         } else {
             Address address = new Address();
             address.hostel = hostel;

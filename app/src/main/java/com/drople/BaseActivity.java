@@ -1,5 +1,6 @@
 package com.drople;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public abstract class BaseActivity extends AppCompatActivity implements Server.ServerCallCompleteListener {
     public Server server;
@@ -87,8 +90,29 @@ public abstract class BaseActivity extends AppCompatActivity implements Server.S
         showSnackBar(findViewById(android.R.id.content), title, retryListener);
     }
 
-    public static void showSnackBar(View view, String title, Server.OnRetryListener retryListener){
-        Toast.makeText(view.getContext(), title, Toast.LENGTH_SHORT).show();
+//    public static void showSnackBar(View view, String title, Server.OnRetryListener retryListener){
+//        Toast.makeText(view.getContext(), title, Toast.LENGTH_SHORT).show();
+//
+//    }
+
+    public static void showSnackBar(Activity activity, String mes) {
+        Snackbar.make(activity.findViewById(android.R.id.content), mes, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public static void showSnackBar(View view, String mes) {
+        Snackbar.make(view, mes, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public static void showSnackBar(Activity activity, String mes, Server.OnRetryListener retryListener) {
+        Snackbar.make(activity.findViewById(android.R.id.content)
+                , mes, Snackbar.LENGTH_SHORT)
+                .setAction("RETRY", v -> retryListener.retryTask()).show();
+    }
+
+    public static void showSnackBar(View view, String mes, Server.OnRetryListener retryListener) {
+        Snackbar.make(view, mes,
+                Snackbar.LENGTH_SHORT)
+                .setAction("RETRY", v -> retryListener.retryTask()).show();
     }
 
 

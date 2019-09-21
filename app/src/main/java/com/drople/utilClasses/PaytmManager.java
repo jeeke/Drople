@@ -2,15 +2,11 @@ package com.drople.utilClasses;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.util.Log;
-import android.widget.Toast;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.util.HashMap;
-
-import static com.drople.utilClasses.Constants.generateString;
 
 class PaytmManager {
 

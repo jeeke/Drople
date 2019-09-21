@@ -1,6 +1,7 @@
 package com.drople;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,9 +13,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.drople.Fragments.LoginFragment;
 import com.drople.Fragments.SignupFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.drople.Server.SERVER_LOGIN;
+import static com.drople.Server.SERVER_SIGNUP;
 import static com.drople.utilClasses.PrefManager.PREF_NAME;
 
 public class AuthActivity extends BaseActivity {
@@ -53,10 +59,29 @@ public class AuthActivity extends BaseActivity {
 
     }
 
+    public static void signOut(Activity context) {
+        // Firebase sign out
+        FirebaseAuth.getInstance().signOut();
+        // Google sign out
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(context.getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+        mGoogleSignInClient.signOut();
+        //redirect to login screen
+        Intent intent = new Intent(context, AuthActivity.class);
+//        intent.putExtra("from", false);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
     private void updateUI() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            startActivity(new Intent(this, DashboardActivity.class));
+            Intent intent = new Intent(this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
         }
     }
@@ -72,6 +97,14 @@ public class AuthActivity extends BaseActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onServerCallSuccess(int methodId, String title) {
+        super.onServerCallSuccess(methodId, title);
+        if(methodId==SERVER_LOGIN || methodId==SERVER_SIGNUP){
+            updateUI();
+        }
     }
 }
 
