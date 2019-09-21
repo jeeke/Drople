@@ -36,21 +36,10 @@ public class HomeFrag extends MainActivityFragments {
         setHasOptionsMenu(true);
         toolbar = layout.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        Attaching Listeners to Home buttons
-        //    private ViewFlipper viewFlipper;
         ViewPager viewPager = layout.findViewById(R.id.offers);
-//        viewPager.setClipToPadding(false);
-//        //TODO Starpoint do not remove top and bottom padding coz its unsycronizes pager indicator motion
-//        viewPager.setPadding(40,10,40,10);
-//        viewPager.setPageMargin(20);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(), layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(Integer.MAX_VALUE / 2);
-
-//        Timer timer= new Timer();
-//        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
-
-
         ImageView imageView;
         View home_button;
         TextView head;
@@ -58,12 +47,9 @@ public class HomeFrag extends MainActivityFragments {
         home_button = layout.findViewById(R.id.btn_home1);
         imageView = home_button.findViewById(R.id.btn_home_img);
         imageView.setImageResource(R.drawable.place);
-        home_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
-                startActivity(intent);
-            }
+        home_button.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
+            startActivity(intent);
         });
 
 
@@ -82,15 +68,10 @@ public class HomeFrag extends MainActivityFragments {
         });
 
 
-        View.OnClickListener servicesListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ServicesActivity.class);
-                intent.putExtra("btnId", v.getId());
-                startActivity(intent);
-
-            }
+        View.OnClickListener servicesListener = v -> {
+            Intent intent = new Intent(getContext(), ServicesActivity.class);
+            intent.putExtra("btnId", v.getId());
+            startActivity(intent);
         };
 
         //Wash N Iron Button
@@ -135,26 +116,5 @@ public class HomeFrag extends MainActivityFragments {
 
         return layout;
     }
-
-//    public class MyTimerTask extends TimerTask
-//    {
-//
-//        @Override
-//        public void run() {
-//            getActivity().runOnUiThread(new Runnable(){
-//                @Override
-//                public void run()
-//                {
-//                    if(viewPager.getCurrentItem()==0)
-//                        viewPager.setCurrentItem(1);
-//                    else if(viewPager.getCurrentItem()==1)
-//                        viewPager.setCurrentItem(2);
-//                    else
-//                        viewPager.setCurrentItem(0);
-//                }
-//
-//            });
-//        }
-//    }
 
 }

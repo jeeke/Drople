@@ -1,4 +1,4 @@
-package com.example.gyanesh.myapplication.Adapters;
+package com.drople.Adapters;
 
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gyanesh.myapplication.AddedClothesActivity;
-import com.example.gyanesh.myapplication.R;
+import com.drople.AddedClothesActivity;
+import com.drople.R;
 
 import java.util.ArrayList;
 

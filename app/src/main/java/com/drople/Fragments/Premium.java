@@ -1,7 +1,6 @@
-package com.example.gyanesh.myapplication.Fragments;
+package com.drople.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,14 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.gyanesh.myapplication.Adapters.AddClothListAdaptor;
-import com.example.gyanesh.myapplication.Adapters.VendorListAdaptor;
-import com.example.gyanesh.myapplication.R;
+import com.drople.Adapters.AddClothListAdaptor;
+import com.drople.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class DryWash extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Premium extends Fragment {
     RecyclerView recyclerView;
     FloatingActionButton btn;
 

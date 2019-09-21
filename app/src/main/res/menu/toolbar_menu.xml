@@ -9,10 +9,10 @@
         app:showAsAction="ifRoom">
     </item>
 
-    <item
-        android:id="@+id/rate_us"
-        android:icon="@drawable/ic_star2"
-        android:orderInCategory="1"
-        android:title="Rate Us"
-        app:showAsAction="ifRoom" />
+    <!--<item-->
+        <!--android:id="@+id/rate_us"-->
+        <!--android:icon="@drawable/ic_star2"-->
+        <!--android:orderInCategory="1"-->
+        <!--android:title="Rate Us"-->
+        <!--app:showAsAction="ifRoom" />-->
 </menu>

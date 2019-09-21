@@ -2,7 +2,6 @@ package com.drople;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,15 +76,9 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
         orderManager = new OrderManager(this);
         setContentView(R.layout.activity_place_order);
         addClothes = findViewById(R.id.add_clothes);
-        addClothes.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
-            startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
-        addClothes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddedClothesActivity.class);
-                startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
-            }
+        addClothes.setOnClickListener(v1 -> {
+            Intent intent1 = new Intent(v1.getContext(), AddedClothesActivity.class);
+            startActivityForResult(intent1, ADD_CLOTHES_REQUEST_CODE);
         });
 
         Toolbar toolbar;
@@ -107,7 +98,7 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
 
         dlg = new ProgressDialog(this);
         Button confirm = findViewById(R.id.btn_confirm);
-        confirm.setOnClickListener(v -> {
+        confirm.setOnClickListener(view -> {
             orderManager.setSelectedDate(dateSelectManager.getSelectedDate());
             if (orderManager.isValid()) {
 //                dlg = new ProgressDialog(PlaceOrderActivity.this);

@@ -1,15 +1,13 @@
-package com.example.gyanesh.myapplication;
+package com.drople;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.gyanesh.myapplication.Adapters.AddClothAdaptor;
-import com.example.gyanesh.myapplication.Adapters.VendorAdaptor;
+import com.drople.Adapters.AddClothAdaptor;
 import com.google.android.material.tabs.TabLayout;
 
 public class AddedClothesActivity extends AppCompatActivity {

@@ -1,15 +1,12 @@
-package com.example.gyanesh.myapplication.Adapters;
+package com.drople.Adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.gyanesh.myapplication.Fragments.DryWash;
-import com.example.gyanesh.myapplication.Fragments.Premium;
-import com.example.gyanesh.myapplication.Fragments.VendorFragmentComp;
-import com.example.gyanesh.myapplication.Fragments.VendorFragmentPending;
-import com.example.gyanesh.myapplication.Fragments.VendorFragmentProgress;
-import com.example.gyanesh.myapplication.Fragments.washIronFrag;
+import com.drople.Fragments.DryWash;
+import com.drople.Fragments.Premium;
+import com.drople.Fragments.washIronFrag;
 
 public class AddClothAdaptor extends FragmentPagerAdapter {
 
