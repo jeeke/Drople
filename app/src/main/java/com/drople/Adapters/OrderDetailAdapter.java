@@ -1,7 +1,6 @@
 package com.drople.Adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -54,9 +53,9 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         TextView delivery = cardView.findViewById(R.id.ac_delivery);
 
 
-        number.setText(String.valueOf(currentOrder.oid));
+        number.setText(String.valueOf(currentOrder.id));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-        date_cv.setText(dateFormat.format(currentOrder.pickup_time));
+        date_cv.setText(dateFormat.format(Long.parseLong(currentOrder.c_date)));
 
         int status = Integer.parseInt(currentOrder.status);
         if (status == 3) {

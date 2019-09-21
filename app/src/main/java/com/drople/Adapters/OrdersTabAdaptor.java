@@ -1,14 +1,5 @@
 package com.drople.Adapters;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-
-import com.drople.Fragments.ActiveOrders;
-import com.drople.Fragments.CompletedOrders;
-import com.drople.Models.Address;
-import com.drople.Models.Order;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -16,15 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import static com.drople.Fragments.ActiveOrders.orderDetailAdapter;
-import static com.drople.Fragments.CompletedOrders.completedOrdersAdapter;
+import com.drople.Fragments.ActiveOrders;
+import com.drople.Fragments.CompletedOrders;
+import com.drople.Models.Order;
 
 public class OrdersTabAdaptor extends FragmentStatePagerAdapter {
-
-
-//    private CloudDbHelper cloudDbHelper;
-    private ProgressDialog dialog;
-    private List<Order> activeOrders, completedOrders;
+    private List<Order> mActiveOrders, mCompletedOrders;
 
     @Nullable
     @Override
@@ -40,31 +28,26 @@ public class OrdersTabAdaptor extends FragmentStatePagerAdapter {
         return super.getPageTitle(position);
     }
 
-    public OrdersTabAdaptor(FragmentManager fm, Context context) {
+    public OrdersTabAdaptor(FragmentManager fm,List<Order> activeOrders,List<Order> completedOrders) {
         super(fm);
-        activeOrders = new ArrayList<>();
-        completedOrders = new ArrayList<>();
-//        cloudDbHelper = new CloudDbHelper(this);
-//        cloudDbHelper.refreshOrders();
-        dialog = new ProgressDialog(context);
-        dialog.setTitle("Fetching Your Orders, Please Wait.....");
-        dialog.show();
+        mActiveOrders = activeOrders;
+        mCompletedOrders = completedOrders;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment;
+        Fragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new ActiveOrders();
-                ((ActiveOrders) fragment).setOrders(activeOrders);
+                ((ActiveOrders) fragment).setOrders(mActiveOrders);
                 return fragment;
             case 1:
                 fragment = new CompletedOrders();
-                ((CompletedOrders) fragment).setOrders(completedOrders);
+                ((CompletedOrders) fragment).setOrders(mCompletedOrders);
                 return fragment;
         }
-        return null;
+        return fragment;
     }
 
     @Override

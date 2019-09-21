@@ -9,7 +9,9 @@
         <item name="homeAsUpIndicator">@drawable/ic_back</item>
     </style>
 
-    <!--<item name="android:windowLightStatusBar" tools:targetApi="23">true</item>-->
+    <style name="AppTheme.Launcher">
+    <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
     <style name="defaultButton" parent="android:Widget.Button">
         <item name="android:background">@drawable/button_corner_round</item>
         <item name="android:textStyle">bold</item>

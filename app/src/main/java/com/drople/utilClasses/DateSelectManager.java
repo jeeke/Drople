@@ -2,6 +2,7 @@ package com.drople.utilClasses;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -139,12 +140,12 @@ public class DateSelectManager {
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_YEAR, 1);
         String formattedDate2 = df1.format(cal.getTime());
-        int d1 = cal.get(Calendar.DAY_OF_WEEK);
+        int d1 = (cal.get(Calendar.DAY_OF_WEEK) ) % 7;
         TextView day11 = v1.findViewById(R.id.day);
         day11.setText(getDay(d1));
         TextView textView2 = v2.findViewById(R.id.date);
         textView2.setText(formattedDate2);
-        int d2 = (d1 + 1) % 7;
+        int d2 = (d1 % 7) + 1;
         TextView day22 = v2.findViewById(R.id.day);
         day22.setText(getDay(d2));
         Calendar cal2 = Calendar.getInstance();
@@ -153,7 +154,8 @@ public class DateSelectManager {
         String formattedDate3 = df1.format(cal2.getTime());
         TextView textView3 = v3.findViewById(R.id.date);
         textView3.setText(formattedDate3);
-        int d3 = (d1 + 2) % 7;
+        int d3 = (d2 % 7) + 1;
+        Log.e(" Days",d1 + " " + d2 + " "+ d3);
         TextView day33 = v3.findViewById(R.id.day);
         day33.setText(getDay(d3));
 

@@ -130,7 +130,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/heading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -155,7 +155,7 @@
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:background="@color/colorPrimary"
         android:text="Confirm Pickup"
         android:textColor="@android:color/white"

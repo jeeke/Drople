@@ -31,14 +31,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.drople.Server.SERVER_PLACE_ORDER;
 import static com.drople.utilClasses.Constants.ADD_CLOTHES_REQUEST_CODE;
 import static com.drople.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
 import static com.drople.utilClasses.Constants.TEZ_REQUEST_CODE;
 
-public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener, OrderManager.Listener {
+public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener, OrderManager.Listener {
 
-    //TODO Initialize these values as user fills the details
-    //Todo restrict user to add only 10 addresses
     View addClothes;
     ProgressDialog dlg;
     OrderManager orderManager;
@@ -66,10 +65,11 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         if (requestCode == SELECT_ADDRESS_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                orderManager.setSelectedAddress((Address) data.getParcelableExtra(("selectedAddress")));
+                orderManager.setSelectedAddress((Address) data.getSerializableExtra(("address")));
                 orderManager.updateAddressCard();
             }
         }
+
     }
 
     @Override
@@ -79,12 +79,9 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         orderManager = new OrderManager(this);
         setContentView(R.layout.activity_place_order);
         addClothes = findViewById(R.id.add_clothes);
-        addClothes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
-                startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
-            }
+        addClothes.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
+            startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
         });
 
         Toolbar toolbar;
@@ -98,21 +95,20 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
 
         //For handling date and time selection
         dateSelectManager = new DateSelectManager(this);
+        TextView textView = findViewById(R.id.slot_layout).findViewById(R.id.heading);
+        textView.setText("Select Pick Up Time");
         dateSelectManager.setColors();
 
         dlg = new ProgressDialog(this);
         Button confirm = findViewById(R.id.btn_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderManager.setSelectedDate(dateSelectManager.getSelectedDate());
-                if (orderManager.isValid()) {
-                    dlg = new ProgressDialog(PlaceOrderActivity.this);
-                    dlg.setTitle("Placing Your Order");
-                    dlg.show();
-                    if (orderManager.redirectToPayment()) {
-                        orderManager.verifyAndPlaceOrder(null);
-                    }
+        confirm.setOnClickListener(v -> {
+            orderManager.setSelectedDate(dateSelectManager.getSelectedDate());
+            if (orderManager.isValid()) {
+//                dlg = new ProgressDialog(PlaceOrderActivity.this);
+//                dlg.setTitle("Placing Your Order");
+//                dlg.show();
+                if (orderManager.redirectToPayment()) {
+                    orderManager.verifyAndPlaceOrder(null,server);
                 }
             }
         });
@@ -120,15 +116,22 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         Spinner spinner = findViewById(R.id.spinner5);
         spinner.setOnItemSelectedListener(this);
         List<String> options = new ArrayList<>();
-        options.add("Tez");
-        options.add("Paytm");
         options.add("Cash On Delivery");
+        options.add("Google pay");
+        options.add("Paytm");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
     }
 
+    @Override
+    public void onServerCallSuccess(int methodId, String title) {
+        super.onServerCallSuccess(methodId, title);
+        if(methodId==SERVER_PLACE_ORDER){
+            finish();
+        }
+    }
 
     //1 for paytm
     //0 for Tez
@@ -150,7 +153,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     //all these overriden method is to detect the payment result accordingly
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        orderManager.verifyAndPlaceOrder(bundle);
+        orderManager.verifyAndPlaceOrder(bundle,server);
     }
 
     //Paytm Callbacks
@@ -193,23 +196,5 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
-    }
-
-
-    //Order Manager Listener Callbacks
-
-
-    private void alertDisplayer() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Order Not Verified")
-                .setMessage("Something bad happened, Please try again.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Todo On clicked Ok
-                    }
-                });
-        AlertDialog ok = builder.create();
-        ok.show();
     }
 }

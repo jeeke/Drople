@@ -1,5 +1,8 @@
 package com.drople.Models;
 
-public class Address{
-    public String name,phone,hostel,room,type;
+
+import java.io.Serializable;
+
+public class Address implements Serializable {
+    public String name,phone,hostel,room,type,id;
 }

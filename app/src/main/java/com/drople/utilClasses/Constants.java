@@ -76,19 +76,19 @@ public class Constants {
 
     public static String getDay(int d) {
         switch (d) {
-            case 1:
-                return "SUN";
             case 2:
-                return "MON";
+                return "SUN";
             case 3:
-                return "TUE";
+                return "MON";
             case 4:
-                return "WED";
+                return "TUE";
             case 5:
-                return "THU";
+                return "WED";
             case 6:
-                return "FRI";
+                return "THU";
             case 7:
+                return "FRI";
+            case 1:
                 return "SAT";
             default:
                 return "ERR";

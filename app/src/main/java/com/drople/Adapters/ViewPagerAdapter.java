@@ -43,7 +43,6 @@ public class ViewPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
         ImageView imageView = view.findViewById(R.id.imageView16);
         imageView.setImageResource(images[real_pos]);
-        if(position==1)imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ViewPager vp = (ViewPager) container;
         vp.addView(view);
         return view;

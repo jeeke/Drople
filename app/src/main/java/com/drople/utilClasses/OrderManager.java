@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.drople.Models.Address;
 import com.drople.Models.Garment;
+import com.drople.Models.Order;
 import com.drople.R;
 import com.drople.SelectAddressActivity;
+import com.drople.Server;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -26,8 +30,6 @@ import static com.drople.utilClasses.Constants.ADDRESS;
 import static com.drople.utilClasses.Constants.PAY_MODE;
 import static com.drople.utilClasses.Constants.PICKUP_TIME;
 import static com.drople.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
-import static com.drople.utilClasses.Constants.TOTAL_COST;
-import static com.drople.utilClasses.Constants.USER_ID;
 
 public class OrderManager {
     //    private Order order;
@@ -81,45 +83,23 @@ public class OrderManager {
         }
     }
 
-    public void verifyAndPlaceOrder(Bundle bundle) {
-        final ProgressDialog dialog = new ProgressDialog((Context) listener);
-        dialog.setTitle("Placing Your Order, Please Wait....");
-        dialog.show();
-
-        //Paytm Bundle
-        HashMap<String,Object> params = new HashMap<>();
+    public void verifyAndPlaceOrder(Bundle bundle, Server server) {
+//        final ProgressDialog dialog = new ProgressDialog((Context) listener);
+//        dialog.setTitle("Placing Your Order, Please Wait....");
+//        dialog.show();
+        Order order = new Order();
+        order.garments = selectedGarments;
+        order.cost = total_amount+"";
+        order.pay_mode = payMode+"";
+        order.pickup_time = selectedDate;
+        order.address = selectedAddress;
+        order.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         if(bundle!=null){
+            order.paytm = bundleToMap(bundle);
             Log.e("Paytm Bundle",bundle.toString());
-            params.put("paytm",bundleToMap(bundle));
         }
-        //Order Details
-        params.put(ADDRESS,selectedAddress.toString());
-        params.put(PAY_MODE,payMode);
-        //TODO update this to get selected time
-        params.put(PICKUP_TIME,Calendar.getInstance().getTime());
-//        params.put(USER_ID,ParseUser.getCurrentUser().getObjectId());
-//        params.put(TOTAL_COST,total_amount);
-//
-//        //Verification Details
-//        HashMap<String, Object> verify = garmentToHashMap(selectedGarments);
-//        params.put("verify", verify);
-//
-//        ParseCloud.callFunctionInBackground("verify", params, new FunctionCallback<String>() {
-//            @Override
-//            public void done(String ret, ParseException e) {
-//                dialog.dismiss();
-//                if (e==null) {
-//                    Log.e("Error",ret);
-//                    Toast.makeText((Context) listener, "Successfully placed order", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Log.e("Error", e.toString());
-//                    Toast.makeText((Context) listener, "Order couldn't be placed", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//        //Todo something with this to verify the transaction status
+        server.placeOrder(order);
     }
-
 
     private Map<String,String> bundleToMap(Bundle bundle){
         Map<String,String> map = new HashMap<>();
@@ -133,13 +113,13 @@ public class OrderManager {
 
     public boolean redirectToPayment() {
         //Tez
-        if (payMode == 0) {
+        if (payMode == 1) {
             TejManager tejManager = new TejManager((Activity) listener);
             tejManager.tej(total_amount);
             return false;
         }
         //PayTm
-        else if (payMode == 1) {
+        else if (payMode == 2) {
             PaytmManager paytmManager = new PaytmManager((Activity) listener);
             paytmManager.paytm(total_amount);
             return false;
@@ -158,20 +138,38 @@ public class OrderManager {
             CardView cardView = activity.findViewById(R.id.address_layout_order_activity);
             cardView.setVisibility(View.VISIBLE);
 
-            AddressCardManager addressCardManager = new AddressCardManager(cardView, selectedAddress);
-            addressCardManager.updateDetailsInCard();
+//            AddressCardManager addressCardManager = new AddressCardManager(cardView, selectedAddress);
+//            addressCardManager.updateDetailsInCard();
+            TextView name, number, hostel, room, type;
+            ImageView del;
+            del = cardView.findViewById(R.id.btn_delete);
+            name = cardView.findViewById(R.id.name);
+            number = cardView.findViewById(R.id.number);
+            type = cardView.findViewById(R.id.type);
+            hostel = cardView.findViewById(R.id.hostel);
+            room = cardView.findViewById(R.id.room);
 
+
+            name.setText(selectedAddress.name);
+            number.setText("Phone :  " + selectedAddress.phone);
+            type.setText(selectedAddress.type);
+            hostel.setText("Hostel :  " + selectedAddress.hostel);
+            room.setText("Room No :  " + selectedAddress.room);
+
+            del.setImageDrawable(cardView.getContext().getResources().getDrawable(R.drawable.ic_edit));
+//
             cardView = activity.findViewById(R.id.gonewala);
             cardView.setVisibility(View.GONE);
-
-            //TODO update this to edit the current address
-            ImageView btn_edit = activity.findViewById(R.id.btn_edit);
-            btn_edit.setOnClickListener(v -> {
+            del.setOnClickListener(v -> {
                 Intent intent = new Intent(activity, SelectAddressActivity.class);
                 activity.startActivityForResult(intent, SELECT_ADDRESS_REQUEST_CODE);
             });
-            btn_edit = activity.findViewById(R.id.btn_delete);
-            btn_edit.setVisibility(View.GONE);
+//
+//            //TODO update this to edit the current address
+//            ImageView btn_edit = activity.findViewById(R.id.btn_edit);
+//
+//            btn_edit = activity.findViewById(R.id.btn_delete);
+//            btn_edit.setVisibility(View.GONE);
 
         } else {
             CardView cardView = activity.findViewById(R.id.address_layout_order_activity);

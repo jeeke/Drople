@@ -38,10 +38,6 @@
             android:label="Donate Clothes"
             android:parentActivityName="com.drople.DashboardActivity" />
         <activity
-            android:name=".HistoryActivity"
-            android:label="History"
-            android:parentActivityName="com.drople.DashboardActivity" />
-        <activity
             android:name="com.drople.SelectClothesActivity"
             android:parentActivityName="com.drople.PlaceOrderActivity" />
         <activity
@@ -68,18 +64,19 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.drople.AuthActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity><![CDATA[
-        >
-        ]]>
-        <activity android:name="com.drople.IntroActivity">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.drople.IntroActivity">
+        </activity>
         <activity android:name="com.drople.NotificationActivity"
             android:parentActivityName="com.drople.DashboardActivity"/>
+
+        <service android:name=".Server" />
     </application>
 
 </manifest>

@@ -26,14 +26,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectAddressActivity extends AppCompatActivity implements AddAddressAdapter.Listener {
+public class SelectAddressActivity extends BaseActivity implements AddAddressAdapter.Listener {
 
     private List<Address> addresses;
     AddAddressAdapter addAddressAdapter;
     LinearLayoutManager linearLayoutManager;
     int selectedPos = -1;
     ProgressDialog dialog;
-    static boolean toUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +47,18 @@ public class SelectAddressActivity extends AppCompatActivity implements AddAddre
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FirebaseDatabase.getInstance().
-                getReference().child(FirebaseAuth.getInstance().
+                getReference().child("Users").child(FirebaseAuth.getInstance().
                 getCurrentUser().getUid()).child("addresses").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot d: dataSnapshot.getChildren()){
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
                     addresses.add(d.getValue(Address.class));
                 }
-                addAddressAdapter = new AddAddressAdapter(SelectAddressActivity.this,addresses);
+                addAddressAdapter = new AddAddressAdapter(SelectAddressActivity.this, addresses);
+                RecyclerView recyclerView = findViewById(R.id.recycler_address);
+                linearLayoutManager = new LinearLayoutManager(SelectAddressActivity.this);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(addAddressAdapter);
                 dialog.dismiss();
             }
 
@@ -64,19 +67,10 @@ public class SelectAddressActivity extends AppCompatActivity implements AddAddre
                 dialog.dismiss();
             }
         });
-        //Get Address List from server
+        findViewById(R.id.done).setOnClickListener(v -> {
+            finishActivity();
+        });
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == ADD_ADDRESS_REQUEST_CODE) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                addresses.add((Address) data.getParcelableExtra("address"));
-//                addAddressAdapter.notifyDataSetChanged();
-//            }
-//        }
-//    }
 
     public void addressSetter(View view) {
         Intent intent = new Intent(this, AddressActivity.class);
@@ -95,12 +89,20 @@ public class SelectAddressActivity extends AppCompatActivity implements AddAddre
         selectedPos = position;
     }
 
+    @Override
+    public void deleteAddress(Address address) {
+        server.deleteAddress(FirebaseAuth.getInstance().getCurrentUser().getUid(), address);
+    }
+
 
     public void finishActivity() {
-        //Todo address update successful
-        toUpdate = false;
-        Intent intent = new Intent();
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+        if (selectedPos == -1) {
+            Toast.makeText(this, "Please select an address", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra("address", addAddressAdapter.getSelectedAddress(selectedPos));
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
     }
 }

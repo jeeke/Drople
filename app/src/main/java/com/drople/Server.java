@@ -6,21 +6,27 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 
+import com.drople.Models.Address;
+import com.drople.Models.Order;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
+import java.util.Map;
+
 public class Server extends Service {
 
 
-    public static int SERVER_UPDATE_IMAGE = 1110;
-    public static int SERVER_POST_BID = 1111;
+    public static int SERVER_SAVE_ADDRESS = 1110;
+    public static int SERVER_PLACE_ORDER = 1111;
     public static int SERVER_EDIT_PASSWORD = 1112;
     public static int SERVER_RATE = 1113;
     public static int SERVER_SIGNUP = 1114;
@@ -49,8 +55,8 @@ public class Server extends Service {
 //            ProgressBar progressBar = activity.findViewById(R.id.progress_bar);
 //            if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
 //            else {
-                dialog = new ProgressDialog(activity);
-                dialog.show();
+            dialog = new ProgressDialog(activity);
+            dialog.show();
 //            }
         }
     }
@@ -82,7 +88,55 @@ public class Server extends Service {
         return mBinder;
     }
 
-    public void getAddresses(String id){
+    public void saveAddress(String uid, Address address) {
+        DatabaseReference ref =
+                FirebaseDatabase.getInstance().getReference().child("Users").
+                        child(uid).child("addresses");
+        address.id = ref.push().getKey();
+        ref.child(address.id).setValue(address).addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                notifyListener(true, SERVER_SAVE_ADDRESS,
+                        "Address added", "", null);
+            else notifyListener(false,
+                    SERVER_SAVE_ADDRESS, "",
+                    "Address adding error", () -> saveAddress(uid, address));
+        });
+    }
+
+    public void placeOrder(Order order){
+        showProgressBar();
+        DatabaseReference ref =
+                FirebaseDatabase.getInstance().getReference().child("Orders").
+                        child(order.uid);
+        order.id = ref.push().getKey();
+        order.c_date = new Date().getTime()+"";
+        order.status = "0";
+        ref.child(order.id).setValue(order).addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                notifyListener(true, SERVER_PLACE_ORDER,
+                        "Order Placed", "", null);
+            else notifyListener(false,
+                    SERVER_PLACE_ORDER, "",
+                    "Order placing error", () -> placeOrder( order));
+        });
+    }
+
+    public void deleteAddress(String uid, Address address) {
+//        showProgressBar();
+        DatabaseReference ref =
+                FirebaseDatabase.getInstance().getReference().child("Users").
+                        child(uid).child("addresses");
+        ref.child(address.id).setValue(null).addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                notifyListener(true, SERVER_SAVE_ADDRESS,
+                        "Address deleted", "", null);
+            else notifyListener(false,
+                    SERVER_SAVE_ADDRESS, "",
+                    "Address deleting error", () -> saveAddress(uid, address));
+        });
+    }
+
+    public void getAddresses(String id) {
 
     }
 
@@ -104,6 +158,7 @@ public class Server extends Service {
                                     "Password Updating Unsuccessful", retry));
                 });
     }
+
     // method 5
     public void signUp(String name, String email, String password) {
         showProgressBar();
