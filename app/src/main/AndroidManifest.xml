@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VendorActivity"></activity>
+        <activity android:name=".AddedClothesActivity"></activity>
+        <!-- <activity android:name=".VendorActivity"></activity> -->
         <activity android:name=".MainActivity" />
         <activity
             android:name=".AddressActivity"
@@ -36,7 +37,6 @@
             android:name=".DonateActivity"
             android:label="Donate Clothes"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".SelectClothesActivity"
             android:parentActivityName=".PlaceOrderActivity" />

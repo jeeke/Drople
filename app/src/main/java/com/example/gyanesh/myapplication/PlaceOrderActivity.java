@@ -82,7 +82,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PaytmPaymen
         addClothes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
+                Intent intent = new Intent(v.getContext(), AddedClothesActivity.class);
                 startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
             }
         });

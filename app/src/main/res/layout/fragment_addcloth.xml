@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.VendorFragmentPending">
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addclothrv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Cloth"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textView58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView58"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="Rate"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView46"
+        app:layout_constraintEnd_toStartOf="@+id/textView59"
+        app:layout_constraintStart_toEndOf="@+id/textView46"
+        app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Count"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView58"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView58"
+        app:layout_constraintTop_toTopOf="@+id/textView58" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
