@@ -75,32 +75,38 @@ public class DateSelectManager {
             }
         });
 
-        View.OnClickListener otherTwo = v -> {
-            TextView temp = v.findViewById(R.id.date);
-            selectedDate = temp.getText().toString();
-            v1.setBackground(colorv1);
-            v2.setBackground(colorPrimary);
-            v3.setBackground(colorPrimary);
-            v.setBackground(colorAccent);
-            v4.setBackground(colorPrimary);
-            v5.setBackground(colorPrimary);
-            v6.setBackground(colorPrimary);
-            colorv4 = colorv5 = colorv6 = colorPrimary;
-            v4.setClickable(true);
-            v5.setClickable(true);
-            v6.setClickable(true);
+        View.OnClickListener otherTwo = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView temp = v.findViewById(R.id.date);
+                selectedDate = temp.getText().toString();
+                v1.setBackground(colorv1);
+                v2.setBackground(colorPrimary);
+                v3.setBackground(colorPrimary);
+                v.setBackground(colorAccent);
+                v4.setBackground(colorPrimary);
+                v5.setBackground(colorPrimary);
+                v6.setBackground(colorPrimary);
+                colorv4 = colorv5 = colorv6 = colorPrimary;
+                v4.setClickable(true);
+                v5.setClickable(true);
+                v6.setClickable(true);
+            }
         };
         v2.setOnClickListener(otherTwo);
         v3.setOnClickListener(otherTwo);
 
 
-        View.OnClickListener slotListener = v -> {
-            v4.setBackground(colorv4);
-            v5.setBackground(colorv5);
-            v6.setBackground(colorv6);
-            v.setBackground(colorAccent);
-            TextView temp = v.findViewById(R.id.date);
-            selectedSlot = temp.getText().toString();
+        View.OnClickListener slotListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v4.setBackground(colorv4);
+                v5.setBackground(colorv5);
+                v6.setBackground(colorv6);
+                v.setBackground(colorAccent);
+                TextView temp = v.findViewById(R.id.date);
+                selectedSlot = temp.getText().toString();
+            }
         };
         v4.setOnClickListener(slotListener);
         v5.setOnClickListener(slotListener);
