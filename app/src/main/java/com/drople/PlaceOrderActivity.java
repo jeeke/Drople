@@ -82,6 +82,12 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
         addClothes.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), SelectClothesActivity.class);
             startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
+        addClothes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddedClothesActivity.class);
+                startActivityForResult(intent, ADD_CLOTHES_REQUEST_CODE);
+            }
         });
 
         Toolbar toolbar;
