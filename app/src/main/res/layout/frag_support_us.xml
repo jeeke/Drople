@@ -134,7 +134,7 @@
 
             <include
                 android:id="@+id/contactus"
-                layout="@layout/about_us"
+                layout="@layout/contactus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -142,6 +142,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="2dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/cardView12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -300,7 +301,7 @@
                 android:id="@+id/policy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/ourpolicies"
                 app:layout_constraintEnd_toEndOf="parent"

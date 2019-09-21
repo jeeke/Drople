@@ -40,16 +40,16 @@ public class DryWash extends Fragment {
     ArrayList<Integer> cost = new ArrayList<Integer>()
     {
         {
+            add(9);
+            add(12);
             add(7);
+            add(27);
+            add(17);
+            add(22);
             add(10);
-            add(5);
-            add(25);
-            add(15);
-            add(20);
-            add(8);
-            add(20);
-            add(8);
-            add(25);
+            add(22);
+            add(10);
+            add(27);
         }
     };
 
