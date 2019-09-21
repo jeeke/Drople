@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Server extends Service {
@@ -103,22 +104,29 @@ public class Server extends Service {
         });
     }
 
-    public void placeOrder(Order order){
+    public void placeOrder(Order order) {
         showProgressBar();
-        DatabaseReference ref =
-                FirebaseDatabase.getInstance().getReference().child("Orders").
-                        child(order.uid);
-        order.id = ref.push().getKey();
-        order.c_date = new Date().getTime()+"";
+        String ordersKey =
+                FirebaseDatabase.getInstance().getReference().child("PrevOrders").
+                        child(order.uid).push().getKey();
+        String prevOrderRef = "PrevOrders/" + order.uid + "/" + ordersKey;
+        String orderRef = "Orders/" + ordersKey;
+        order.id = ordersKey;
+        order.c_date = new Date().getTime() + "";
         order.status = "0";
-        ref.child(order.id).setValue(order).addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                notifyListener(true, SERVER_PLACE_ORDER,
-                        "Order Placed", "", null);
-            else notifyListener(false,
-                    SERVER_PLACE_ORDER, "",
-                    "Order placing error", () -> placeOrder( order));
-        });
+        Map<String,Object> map = new HashMap<>();
+        map.put(prevOrderRef, order);
+        map.put(orderRef, order);
+
+        FirebaseDatabase.getInstance().getReference().updateChildren(map)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        notifyListener(true, SERVER_PLACE_ORDER,
+                                "Order Placed", "", null);
+                    else notifyListener(false,
+                            SERVER_PLACE_ORDER, "",
+                            "Order placing error", () -> placeOrder(order));
+                });
     }
 
     public void deleteAddress(String uid, Address address) {

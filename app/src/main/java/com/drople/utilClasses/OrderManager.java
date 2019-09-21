@@ -75,7 +75,7 @@ public class OrderManager {
         } else if (selectedDate == null) {
             Toast.makeText((Context) listener, "Please Select Pickup Time", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (selectedGarments == null) {
+        } else if (selectedGarments != null) {
             Toast.makeText((Context) listener, "Please Select Clothes", Toast.LENGTH_SHORT).show();
             return false;
         } else {

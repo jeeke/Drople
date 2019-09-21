@@ -44,7 +44,7 @@ public class OrdersFrag extends MainActivityFragments{
         dialog.setTitle("Fetching your orders, Please Wait.....");
         dialog.show();
         FirebaseDatabase.getInstance().
-                getReference().child("Orders").child(FirebaseAuth.getInstance().
+                getReference().child("PrevOrders").child(FirebaseAuth.getInstance().
                 getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
