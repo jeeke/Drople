@@ -1,6 +1,8 @@
 package com.example.gyanesh.myapplication.Fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.gyanesh.myapplication.R;
@@ -20,7 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
  * A simple {@link Fragment} subclass.
  */
 public class frag_support extends Fragment {
-
+    CardView callus,mailus;
 
     public frag_support() {
         // Required empty public constructor
@@ -36,7 +39,28 @@ public class frag_support extends Fragment {
         ConstraintLayout constraintLayoutfaq = view.findViewById(R.id.constraint_Faqs);
         ConstraintLayout constraintLayoutop = view.findViewById(R.id.constraint_our_policies);
         final ScrollView scrollView = view.findViewById(R.id.scrollviewsupport);
+        callus = view.findViewById(R.id.callus);
+        callus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+918652751124"));
+                startActivity(intent);
+            }
+        });
+        mailus = view.findViewById(R.id.mailus);
+        mailus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent = new Intent (Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"dropple@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feed Back");
+                intent.setPackage("com.google.android.gm");
+                    startActivity(intent);
+            }
+
+        });
         constraintLayoutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +84,7 @@ public class frag_support extends Fragment {
             @Override
             public void onClick(View v) {
 
-                CardView cardView = view.findViewById(R.id.contactus);
+                ConstraintLayout cardView = view.findViewById(R.id.contactus);
                 if(cardView.getVisibility()==View.GONE)
                 {
                     cardView.setVisibility(View.VISIBLE);
@@ -111,6 +135,15 @@ public class frag_support extends Fragment {
         });
 
         return view;
+    }
+
+    public void call(View v)
+    {
+
+    }
+    public void mail(View v)
+    {
+
     }
 
 }
