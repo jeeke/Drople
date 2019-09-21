@@ -44,29 +44,26 @@ public class DashboardActivity extends AppCompatActivity {
 
     //    Navigation bar handler
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
-            switch (item.getItemId()) {
-                case R.id.nav_support:
-                    fragment = new frag_support();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.nav_home:
-                    fragment = new HomeFrag();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.nav_account:
-                    fragment = new ProfileFrag();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.nav_history:
-                    fragment = new OrdersFrag();
-                    loadFragment(fragment);
-                    return true;
-            }
-            return false;
-        }
-    };
+            = item -> {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.nav_support:
+                        fragment = new frag_support();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.nav_home:
+                        fragment = new HomeFrag();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.nav_account:
+                        fragment = new ProfileFrag();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.nav_history:
+                        fragment = new OrdersFrag();
+                        loadFragment(fragment);
+                        return true;
+                }
+                return false;
+            };
 }
