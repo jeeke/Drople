@@ -45,16 +45,16 @@ public class Premium extends Fragment {
     ArrayList<Integer> cost = new ArrayList<Integer>()
     {
         {
-            add(7);
-            add(10);
-            add(5);
-            add(25);
+            add(12);
             add(15);
+            add(10);
+            add(30);
             add(20);
-            add(8);
-            add(20);
-            add(8);
             add(25);
+            add(13);
+            add(25);
+            add(13);
+            add(30);
         }
     };
 
