@@ -61,7 +61,7 @@ public class FragSupport extends Fragment {
             @Override
             public void onClick(View v) {
 
-                CardView cardView = view.findViewById(R.id.aboutus);
+                ConstraintLayout cardView = view.findViewById(R.id.aboutus);
                 if(cardView.getVisibility()==View.GONE)
                 {
                     cardView.setVisibility(View.VISIBLE);
@@ -98,7 +98,7 @@ public class FragSupport extends Fragment {
             @Override
             public void onClick(View v) {
 
-                CardView cardView = view.findViewById(R.id.ourpolicies);
+                ConstraintLayout cardView = view.findViewById(R.id.ourpolicies);
                 if(cardView.getVisibility()==View.GONE)
                 {
                     cardView.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public class FragSupport extends Fragment {
             @Override
             public void onClick(View v) {
 
-                CardView cardView = view.findViewById(R.id.faqs);
+                ConstraintLayout cardView = view.findViewById(R.id.faqs);
                 if(cardView.getVisibility()==View.GONE)
                 {
                     cardView.setVisibility(View.VISIBLE);
