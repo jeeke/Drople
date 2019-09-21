@@ -2,16 +2,13 @@ package com.drople;
 
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.drople.Fragments.HomeFrag;
 import com.drople.Fragments.ProfileFrag;
 import com.drople.Fragments.OrdersFrag;
-import com.drople.Fragments.frag_support;
+import com.drople.Fragments.FragSupport;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -48,7 +45,7 @@ public class DashboardActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.nav_support:
-                        fragment = new frag_support();
+                        fragment = new FragSupport();
                         loadFragment(fragment);
                         return true;
                     case R.id.nav_home:

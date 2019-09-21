@@ -1,31 +1,27 @@
-package com.example.gyanesh.myapplication.Fragments;
+package com.drople.Fragments;
 
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.example.gyanesh.myapplication.R;
-
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+
+import com.drople.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class frag_support extends Fragment {
+public class FragSupport extends Fragment {
     CardView callus,mailus;
 
-    public frag_support() {
+    public FragSupport() {
         // Required empty public constructor
     }
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +26,10 @@ import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import static com.drople.Server.SERVER_PLACE_ORDER;
 import static com.drople.utilClasses.Constants.ADD_CLOTHES_REQUEST_CODE;
@@ -35,36 +38,34 @@ import static com.drople.utilClasses.Constants.TEZ_REQUEST_CODE;
 
 public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTransactionCallback, AdapterView.OnItemSelectedListener, OrderManager.Listener {
 
-    View addClothes;
     ProgressDialog dlg;
     OrderManager orderManager;
     DateSelectManager dateSelectManager;
+    LinearLayout addcloth;
+    ConstraintLayout constraintLayout;
+
+    public static int aamount,aacount;
+    TextView amount, count;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.v("resuly",""+resultCode);
         if (requestCode == TEZ_REQUEST_CODE) {
             //TODO process based on data in response
             Log.e("result", data.getStringExtra("Status"));
         }
-
-        if (requestCode == ADD_CLOTHES_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                orderManager.setSelectedGarments(new ArrayList<>(((Map<Integer, Garment>) data.getSerializableExtra("selectedGarments")).values()));
-                orderManager.setTotal_amount(data.getIntExtra("total_amount", 0));
-                RecyclerView listView = findViewById(R.id.selectedList);
-//                listView.setVisibility(View.VISIBLE);
-                listView.setAdapter(orderManager.getSelectClothesAdapter());
-                listView.setLayoutManager(new LinearLayoutManager(this));
-            }
-        }
-
         if (requestCode == SELECT_ADDRESS_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 orderManager.setSelectedAddress((Address) data.getSerializableExtra(("address")));
                 orderManager.updateAddressCard();
             }
+        }
+        if (requestCode == 157) {
+
+            constraintLayout.setVisibility(View.VISIBLE);
+            amount.setText(String.valueOf(aamount));
+            count.setText(String.valueOf(aacount));
         }
 
     }
@@ -75,11 +76,18 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
         super.onCreate(savedInstanceState);
         orderManager = new OrderManager(this);
         setContentView(R.layout.activity_place_order);
-        addClothes = findViewById(R.id.add_clothes);
-        addClothes.setOnClickListener(v1 -> {
+        addcloth = findViewById(R.id.linearLayout);
+        constraintLayout = findViewById(R.id.mylayout);
+        amount = findViewById(R.id.amountcloth);
+        count = findViewById(R.id.countcloth);
+        addcloth.setOnClickListener(v1 -> {
             Intent intent1 = new Intent(v1.getContext(), AddedClothesActivity.class);
-            startActivityForResult(intent1, ADD_CLOTHES_REQUEST_CODE);
+            startActivityForResult(intent1, 157);
         });
+
+
+
+
 
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar2);
@@ -105,7 +113,7 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
 //                dlg.setTitle("Placing Your Order");
 //                dlg.show();
                 if (orderManager.redirectToPayment()) {
-                    orderManager.verifyAndPlaceOrder(null,server);
+                    orderManager.verifyAndPlaceOrder(null, server);
                 }
             }
         });
@@ -125,7 +133,7 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
     @Override
     public void onServerCallSuccess(int methodId, String title) {
         super.onServerCallSuccess(methodId, title);
-        if(methodId==SERVER_PLACE_ORDER){
+        if (methodId == SERVER_PLACE_ORDER) {
             finish();
         }
     }
@@ -150,7 +158,7 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
     //all these overriden method is to detect the payment result accordingly
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        orderManager.verifyAndPlaceOrder(bundle,server);
+        orderManager.verifyAndPlaceOrder(bundle, server);
     }
 
     //Paytm Callbacks

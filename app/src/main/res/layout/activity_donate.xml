@@ -74,11 +74,6 @@
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
                 android:layout_height="175dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -88,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="177dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/don" />
+                    app:srcCompat="@drawable/image" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView

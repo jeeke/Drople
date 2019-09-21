@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drople.AddedClothesActivity;
+import com.drople.PlaceOrderActivity;
 import com.drople.R;
 
 import java.util.ArrayList;
@@ -42,10 +43,11 @@ public class AddClothListAdaptor extends RecyclerView.Adapter<AddClothListAdapto
             holder.plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    PlaceOrderActivity.aacount++;
                     Integer temp = Integer.valueOf(holder.count.getText().toString());
                     holder.count.setText(String.valueOf(temp+1));
-                    AddedClothesActivity.amount+=cost.get(position);
-                    AddedClothesActivity.amontdisp.setText(AddedClothesActivity.amount.toString()+" Rs");
+                    PlaceOrderActivity.aamount+=cost.get(position);
+                    AddedClothesActivity.amontdisp.setText(PlaceOrderActivity.aamount+" Rs");
                 }
             });
             holder.minus.setOnClickListener(new View.OnClickListener() {
@@ -53,9 +55,10 @@ public class AddClothListAdaptor extends RecyclerView.Adapter<AddClothListAdapto
                 public void onClick(View v) {
                     Integer temp = Integer.valueOf(holder.count.getText().toString());
                     if(temp!=0) {
+                       PlaceOrderActivity.aacount--;
                         holder.count.setText(String.valueOf(temp - 1));
-                        AddedClothesActivity.amount -= cost.get(position);
-                        AddedClothesActivity.amontdisp.setText(AddedClothesActivity.amount.toString()+" Rs");
+                        PlaceOrderActivity.aamount -= cost.get(position);
+                        AddedClothesActivity.amontdisp.setText(PlaceOrderActivity.aamount+" Rs");
                     }
                 }
             });
