@@ -100,7 +100,7 @@ public class PlaceOrderActivity extends BaseActivity implements PaytmPaymentTran
         Button confirm = findViewById(R.id.btn_confirm);
         confirm.setOnClickListener(view -> {
             orderManager.setSelectedDate(dateSelectManager.getSelectedDate());
-            if (orderManager.isValid()) {
+            if (orderManager.checkValidity()) {
 //                dlg = new ProgressDialog(PlaceOrderActivity.this);
 //                dlg.setTitle("Placing Your Order");
 //                dlg.show();

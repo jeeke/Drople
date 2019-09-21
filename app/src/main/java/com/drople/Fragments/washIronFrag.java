@@ -66,7 +66,6 @@ public class washIronFrag extends Fragment {
         AddClothListAdaptor mAdapter = new AddClothListAdaptor(clothes,cost);//response.body().getData());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         return rootView;
     }

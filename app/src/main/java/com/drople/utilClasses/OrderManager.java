@@ -39,6 +39,14 @@ public class OrderManager {
     private int payMode;
     private String selectedDate;
 
+
+    public static boolean isAddressValid(Address address){
+        boolean valid = true;
+        if(address.id==null || address.room==null
+                || address.phone==null || address.type==null || address.hostel==null) valid = false;
+        return  valid;
+    }
+
     public void setSelectedAddress(Address selectedAddress) {
         this.selectedAddress = selectedAddress;
     }
@@ -68,8 +76,8 @@ public class OrderManager {
 
     private Listener listener;
 
-    public boolean isValid() {
-        if (selectedAddress == null) {
+    public boolean isValid(Address addresses,String selectedDate,ArrayList<Garment> selectedGarments) {
+        if (addresses == null) {
             Toast.makeText((Context) listener, "Please Select An Address", Toast.LENGTH_SHORT).show();
             return false;
         } else if (selectedDate == null) {
@@ -81,6 +89,25 @@ public class OrderManager {
         } else {
             return true;
         }
+    }
+
+    public static boolean isValidInputs(Address addresses,String selectedDate,ArrayList<Garment> selectedGarments) {
+        if (addresses == null) {
+//            Toast.makeText((Context) listener, "Please Select An Address", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (selectedDate == null) {
+//            Toast.makeText((Context) listener, "Please Select Pickup Time", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (selectedGarments == null) {
+//            Toast.makeText((Context) listener, "Please Select Clothes", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkValidity(){
+        return isValid(selectedAddress,selectedDate,selectedGarments);
     }
 
     public void verifyAndPlaceOrder(Bundle bundle, Server server) {

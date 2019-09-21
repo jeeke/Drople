@@ -2,6 +2,7 @@ package com.drople;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -33,8 +34,7 @@ public class AddressActivity extends BaseActivity {
         mNumber = findViewById(R.id.na_number);
         mRoom = findViewById(R.id.na_desc);
         mDef = findViewById(R.id.na_def);
-        mHostel = findViewById(R.id.hostelSpinner);
-
+        mHostel = findViewById(R.id.spinner);
         setSupportActionBar(toolbar);
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

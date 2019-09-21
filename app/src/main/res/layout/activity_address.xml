@@ -104,23 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Spinner
-                android:id="@+id/hostelSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:autofillHints="Locality"
-                android:entries="@array/Hostel_names"
-                android:background="@drawable/customspinner"
-                android:gravity="center"
-                android:padding="8dp"
-                android:ems="10"
-                android:inputType="number"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <EditText
                 android:id="@+id/na_desc"
                 android:layout_width="0dp"
@@ -128,25 +111,24 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:ems="10"
-                android:hint="Room No"
 
+                android:hint="Room No"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/hostelSpinner"
-                app:layout_constraintStart_toStartOf="@+id/hostelSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/hostelSpinner" />
+                app:layout_constraintEnd_toEndOf="@+id/spinner"
+                app:layout_constraintStart_toStartOf="@+id/spinner"
+                app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
                 android:text="Hostel no."
-                app:layout_constraintBottom_toBottomOf="@+id/hostelSpinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/hostelSpinner" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView37"
@@ -156,6 +138,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/na_desc"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="@+id/na_desc" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:background="@drawable/customspinner"
+                android:entries="@array/Hostel_names"
+                android:padding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
