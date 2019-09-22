@@ -10,6 +10,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 import com.drople.Models.Address;
+import com.drople.Models.GenericOrder;
 import com.drople.Models.Order;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -126,6 +127,19 @@ public class Server extends Service {
                     else notifyListener(false,
                             SERVER_PLACE_ORDER, "",
                             "Order placing error", () -> placeOrder(order));
+                });
+    }
+
+    public void orderDonate(GenericOrder order){
+        showProgressBar();
+        FirebaseDatabase.getInstance().getReference().child("Donations").push().setValue(order)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        notifyListener(true, SERVER_PLACE_ORDER,
+                                "Order Placed", "", null);
+                    else notifyListener(false,
+                            SERVER_PLACE_ORDER, "",
+                            "Order placing error", () -> orderDonate(order));
                 });
     }
 

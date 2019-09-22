@@ -88,9 +88,9 @@ public class AuthActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        updateUI();
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        updateUI();
     }
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

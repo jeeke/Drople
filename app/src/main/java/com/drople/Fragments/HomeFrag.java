@@ -39,7 +39,7 @@ public class HomeFrag extends MainActivityFragments {
         ViewPager viewPager = layout.findViewById(R.id.offers);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(), layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setCurrentItem(Integer.MAX_VALUE / 2);
+//        viewPager.setCurrentItem(Integer.MAX_VALUE / 2);
         ImageView imageView;
         View home_button;
         TextView head;
@@ -59,12 +59,9 @@ public class HomeFrag extends MainActivityFragments {
         head.setText("Donate Clothes");
         imageView = home_button.findViewById(R.id.btn_home_img);
         imageView.setImageResource(R.drawable.btn_donate);
-        home_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DonateActivity.class);
-                startActivity(intent);
-            }
+        home_button.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), DonateActivity.class);
+            startActivity(intent);
         });
 
 

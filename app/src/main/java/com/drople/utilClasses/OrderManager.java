@@ -34,11 +34,11 @@ import static com.drople.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
 
 public class OrderManager {
     //    private Order order;
-    private Address selectedAddress;
+    public Address selectedAddress;
     private ArrayList<Garment> selectedGarments;
     private int total_amount;
     private int payMode;
-    private String selectedDate;
+    public String selectedDate;
 
 
     public static boolean isAddressValid(Address address){
