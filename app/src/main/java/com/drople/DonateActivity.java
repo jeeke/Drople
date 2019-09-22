@@ -24,6 +24,7 @@ import com.drople.Models.Order;
 import com.drople.utilClasses.DateSelectManager;
 import com.drople.utilClasses.OrderManager;
 
+import static com.drople.Server.SERVER_DONATE;
 import static com.drople.utilClasses.Constants.SELECT_ADDRESS_REQUEST_CODE;
 
 public class DonateActivity extends BaseActivity implements OrderManager.Listener {
@@ -85,5 +86,11 @@ public class DonateActivity extends BaseActivity implements OrderManager.Listene
                 orderManager.updateAddressCard();
             }
         }
+    }
+
+    @Override
+    public void onServerCallSuccess(int methodId, String title) {
+        super.onServerCallSuccess(methodId, title);
+        if(methodId==SERVER_DONATE) finish();
     }
 }

@@ -53,7 +53,7 @@ public class SignupFragment extends Fragment {
         if (uName.equals("") || password.equals("") || email.equals("")) {
             showSnackBar(getActivity(), "Username,email and password can't be empty");
             return true;
-        } else if (!password.equals(passwordAgain)) {
+        }else if (!password.equals(passwordAgain)) {
             showSnackBar(getActivity(), "Passwords do not match");
         }
         return false;

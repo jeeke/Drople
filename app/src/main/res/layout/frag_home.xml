@@ -51,7 +51,7 @@
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/offers"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -61,7 +61,6 @@
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/pageIndicatorView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +72,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/offers"
-                app:piv_animationType="swap"
                 app:piv_dynamicCount="true"
                 app:piv_interactiveAnimation="true"
                 app:piv_radius="3dp"

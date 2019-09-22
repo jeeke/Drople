@@ -30,19 +30,9 @@ public class Server extends Service {
     public static int SERVER_SAVE_ADDRESS = 1110;
     public static int SERVER_PLACE_ORDER = 1111;
     public static int SERVER_EDIT_PASSWORD = 1112;
-    public static int SERVER_RATE = 1113;
+    public static int SERVER_DONATE = 1113;
     public static int SERVER_SIGNUP = 1114;
     public static int SERVER_LOGIN = 1115;
-    public static int SERVER_POST_FEED = 1116;
-    public static int SERVER_POST_TASK = 1117;
-    public static int SERVER_POST_QUESTION = 1118;
-    public static int SERVER_DELETE_QUESTION = 1119;
-    public static int SERVER_ASSIGN_TASK = 1120;
-    public static int SERVER_CANCEL_BID = 1121;
-    public static int SERVER_TASK_DONE = 1122;
-    public static int SERVER_SAVE_ABOUT = 1123;
-    public static int SERVER_ADD_SKILL = 1124;
-    public static int SERVER_REMOVE_SKILL = 1125;
 
     static ProgressDialog dialog;
 
@@ -115,30 +105,32 @@ public class Server extends Service {
         order.id = ordersKey;
         order.c_date = new Date().getTime() + "";
         order.status = "0";
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put(prevOrderRef, order);
         map.put(orderRef, order);
 
         FirebaseDatabase.getInstance().getReference().updateChildren(map)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful())
+                    if (task.isSuccessful()) {
+                        PlaceOrderActivity.aacount = 0;
+                        PlaceOrderActivity.aamount = 0;
                         notifyListener(true, SERVER_PLACE_ORDER,
                                 "Order Placed", "", null);
-                    else notifyListener(false,
+                    } else notifyListener(false,
                             SERVER_PLACE_ORDER, "",
                             "Order placing error", () -> placeOrder(order));
                 });
     }
 
-    public void orderDonate(GenericOrder order){
+    public void orderDonate(GenericOrder order) {
         showProgressBar();
         FirebaseDatabase.getInstance().getReference().child("Donations").push().setValue(order)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful())
-                        notifyListener(true, SERVER_PLACE_ORDER,
+                        notifyListener(true, SERVER_DONATE,
                                 "Order Placed", "", null);
                     else notifyListener(false,
-                            SERVER_PLACE_ORDER, "",
+                            SERVER_DONATE, "",
                             "Order placing error", () -> orderDonate(order));
                 });
     }

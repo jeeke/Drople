@@ -40,6 +40,7 @@ public class HomeFrag extends MainActivityFragments {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getContext(), layout.findViewById(R.id.pageIndicatorView));
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(Integer.MAX_VALUE / 2);
+
         ImageView imageView;
         View home_button;
         TextView head;
