@@ -10,9 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.drople.AddedClothesActivity;
 import com.drople.Models.Address;
 import com.drople.Models.Garment;
 import com.drople.Models.Order;
+import com.drople.PlaceOrderActivity;
 import com.drople.R;
 import com.drople.SelectAddressActivity;
 import com.drople.Server;
@@ -116,8 +119,9 @@ public class OrderManager {
 //        dialog.setTitle("Placing Your Order, Please Wait....");
 //        dialog.show();
         Order order = new Order();
+        order.count = String.valueOf(PlaceOrderActivity.aacount);
         order.garments = selectedGarments;
-        order.cost = total_amount+"";
+        order.cost = String.valueOf(PlaceOrderActivity.aamount);
         order.pay_mode = payMode+"";
         order.pickup_time = selectedDate;
         order.address = selectedAddress;

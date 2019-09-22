@@ -25,33 +25,31 @@
             app:srcCompat="@drawable/history" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/btn_home_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_home_img"
             app:layout_constraintTop_toTopOf="@+id/btn_home_img">
 
             <TextView
-                android:textSize="14sp"
                 android:id="@+id/head1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Iron"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <TextView
-                android:textSize="12sp"
                 android:id="@+id/head2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="min 1 day"
-                android:textColor="@color/grey" />
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
